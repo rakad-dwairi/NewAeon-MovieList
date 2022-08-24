@@ -13,13 +13,12 @@ class CategorySeeder extends Seeder
     {
         //
         $categories = [
-            ['name' => 'Category1'],
-            ['name' => 'Category2']
+            ['name' => 'Horror'],
+            ['name' => 'Comedian']
         ];
 
         foreach ($categories as $category) {
             \App\Category::create($category);
         }
-
     }
 }

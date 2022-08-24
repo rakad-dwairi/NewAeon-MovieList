@@ -2,9 +2,9 @@
 
 use Illuminate\Database\Seeder;
 
-class FilmCategorySeeder extends Seeder
+class SeriesCategorySeeder extends Seeder
 {
-    /**
+  /**
      * Run the database seeds.
      *
      * @return void
@@ -12,23 +12,24 @@ class FilmCategorySeeder extends Seeder
     public function run()
     {
 
-        $filmCategories = [
+        $categories = [
             [
-                'film_id' => '1',
+                'series_id' => '1',
                 'category_id' => '1',
             ],
             [
-                'film_id' => '1',
+                'series_id' => '1',
                 'category_id' => '2',
             ],
             [
-                'film_id' => '2',
+                'series_id' => '2',
                 'category_id' => '1',
             ],
         ];
 
-        foreach ($filmCategories as $filmCategory) {
-            \Illuminate\Support\Facades\DB::table('film_category')->insert($filmCategory);
+        foreach ($categories as $categorie) {
+            \Illuminate\Support\Facades\DB::table('series_category')->insert($categorie);
         }
+
     }
 }

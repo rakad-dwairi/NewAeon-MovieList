@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Actor;
 use App\Category;
 use App\Film;
+use App\Series;
 use App\Message;
 use Illuminate\Http\Request;
 

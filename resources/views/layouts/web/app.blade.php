@@ -7,8 +7,6 @@
 <![endif]-->
 <!--[if !(IE 7) | !(IE 8)  ]><!-->
 <html class="no-js" lang="en">
-
-
 <head>
     <!-- Basic need -->
     <title>Films</title>
@@ -104,12 +102,10 @@
                         <li class="loginLink"><a href="{{route('login')}}">LOG In</a></li>
                         <li class="btn signupLink"><a href="{{route('register')}}">sign up</a></li>
                     @endauth
-
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
         </nav>
-
         <!-- top search form -->
         <div class="top-search">
             <form action="/search" method="GET">
@@ -176,8 +172,8 @@
     </div>
     <div class="ft-copyright">
         <div class="ft-left">
-            <p><a href="" target="_blank"></a>Made with <i class="ion-ios-heart" style="color: red"></i> by <span
-                        style="color: orangered">Abdullah Shublaq</span></p>
+            <p><a href="" target="_blank"></a>Powered by <span
+                        style="color: orangered">New Aeon</span></p>
         </div>
         <div class="backtotop">
             <p><a href="#" id="back-to-top" style="color: #dd003f; font-weight: bold">Back to top <i

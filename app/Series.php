@@ -5,19 +5,19 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 
-class Film extends Model
+class Series extends Model
 {
 
     use favoritable, rateable, reviewable;
 
-    protected $table = 'films';
+    protected $table = 'series';
 
-    protected $fillable = ['name', 'year', 'overview', 'background_cover', 'poster', 'url', 'api_url'];
+    protected $fillable = ['name','seasons', 'year', 'overview', 'background_cover', 'poster', 'url', 'api_url'];
 
     protected static function booted()
     {
-        static::deleting(function (Film $film) {
-            $attributes = $film->getAttributes();
+        static::deleting(function (Series $series) {
+            $attributes = $series->getAttributes();
             Storage::delete($attributes['background_cover']);
             Storage::delete($attributes['poster']);
         });
@@ -35,7 +35,7 @@ class Film extends Model
 
     public function categories()
     {
-        return $this->belongsToMany(Category::class, 'film_category');
+        return $this->belongsToMany(Category::class, 'series_category');
     }
 
     public function actors()

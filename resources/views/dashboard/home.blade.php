@@ -73,13 +73,13 @@
                                     <span>Reviews</span>
                                 </div>
                             </li>
-                            <li class="col-lg-3 col-md-3 col-6">
+                            {{-- <li class="col-lg-3 col-md-3 col-6">
                                 <div class="body">
-                                    <i class="zmdi zmdi-male col-grey"></i>
-                                    <h4>{{$actors}}</h4>
-                                    <span>Actors</span>
+                                    <i class="zmdi zmdi-movie-alt col-grey"></i>
+                                    <h4>{{$series}}</h4>
+                                    <span>Series</span>
                                 </div>
-                            </li>
+                            </li> --}}
                             <li class="col-lg-3 col-md-3 col-6">
                                 <div class="body">
                                     <i class="zmdi zmdi-email col-deep-purple"></i>
