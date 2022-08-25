@@ -187,8 +187,6 @@ class FilmController extends Controller
      */
     public function destroy(Film $film)
     {
-        //
-
         $film->delete();
 
         session()->flash('success', 'Film Deleted Successfully');

@@ -13,7 +13,12 @@ class Category extends Model
 
     public function films()
     {
-        return $this->belongsToMany(Film::class, 'film_category', Series::class,'series_category');
+        return $this->belongsToMany(Film::class, 'film_category');
+    }
+
+    public function series()
+    {
+        return $this->belongsToMany(Series::class, 'series_category');
     }
 
 }
