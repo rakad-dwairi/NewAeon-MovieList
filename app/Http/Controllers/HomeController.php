@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Actor;
 use App\Category;
 use App\Film;
+use App\Series;
 use App\Message;
 use Illuminate\Http\Request;
 
@@ -28,9 +29,12 @@ class HomeController extends Controller
     public function index()
     {
         $sliderFilms = Film::with('categories')->with('ratings')->limit(10)->latest()->get();
+        $sliderSeries = Series::with('categories')->limit(10)->latest()->get();
         $categoryFilms = Category::with('films')->get();
+        $categorySeries = Category::with('series')->get();
+        
 
-        return view('home', compact('sliderFilms', 'categoryFilms'));
+        return view('home', compact('sliderFilms', 'categoryFilms','sliderSeries','categorySeries'));
     }
 
     public function search(Request $request)
@@ -40,6 +44,10 @@ class HomeController extends Controller
                 $films = Film::where('name', 'like', '%' . $request->search . '%')->paginate(10);
                 return view('movies.index', compact('films'));
                 break;
+                case 'series':
+                    $films = Series::where('name', 'like', '%' . $request->search . '%')->paginate(10);
+                    return view('series.index', compact('series'));
+                    break;
             case 'actors':
                 $actors = Actor::where('name', 'like', '%' . $request->search . '%')->paginate(10);
                 return view('actors.index', compact('actors'));

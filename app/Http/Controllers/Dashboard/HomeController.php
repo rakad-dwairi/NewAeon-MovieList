@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Actor;
+use App\Series;
 use App\Admin;
 use App\Category;
 use App\Film;
@@ -25,7 +26,8 @@ class HomeController extends Controller
         $reviews = Review::count();
         $actors = Actor::count();
         $messages = Message::count();
+        $series = Series::count();
 
-        return view('dashboard.home', compact('admins', 'clients', 'films', 'categories', 'ratings', 'reviews', 'actors', 'messages'));
+        return view('dashboard.home', compact('admins', 'clients', 'films', 'categories', 'ratings', 'reviews', 'actors', 'messages','series'));
     }
 }

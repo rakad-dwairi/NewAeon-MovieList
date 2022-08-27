@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
+
 class FilmController extends Controller
 {
 
@@ -186,8 +187,6 @@ class FilmController extends Controller
      */
     public function destroy(Film $film)
     {
-        //
-
         $film->delete();
 
         session()->flash('success', 'Film Deleted Successfully');

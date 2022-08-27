@@ -15,16 +15,19 @@ class RatingSeeder extends Seeder
         $ratings = [
             [
                 'user_id' => '1',
+                'series_id'=>'1',
                 'film_id' => '1',
                 'rating' => '4',
             ],
             [
                 'user_id' => '1',
+                'series_id'=>'1',
                 'film_id' => '2',
                 'rating' => '7',
             ],
             [
                 'user_id' => '2',
+                'series_id'=>'1',
                 'film_id' => '2',
                 'rating' => '5',
             ]

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Film;
+use App\Series;
 use App\Http\Controllers\Controller;
 use App\Rating;
 use App\User;
@@ -26,7 +27,7 @@ class RatingController extends Controller
     public function index(Request $request)
     {
         //
-        $ratings = Rating::with('user')->with('film')
+        $ratings = Rating::with('user')->with('film')->with('series')
             ->where(function ($query) use ($request) {
                 $query->when($request->client, function ($q) use ($request) {
                     return $q->whereHas('user', function ($q2) use ($request) {
@@ -45,8 +46,9 @@ class RatingController extends Controller
             ->latest()->paginate(10);
         $clients = User::all();
         $films = Film::all();
+        $series = Series::all();
 
-        return view('dashboard.ratings.index', compact('ratings', 'clients', 'films'));
+        return view('dashboard.ratings.index', compact('ratings', 'clients', 'films','series'));
     }
 
     /**

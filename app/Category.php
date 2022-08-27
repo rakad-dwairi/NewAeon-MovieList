@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    //
+
     protected $table = 'categories';
 
     protected $fillable = ['name'];
@@ -15,4 +15,10 @@ class Category extends Model
     {
         return $this->belongsToMany(Film::class, 'film_category');
     }
+
+    public function series()
+    {
+        return $this->belongsToMany(Series::class, 'series_category');
+    }
+
 }
