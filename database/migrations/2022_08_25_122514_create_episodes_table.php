@@ -18,6 +18,10 @@ class CreateEpisodesTable extends Migration
             $table->unsignedBigInteger('series_id');
             $table->unsignedBigInteger('seasons_id');
             $table->string('name');
+            $table->text('background_cover');
+            $table->text('poster');
+            $table->text('url');
+            $table->text('api_url');
             $table->timestamps();
 
             $table->foreign('series_id')->references('id')->on('series')->onDelete('cascade');

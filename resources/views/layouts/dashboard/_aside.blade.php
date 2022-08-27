@@ -77,6 +77,18 @@
                             </ul>
                         </li>
                     @endif
+                    @if(auth()->guard('admin')->user()->hasPermission('read_series'))
+                        <li>
+                            <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-movie-alt"></i><span>series</span>
+                            </a>
+                            <ul class="ml-menu">
+                                <li><a href="{{route('dashboard.series.index')}}">All Series</a></li>
+                                @if(auth()->guard('admin')->user()->hasPermission('create_series'))
+                                    <li><a href="{{route('dashboard.series.create')}}">Add Series</a></li>
+                                @endif
+                            </ul>
+                        </li>
+                    @endif
 
                     @if(auth()->guard('admin')->user()->hasPermission('read_actors'))
                         <li>

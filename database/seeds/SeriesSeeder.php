@@ -14,7 +14,7 @@ class SeriesSeeder extends Seeder
         //
         $series = [
             [
-                'name' => 'film1',
+                'name' => 'Lucifer',
                 'seasons' => '3',
                 'year' => '2019',
                 'overview' => 'film1film1film1film1film1film1film1film1film1film1film1film1',
@@ -22,7 +22,7 @@ class SeriesSeeder extends Seeder
                 'poster' => 'film_posters/film-poster.jpg',
                 ],
             [
-                'name' => 'film2',
+                'name' => 'Breaking Bad',
                 'seasons' => '7',
                 'year' => '2020',
                 'overview' => 'film2film2film2film2film2film2film2film2film2film2film2film2',

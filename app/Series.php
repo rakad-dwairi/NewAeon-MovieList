@@ -48,6 +48,11 @@ class Series extends Model
         return $this->hasMany(Rating::class);
     }
 
+    public function seasons()
+    {
+        return $this->hasMany(Seasons::class);
+    }
+
     public function reviews()
     {
         return $this->hasMany(Review::class);
