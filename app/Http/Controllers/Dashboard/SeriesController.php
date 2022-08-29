@@ -64,7 +64,9 @@ class SeriesController extends Controller
      */
     public function create()
     {
-        
+        $categories = Category::all();
+        $actors = Actor::all();
+        return view('dashboard.series.create', compact('categories', 'actors'));
     }
 
     /**
@@ -75,7 +77,35 @@ class SeriesController extends Controller
      */
     public function store(Request $request)
     {
-        
+
+        $attributes = $request->validate([
+            'name' => 'required|string|max:50|min:1|unique:films',
+            'seasons'=>'required|numeric',
+            'year' => 'required|string|max:4|min:4',
+            'overview' => 'required|string',
+            'background_cover' => 'required|image',
+            'poster' => 'required|image',
+            'categories' => 'required|array|max:3|exists:categories,id',
+            'actors' => 'required|array|max:10|exists:actors,id'
+        ]);
+
+        $attributes['background_cover'] = $request->background_cover->store('film_background_covers');
+        $attributes['poster'] = $request->poster->store('series_posters');
+
+        $film = Series::create([
+            'name' => $attributes['name'],
+            'year' => $attributes['year'],
+            'seasons'=>$attributes['seasons'],
+            'overview' => $attributes['overview'],
+            'background_cover' => $attributes['background_cover'],
+            'poster' => $attributes['poster'],
+
+        ]);
+        $film->categories()->sync($attributes['categories']);
+        $film->actors()->sync($attributes['actors']);
+
+        session()->flash('success', 'Serie Added Successfully');
+        return redirect()->route('dashboard.films.index');
     }
 
     /**

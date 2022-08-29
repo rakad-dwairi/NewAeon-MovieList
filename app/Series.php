@@ -40,8 +40,9 @@ class Series extends Model
 
     public function actors()
     {
-        return $this->belongsToMany(Actor::class, 'film_actor');
+        return $this->belongsToMany(Actor::class, 'series_actor');
     }
+
 
     public function ratings()
     {
