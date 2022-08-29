@@ -89,7 +89,7 @@ class SeriesController extends Controller
             'actors' => 'required|array|max:10|exists:actors,id'
         ]);
 
-        $attributes['background_cover'] = $request->background_cover->store('film_background_covers');
+        $attributes['background_cover'] = $request->background_cover->store('series_background_covers');
         $attributes['poster'] = $request->poster->store('series_posters');
 
         $film = Series::create([
@@ -105,7 +105,7 @@ class SeriesController extends Controller
         $film->actors()->sync($attributes['actors']);
 
         session()->flash('success', 'Serie Added Successfully');
-        return redirect()->route('dashboard.films.index');
+        return redirect()->route('dashboard.series.index');
     }
 
     /**
