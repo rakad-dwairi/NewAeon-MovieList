@@ -75,35 +75,7 @@ class SeriesController extends Controller
      */
     public function store(Request $request)
     {
-        // $attributes = $request->validate([
-        //     'name' => 'required|string|max:50|min:1|unique:series',
-        //     'year' => 'required|string|max:4|min:4',
-        //     'overview' => 'required|string',
-        //     'background_cover' => 'required|image',
-        //     'poster' => 'required|image',
-        //     'url' => 'required|string',
-        //     'api_url' => 'required|string',
-        //     'categories' => 'required|array|max:3|exists:categories,id',
-        //     'actors' => 'required|array|max:10|exists:actors,id'
-        // ]);
-
-        // $attributes['background_cover'] = $request->background_cover->store('serie_background_covers');
-        // $attributes['poster'] = $request->poster->store('serie_posters');
-
-        // $serie = Series::create([
-        //     'name' => $attributes['name'],
-        //     'year' => $attributes['year'],
-        //     'overview' => $attributes['overview'],
-        //     'background_cover' => $attributes['background_cover'],
-        //     'poster' => $attributes['poster'],
-        //     'url' => $attributes['url'],
-        //     'api_url' => $attributes['api_url'],
-        // ]);
-        // $serie->categories()->sync($attributes['categories']);
-        // $serie->actors()->sync($attributes['actors']);
-
-        // session()->flash('success', 'Film Added Successfully');
-        // return redirect()->route('dashboard.series.index');
+        
     }
 
     /**
@@ -114,7 +86,9 @@ class SeriesController extends Controller
      */
     public function show($id)
     {
-        //
+        $seasons = Series::with('seasons2')->find($id);
+        // dd($seasons); 
+        return view('dashboard.seasons.index', compact('seasons'));
     }
 
     /**

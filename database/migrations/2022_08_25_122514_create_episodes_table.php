@@ -27,7 +27,7 @@ class CreateEpisodesTable extends Migration
             $table->foreign('series_id')->references('id')->on('series')->onDelete('cascade');
             $table->foreign('seasons_id')->references('id')->on('seasons')->onDelete('cascade');
 
-            $table->unique(['series_id', 'seasons_id']);
+            // $table->unique(['series_id', 'seasons_id']);
         });
     }
 

@@ -137,7 +137,7 @@
                                             </td>
                                             <td>
                                                  @if(auth()->guard('admin')->user()->hasPermission('read_series'))
-                                                <a href="{{route('dashboard.seasons.index', $serie)}}">
+                                                <a href="{{route('dashboard.series.show', $serie->id)}}">
                                                     <button class="btn btn-icon btn-neutral btn-icon-mini" title="Edit">
                                                         <i class="zmdi zmdi-eye"></i>
                                                     </button>

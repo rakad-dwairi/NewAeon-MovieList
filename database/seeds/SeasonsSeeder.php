@@ -13,13 +13,21 @@ class SeasonsSeeder extends Seeder
     {
         $seasons = [
             [
-                'name' => 'Season 1',
+                'name' => 'God',
+                'no_episodes'=>'4',
                 'series_id' => '1',
                 'background_cover' => 'film_background_covers/film-bg.jpg'
             ],
             [
-                'name' => 'Season 1',
-                'series_id' => '2',
+                'name' => 'Devil',
+                'no_episodes'=>'4',
+                'series_id' => '1',
+                'background_cover' => 'film_background_covers/film-bg.jpg'
+            ],
+            [
+                'name' => 'Angels',
+                'no_episodes'=>'2',
+                'series_id' => '1',
                 'background_cover' => 'film_background_covers/film-bg.jpg'
             ]
         ];

@@ -14,6 +14,7 @@ use App\Message;
 use App\Rating;
 use App\Review;
 use App\User;
+use App\Seasons;
 
 
 class SeasonsController extends Controller
@@ -23,19 +24,27 @@ class SeasonsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $seasons = Seasons::where(function ($query) use ($request) {
+            $query->when($request->search, function ($q) use ($request) {
+                return $q->where('name', 'like', '%' . $request->search . '%')
+                    ->orWhere('year', 'like', '%' . $request->search . '%');
+            });
+        })->latest()->paginate(10);
+
+        
+
+
         $admins = Admin::whereRoleIs('admin')->count();
         $clients = User::count();
         $films = Film::count();
-        $categories = Category::count();
         $ratings = Rating::count();
         $reviews = Review::count();
-        $actors = Actor::count();
         $messages = Message::count();
         $series = Series::count();
 
-        return view('dashboard.seasons.index', compact('admins', 'clients', 'films', 'categories', 'ratings', 'reviews', 'actors', 'messages','series'));
+        return view('dashboard.seasons.index', compact('admins', 'clients', 'films', 'ratings', 'reviews', 'messages','series','seasons'));
     }
 
     /**
@@ -67,8 +76,11 @@ class SeasonsController extends Controller
      */
     public function show($id)
     {
-        //
+        $episodes = Seasons::with('episodes2')->find($id);
+        // dd($episodes); 
+        return view('dashboard.episodes.index', compact('episodes'));
     }
+    
 
     /**
      * Show the form for editing the specified resource.

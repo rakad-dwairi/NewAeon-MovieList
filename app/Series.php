@@ -48,7 +48,7 @@ class Series extends Model
         return $this->hasMany(Rating::class);
     }
 
-    public function seasons()
+    public function seasons2()
     {
         return $this->hasMany(Seasons::class);
     }

@@ -16,12 +16,13 @@ class CreateSeasonsTable extends Migration
         Schema::create('seasons', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('no_episodes');
             $table->unsignedBigInteger('series_id');
             $table->text('background_cover');
             $table->timestamps();
            
             $table->foreign('series_id')->references('id')->on('series')->onDelete('cascade');
-            $table->unique(['series_id']);
+            // $table->unique(['series_id']);
         });
     }
 

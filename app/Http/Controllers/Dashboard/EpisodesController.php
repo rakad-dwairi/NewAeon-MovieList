@@ -11,16 +11,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
-class EposidesController extends Controller
+class EpisodesController extends Controller
 {
 
 
     public function __construct()
     {
-        $this->middleware(['permission:create_eposides,guard:admin'])->only(['create', 'store']);
-        $this->middleware(['permission:read_eposides,guard:admin'])->only('index');
-        $this->middleware(['permission:update_eposides,guard:admin'])->only(['edit', 'update']);
-        $this->middleware(['permission:delete_eposides,guard:admin'])->only('destroy');
+        $this->middleware(['permission:create_episodes,guard:admin'])->only(['create', 'store']);
+        $this->middleware(['permission:read_episodes,guard:admin'])->only('index');
+        $this->middleware(['permission:update_episodes,guard:admin'])->only(['edit', 'update']);
+        $this->middleware(['permission:delete_episodes,guard:admin'])->only('destroy');
     }
     /**
      * Display a listing of the resource.
@@ -30,33 +30,33 @@ class EposidesController extends Controller
     public function index(Request $request)
     {
          //
-         $eposide = Episode::where(function ($query) use ($request) {
+         $episodes = Episode::where(function ($query) use ($request) {
             $query->when($request->search, function ($q) use ($request) {
                 return $q->where('name', 'like', '%' . $request->search . '%')
                     ->orWhere('year', 'like', '%' . $request->search . '%');
             });
-            $query->when($request->category, function ($q) use ($request) {
-                return $q->whereHas('categories', function ($q2) use ($request){
-                    return $q2->whereIn('category_id', (array)$request->category)
-                        ->orWhereIn('name', (array)$request->category);
-                });
-            });
-            $query->when($request->actor, function ($q) use ($request) {
-                return $q->whereHas('actors', function ($q2) use ($request){
-                    return $q2->whereIn('actor_id', (array)$request->actor)
-                        ->orWhereIn('name', (array)$request->actor);
-                });
-            });
-            $query->when($request->favorite, function ($q) use ($request) {
-                return $q->whereHas('favorites', function ($q2) use ($request){
-                    return $q2->whereIn('user_id', (array)$request->favorite);
-                });
-            });
-        })->with('categories')->with('ratings')->latest()->paginate(10);
-        // $categories = Category::all();
-        // $actors = Actor::all();
+            // $query->when($request->category, function ($q) use ($request) {
+            //     return $q->whereHas('categories', function ($q2) use ($request){
+            //         return $q2->whereIn('category_id', (array)$request->category)
+            //             ->orWhereIn('name', (array)$request->category);
+            //     });
+            // });
+            // $query->when($request->actor, function ($q) use ($request) {
+            //     return $q->whereHas('actors', function ($q2) use ($request){
+            //         return $q2->whereIn('actor_id', (array)$request->actor)
+            //             ->orWhereIn('name', (array)$request->actor);
+            //     });
+            // });
+            // $query->when($request->favorite, function ($q) use ($request) {
+            //     return $q->whereHas('favorites', function ($q2) use ($request){
+            //         return $q2->whereIn('user_id', (array)$request->favorite);
+            //     });
+            // });
+        })->latest()->paginate(10);
+        //  $categories = Category::all();
+        //  $actors = Actor::all();
 
-        return view('dashboard.films.index', compact('eposide'));
+        return view('dashboard.episodes.index', compact('episodes'));
     }
 
     /**
