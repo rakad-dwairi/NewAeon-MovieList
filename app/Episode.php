@@ -9,9 +9,9 @@ class Episode extends Model
 
     protected $table = 'episodes';
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'background_cover', 'poster', 'url', 'api_url'];
 
-    public function season()
+    public function season2()
     {
         return $this->belongsTo(Seasons::class, 'seasons');
     }
@@ -20,4 +20,38 @@ class Episode extends Model
         return $this->belongsTo(Series::class, 'series');
     }
 
+    public function getPosterAttribute($value)
+    {
+        return asset('storage/' . $value);
+    }
+
+    public function getBackgroundCoverAttribute($value)
+    {
+        return asset('storage/' . $value);
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'film_category');
+    }
+
+    public function actors()
+    {
+        return $this->belongsToMany(Actor::class, 'film_actor');
+    }
+
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class);
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
+    }
 }

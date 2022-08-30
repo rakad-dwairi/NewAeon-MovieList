@@ -35,7 +35,7 @@ class Series extends Model
 
     public function categories()
     {
-        return $this->belongsToMany(Category::class, 'series_category');
+        return $this->belongsToMany(Category::class, 'film_category');
     }
 
     public function actors()
@@ -43,12 +43,13 @@ class Series extends Model
         return $this->belongsToMany(Actor::class, 'film_actor');
     }
 
+
     public function ratings()
     {
         return $this->hasMany(Rating::class);
     }
 
-    public function seasons()
+    public function seasons2()
     {
         return $this->hasMany(Seasons::class);
     }

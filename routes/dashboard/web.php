@@ -19,7 +19,7 @@ Route::group(['prefix' => 'dashboard', 'namespace' => 'Dashboard'], function () 
         Route::resource('films', 'FilmController');
         Route::resource('series', 'SeriesController');
         Route::resource('seasons', 'SeasonsController');
-        Route::resource('eposides', 'EposidesController');
+        Route::resource('episodes', 'EpisodesController');
 
         Route::resource('actors', 'ActorController');
         Route::resource('categories', 'CategoryController')->except(['show']);

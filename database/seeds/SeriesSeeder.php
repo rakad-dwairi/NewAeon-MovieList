@@ -23,7 +23,7 @@ class SeriesSeeder extends Seeder
                 ],
             [
                 'name' => 'Breaking Bad',
-                'seasons' => '7',
+                'seasons' => '2',
                 'year' => '2020',
                 'overview' => 'film2film2film2film2film2film2film2film2film2film2film2film2',
                 'background_cover' => 'film_background_covers/film-bg.jpg',
