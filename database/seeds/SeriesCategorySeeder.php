@@ -15,10 +15,6 @@ class SeriesCategorySeeder extends Seeder
         $categories = [
             [
                 'series_id' => '1',
-                'category_id' => '1',
-            ],
-            [
-                'series_id' => '1',
                 'category_id' => '2',
             ],
             [

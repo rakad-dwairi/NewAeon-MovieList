@@ -35,12 +35,12 @@ class Series extends Model
 
     public function categories()
     {
-        return $this->belongsToMany(Category::class, 'film_category');
+        return $this->belongsToMany(Category::class, 'series_category');
     }
 
     public function actors()
     {
-        return $this->belongsToMany(Actor::class, 'film_actor');
+        return $this->belongsToMany(Actor::class, 'series_actor');
     }
 
 

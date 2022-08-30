@@ -28,6 +28,14 @@ class SeriesSeeder extends Seeder
                 'overview' => 'film2film2film2film2film2film2film2film2film2film2film2film2',
                 'background_cover' => 'film_background_covers/film-bg.jpg',
                 'poster' => 'film_posters/film-poster.jpg',
+            ],
+            [
+                'name' => 'Brooklyn 99',
+                'seasons' => '1',
+                'year' => '2020',
+                'overview' => 'film2film2film2film2film2film2film2film2film2film2film2film2',
+                'background_cover' => 'film_background_covers/film-bg.jpg',
+                'poster' => 'film_posters/film-poster.jpg',
                 ]
         ];
 

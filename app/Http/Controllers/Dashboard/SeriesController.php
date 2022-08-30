@@ -79,7 +79,7 @@ class SeriesController extends Controller
     {
 
         $attributes = $request->validate([
-            'name' => 'required|string|max:50|min:1|unique:films',
+            'name' => 'required|string|max:50|min:1|unique:series',
             'seasons'=>'required|numeric',
             'year' => 'required|string|max:4|min:4',
             'overview' => 'required|string',

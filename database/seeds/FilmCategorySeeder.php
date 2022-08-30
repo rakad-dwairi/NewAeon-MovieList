@@ -15,17 +15,14 @@ class FilmCategorySeeder extends Seeder
         $filmCategories = [
             [
                 'film_id' => '1',
-                'series_id' => '2',
                 'category_id' => '1',
             ],
             [
                 'film_id' => '1',
-                'series_id' => '2',
                 'category_id' => '2',
             ],
             [
                 'film_id' => '2',
-                'series_id' => '2',
                 'category_id' => '1',
             ],
         ];
