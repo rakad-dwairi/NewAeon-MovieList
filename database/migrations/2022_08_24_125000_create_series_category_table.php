@@ -9,17 +9,19 @@ class CreateSeriesCategoryTable extends Migration
 
    public function up()
    {
+    DB::statement('SET FOREIGN_KEY_CHECKS=0');
        Schema::create('series_category', function (Blueprint $table) {
            $table->id();
            $table->unsignedBigInteger('series_id');
            $table->unsignedBigInteger('category_id');
            $table->timestamps();
 
-            // $table->foreign('series_id')->references('id')->on('series')->onDelete('cascade');
+            $table->foreign('series_id')->references('id')->on('series')->onDelete('cascade');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
 
-            $table->unique(['series_id', 'category_id']);
+            // $table->unique(['category_id']);
        });
+       DB::statement('SET FOREIGN_KEY_CHECKS=1');
    }
 
    /**

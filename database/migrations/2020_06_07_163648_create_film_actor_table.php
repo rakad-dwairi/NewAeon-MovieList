@@ -17,11 +17,11 @@ class CreateFilmActorTable extends Migration
         Schema::create('film_actor', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('film_id');
-            $table->unsignedBigInteger('series_id');
+            // $table->unsignedBigInteger('series_id');
             $table->unsignedBigInteger('actor_id');
             $table->timestamps();
 
-            $table->foreign('series_id')->references('id')->on('series')->onDelete('cascade');
+            // $table->foreign('series_id')->references('id')->on('series')->onDelete('cascade');
             $table->foreign('film_id')->references('id')->on('films')->onDelete('cascade');
             $table->foreign('actor_id')->references('id')->on('actors')->onDelete('cascade');
 

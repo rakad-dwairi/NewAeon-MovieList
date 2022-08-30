@@ -13,6 +13,7 @@ class CreateSeriesTable extends Migration
      */
     public function up()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
         Schema::create('series', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
@@ -23,6 +24,7 @@ class CreateSeriesTable extends Migration
             $table->text('poster');
             $table->timestamps();
         });
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
     }
 
     /**
