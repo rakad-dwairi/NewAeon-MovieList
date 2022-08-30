@@ -188,7 +188,7 @@ class FilmController extends Controller
     public function destroy(Film $film)
     {
         $film->delete();
-
+        dd($film->delete());
         session()->flash('success', 'Film Deleted Successfully');
         return redirect()->route('dashboard.films.index');
     }

@@ -9,7 +9,7 @@ class Seasons extends Model
 
     protected $table = 'seasons';
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name','no_episodes'];
 
     public function series()
     {

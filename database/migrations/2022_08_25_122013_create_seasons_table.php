@@ -16,7 +16,7 @@ class CreateSeasonsTable extends Migration
         Schema::create('seasons', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('no_episodes');
+            $table->integer('no_episodes');
             $table->unsignedBigInteger('series_id');
             $table->text('background_cover');
             $table->timestamps();

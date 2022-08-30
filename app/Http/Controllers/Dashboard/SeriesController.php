@@ -127,9 +127,11 @@ class SeriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Series $serie)
     {
-        //
+        $categories = Category::all();
+        $actors = Actor::all();
+        return view('dashboard.films.edit', compact('serie', 'categories', 'actors'));
     }
 
     /**
@@ -139,9 +141,34 @@ class SeriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Series $serie)
     {
-        //
+        $attributes = $request->validate([
+            'name' => ['required', 'string', 'max:50', 'min:1', Rule::unique('series')->ignore($serie)],
+            'year' => 'required|string|max:4|min:4',
+            'seasons'=>'required|numeric',
+            'overview' => 'required|string',
+            'background_cover' => 'nullable|image',
+            'poster' => 'nullable|image',
+            'categories' => 'required|array|max:3|exists:categories,id',
+            'actors' => 'required|array|max:10|exists:actors,id'
+        ]);
+
+        if ($request->background_cover) {
+            Storage::delete($serie->getAttributes()['background_cover']);
+            $attributes['background_cover'] = $request->background_cover->store('series_background_covers');
+        }
+        if ($request->poster) {
+            Storage::delete($serie->getAttributes()['poster']);
+            $attributes['poster'] = $request->poster->store('series_posters');
+        }
+
+        $serie->update($attributes);
+        $serie->categories()->sync($attributes['categories']);
+        $serie->actors()->sync($attributes['actors']);
+
+        session()->flash('success', 'Serie Updated Successfully');
+        return redirect()->route('dashboard.series.index');
     }
 
     /**
@@ -150,8 +177,14 @@ class SeriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($serie)
     {
-        //
+        if(Series::destroy($serie)) {
+            session()->flash('success', 'Serie Deleted Successfully');
+             return redirect()->route('dashboard.series.index');
+          } else {
+            session()->flash('alert', 'Serie Was not Successfully Delted');
+             return redirect()->route('dashboard.series.index');
+          }
     }
 }

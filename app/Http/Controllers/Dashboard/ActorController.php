@@ -119,7 +119,6 @@ class ActorController extends Controller
      */
     public function update(Request $request, Actor $actor)
     {
-        //
         $attributes = $request->validate([
             'name' => ['required', 'string', 'max:30', 'min:3', Rule::unique('actors')->ignore($actor)],
             'dob' => 'required|date',

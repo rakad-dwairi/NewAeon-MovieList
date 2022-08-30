@@ -28,8 +28,7 @@ class SeasonsController extends Controller
     {
         $seasons = Seasons::where(function ($query) use ($request) {
             $query->when($request->search, function ($q) use ($request) {
-                return $q->where('name', 'like', '%' . $request->search . '%')
-                    ->orWhere('year', 'like', '%' . $request->search . '%');
+                return $q->where('name', 'like', '%' . $request->search . '%');
             });
         })->latest()->paginate(10);
 
@@ -54,7 +53,9 @@ class SeasonsController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::all();
+        $actors = Actor::all();
+        return view('dashboard.seasons.create', compact('categories', 'actors'));
     }
 
     /**
@@ -65,7 +66,29 @@ class SeasonsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+   
+        $attributes = $request->validate([
+            'name' => 'required|string|max:50|min:1|unique:films',
+            'no_episodes' => 'required|integer',
+            'background_cover' => 'required|image',
+            'categories' => 'required|array|max:3|exists:categories,id',
+            'actors' => 'required|array|max:10|exists:actors,id'
+        ]);
+
+        $attributes['background_cover'] = $request->background_cover->store('series_background_covers');
+        
+        $season = Seasons::create([
+            'name' => $attributes['name'],
+            'series_id'=>$id,
+            'no_episodes' => $attributes['no_episodes'],
+            'background_cover' => $attributes['background_cover'],
+        ]);
+        dd($season);
+        $season->categories()->sync($attributes['categories']);
+        $season->actors()->sync($attributes['actors']);
+
+        session()->flash('success', 'Season Added Successfully');
+        return redirect()->route('dashboard.seasons.index');
     }
 
     /**

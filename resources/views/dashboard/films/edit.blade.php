@@ -35,7 +35,7 @@
                         </div>
 
                         <div class="body">
-                            <form action="{{route('dashboard.films.update', $film)}}" method="POST"
+                            <form action="{{route('dashboard.films.update', $film ?? '')}}" method="POST"
                                   enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
@@ -48,14 +48,14 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <input type="text" name="name" class="form-control"
-                                                   placeholder="Name" value="{{ $film->name }}">
+                                                   placeholder="Name" value="{{ $film ?? ''->name }}">
                                             <span style="color: red; margin-left: 10px">{{ $errors->first('name') }}</span>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <input type="text" name="year" class="form-control"
-                                                   placeholder="Year" value="{{ $film->year }}">
+                                                   placeholder="Year" value="{{ $film ?? ''->year }}">
                                             <span style="color: red;margin-left: 10px">{{ $errors->first('year') }}</span>
                                         </div>
                                     </div>
@@ -67,7 +67,7 @@
                                             <option selected disabled>- Categories -</option>
                                             @foreach ($categories as $category)
                                                 <option value="{{ $category->id }}"
-                                                {{in_array($category->id, $film->categories->pluck('id')->toArray()) ? 'selected' : ''}}>
+                                                {{in_array($category->id, $film ?? ''->categories->pluck('id')->toArray()) ? 'selected' : ''}}>
                                                     {{ $category->name }}
                                                 </option>
                                             @endforeach
@@ -82,7 +82,7 @@
                                             <option selected disabled>- Actors -</option>
                                             @foreach ($actors as $actor)
                                                 <option value="{{ $actor->id }}"
-                                                        {{in_array($actor->id, $film->actors->pluck('id')->toArray()) ? 'selected' : ''}}>
+                                                        {{in_array($actor->id, $film ?? ''->actors->pluck('id')->toArray()) ? 'selected' : ''}}>
                                                     {{ $actor->name }}
                                                 </option>
                                             @endforeach
@@ -98,7 +98,7 @@
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <textarea name="overview" rows="4" class="form-control no-resize"
-                                                      placeholder="Film Overview">{{ $film->overview }}</textarea>
+                                                      placeholder="Film Overview">{{ $film ?? ''->overview }}</textarea>
                                             <span style="color: red; margin-left: 10px">{{ $errors->first('overview') }}</span>
                                         </div>
                                     </div>
@@ -107,7 +107,7 @@
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <textarea name="url" rows="4" class="form-control no-resize"
-                                                      placeholder="Embed Code From JWPlayer Server">{{ $film->url }}</textarea>
+                                                      placeholder="Embed Code From JWPlayer Server">{{ $film ?? ''->url }}</textarea>
                                             <span style="color: red; margin-left: 10px">{{ $errors->first('url') }}</span>
                                         </div>
                                     </div>
@@ -116,7 +116,7 @@
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <textarea name="api_url" rows="4" class="form-control no-resize"
-                                                      placeholder="API URL">{{ $film->api_url }}</textarea>
+                                                      placeholder="API URL">{{ $film ?? ''->api_url }}</textarea>
                                             <span style="color: red; margin-left: 10px">{{ $errors->first('api_url') }}</span>
                                         </div>
                                     </div>
@@ -126,7 +126,7 @@
                                     <div class="fileinput fileinput-new" data-provides="fileinput">
                                         <div class="fileinput-new thumbnail"
                                              style="width: 200px; height: 150px;">
-                                            <img src="{{$film->background_cover}}"
+                                            <img src="{{$film ?? ''->background_cover}}"
                                                  alt=""/>
                                         </div>
                                         <div class="fileinput-preview fileinput-exists thumbnail"
@@ -137,7 +137,7 @@
                                                     <span class="fileinput-new"> Select Film Background_Cover </span>
                                                     <span class="fileinput-exists"> Change </span>
                                                     <input type="file" name="background_cover"
-                                                           value="{{$film->background_cover}}">
+                                                           value="{{$film ?? ''->background_cover}}">
                                                 </span>
                                             <a href="" class="btn btn-danger fileinput-exists"
                                                data-dismiss="fileinput">
@@ -152,7 +152,7 @@
                                     <div class="fileinput fileinput-new" data-provides="fileinput">
                                         <div class="fileinput-new thumbnail"
                                              style="width: 200px; height: 150px;">
-                                            <img src="{{$film->poster}}"
+                                            <img src="{{$film ?? ''->poster}}"
                                                  alt=""/>
                                         </div>
                                         <div class="fileinput-preview fileinput-exists thumbnail"
@@ -163,7 +163,7 @@
                                                     <span class="fileinput-new"> Select Film Poster </span>
                                                     <span class="fileinput-exists"> Change </span>
                                                     <input type="file" name="poster"
-                                                           value="{{$film->poster}}">
+                                                           value="{{$film ?? ''->poster}}">
                                                 </span>
                                             <a href="" class="btn btn-danger fileinput-exists"
                                                data-dismiss="fileinput">
