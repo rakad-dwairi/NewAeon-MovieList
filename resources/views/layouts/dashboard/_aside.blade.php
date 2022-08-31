@@ -64,6 +64,18 @@
                             </ul>
                         </li>
                     @endif
+                    @if(auth()->guard('admin')->user()->hasPermission('read_servers'))
+                        <li>
+                            <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-view-agenda"></i><span>Servers</span>
+                            </a>
+                            <ul class="ml-menu">
+                                <li><a href="{{route('dashboard.servers.index')}}">All Servers</a></li>
+                                @if(auth()->guard('admin')->user()->hasPermission('create_servers'))
+                                    <li><a href="{{route('dashboard.servers.create')}}">Add Server</a></li>
+                                @endif
+                            </ul>
+                        </li>
+                    @endif
 
                     @if(auth()->guard('admin')->user()->hasPermission('read_films'))
                         <li>

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFilmCategoryTable extends Migration
+class CreateFilmServerTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,17 @@ class CreateFilmCategoryTable extends Migration
      */
     public function up()
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS=0');
-        Schema::create('film_category', function (Blueprint $table) {
+        Schema::create('film_server', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('film_id');
-            $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('server_id');
             $table->timestamps();
 
             $table->foreign('film_id')->references('id')->on('films')->onDelete('cascade');
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreign('server_id')->references('id')->on('servers')->onDelete('cascade');
 
-            $table->unique(['film_id','category_id']);
+            $table->unique(['film_id','server_id']);
         });
-        DB::statement('SET FOREIGN_KEY_CHECKS=1');
     }
 
     /**
@@ -35,6 +33,6 @@ class CreateFilmCategoryTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('film_category');
+        Schema::dropIfExists('film_server');
     }
 }

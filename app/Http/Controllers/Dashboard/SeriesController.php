@@ -12,7 +12,7 @@ use Illuminate\Validation\Rule;
 
 class SeriesController extends Controller
 {
-
+    
     public function __construct()
     {
         $this->middleware(['permission:create_series,guard:admin'])->only(['create', 'store']);

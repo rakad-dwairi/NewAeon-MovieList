@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Actor;
 use App\Category;
+use App\Server;
 use App\Film;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -42,6 +43,12 @@ class FilmController extends Controller
                         ->orWhereIn('name', (array)$request->category);
                 });
             });
+            // $query->when($request->server, function ($q) use ($request) {
+            //     return $q->whereHas('servers', function ($q2) use ($request){
+            //         return $q2->whereIn('server_id', (array)$request->server)
+            //             ->orWhereIn('name', (array)$request->server);
+            //     });
+            // });
             $query->when($request->actor, function ($q) use ($request) {
                 return $q->whereHas('actors', function ($q2) use ($request){
                     return $q2->whereIn('actor_id', (array)$request->actor)
@@ -53,11 +60,12 @@ class FilmController extends Controller
                     return $q2->whereIn('user_id', (array)$request->favorite);
                 });
             });
-        })->with('categories')->with('ratings')->latest()->paginate(10);
+        })->with('categories')->with('ratings')->with('servers')->latest()->paginate(10);
         $categories = Category::all();
+        $servers = Server::all();
         $actors = Actor::all();
 
-        return view('dashboard.films.index', compact('films', 'categories', 'actors'));
+        return view('dashboard.films.index', compact('films', 'categories', 'actors','servers'));
     }
 
     /**
@@ -69,8 +77,9 @@ class FilmController extends Controller
     {
         //
         $categories = Category::all();
+        $servers = Server::all();
         $actors = Actor::all();
-        return view('dashboard.films.create', compact('categories', 'actors'));
+        return view('dashboard.films.create', compact('categories', 'actors','servers'));
     }
 
     /**
@@ -91,6 +100,7 @@ class FilmController extends Controller
             'url' => 'required|string',
             'api_url' => 'required|string',
             'categories' => 'required|array|max:3|exists:categories,id',
+            'servers' => 'required|array|max:3|exists:servers,id',
             'actors' => 'required|array|max:10|exists:actors,id'
         ]);
 
@@ -107,6 +117,7 @@ class FilmController extends Controller
             'api_url' => $attributes['api_url'],
         ]);
         $film->categories()->sync($attributes['categories']);
+        $film->servers()->sync($attributes['servers']);
         $film->actors()->sync($attributes['actors']);
 
         session()->flash('success', 'Film Added Successfully');
@@ -134,8 +145,9 @@ class FilmController extends Controller
     {
         //
         $categories = Category::all();
+        $servers = Server::all();
         $actors = Actor::all();
-        return view('dashboard.films.edit', compact('film', 'categories', 'actors'));
+        return view('dashboard.films.edit', compact('film', 'categories', 'actors','servers'));
     }
 
     /**
@@ -157,6 +169,7 @@ class FilmController extends Controller
             'url' => 'required|string',
             'api_url' => 'required|string',
             'categories' => 'required|array|max:3|exists:categories,id',
+            'servers' => 'required|array|max:3|exists:servers,id',
             'actors' => 'required|array|max:10|exists:actors,id'
         ]);
 
@@ -171,6 +184,7 @@ class FilmController extends Controller
 
         $film->update($attributes);
         $film->categories()->sync($attributes['categories']);
+        $film->servers()->sync($attributes['servers']);
         $film->actors()->sync($attributes['actors']);
 
         session()->flash('success', 'Film Updated Successfully');
@@ -188,7 +202,6 @@ class FilmController extends Controller
     public function destroy(Film $film)
     {
         $film->delete();
-        dd($film->delete());
         session()->flash('success', 'Film Deleted Successfully');
         return redirect()->route('dashboard.films.index');
     }

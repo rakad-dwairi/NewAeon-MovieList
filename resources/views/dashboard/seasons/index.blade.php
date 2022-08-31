@@ -17,7 +17,7 @@
             </div>
             <div class="col-lg-5 col-md-7 col-sm-12">
                 @if(auth()->guard('admin')->user()->hasPermission('create_seasons'))
-                <a href="{{route('dashboard.seasons.create')}}">
+                <a href="{{ route('dashboard.seasons.create',['series_id' => 1]) }}">
                     <button class="btn btn-primary btn-icon btn-round d-none d-md-inline-block float-right m-l-10"
                         type="button">
                         <i class="zmdi zmdi-plus"></i>

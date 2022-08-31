@@ -62,6 +62,18 @@
 
                                 <div class="row clearfix">
                                     <div class="col-sm-12">
+                                        <select class="form-control z-index show-tick" name="servers[]" data-live-search="true" multiple>
+                                            <option selected disabled>- Select Servers -</option>
+                                            @foreach ($servers as $server)
+                                                <option value="{{ $server->id }}">{{ $server->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        <span style="color: red;margin-left: 10px">{{ $errors->first('servers') }}</span>
+                                    </div>
+                                </div>
+
+                                <div class="row clearfix">
+                                    <div class="col-sm-12">
                                         <select class="form-control z-index show-tick" name="categories[]" data-live-search="true" multiple>
                                             <option selected disabled>- Select Categories -</option>
                                             @foreach ($categories as $category)

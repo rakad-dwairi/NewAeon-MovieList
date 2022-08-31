@@ -38,6 +38,11 @@ class Film extends Model
         return $this->belongsToMany(Category::class, 'film_category');
     }
 
+    public function servers()
+    {
+        return $this->belongsToMany(Server::class, 'film_server');
+    }
+
     public function actors()
     {
         return $this->belongsToMany(Actor::class, 'film_actor');

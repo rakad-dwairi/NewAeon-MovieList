@@ -57,6 +57,14 @@
                                                    placeholder="Search..." value="{{ request()->search }}">
                                         </div>
                                     </div>
+                                    {{-- <div class="col-3">
+                                        <select name="server" class="form-control z-index show-tick" data-live-search="true">
+                                            <option value="">- All Servers -</option>
+                                            @foreach($servers as $server)
+                                                <option value="{{$server->id}}" {{request()->server == $server->id ? 'selected' : ''}}>{{$server->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div> --}}
                                     <div class="col-3">
                                         <select name="category" class="form-control z-index show-tick" data-live-search="true">
                                             <option value="">- All Categories -</option>
@@ -65,6 +73,7 @@
                                             @endforeach
                                         </select>
                                     </div>
+
                                     <div class="col-3">
                                         <select name="actor" class="form-control z-index show-tick" data-live-search="true">
                                             <option value="">- All Actors -</option>
@@ -89,6 +98,7 @@
                                             <th>Rating</th>
                                             <th>Overview</th>
                                             <th>Categories</th>
+                                            <th>Servers</th>
                                             <th>Relations</th>
                                             <th>Actions</th>
                                         </tr>
@@ -119,6 +129,11 @@
                                                 <td>
                                                     @foreach($film->categories as $category)
                                                         <span class="badge badge-info">{{$category->name}}</span>
+                                                    @endforeach
+                                                </td>
+                                                <td>
+                                                    @foreach($film->servers as $server)
+                                                        <span class="badge badge-info">{{$server->name}}</span>
                                                     @endforeach
                                                 </td>
                                                 <td>
