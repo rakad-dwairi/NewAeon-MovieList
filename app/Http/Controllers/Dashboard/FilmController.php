@@ -90,12 +90,13 @@ class FilmController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //  dd($request);
         $attributes = $request->validate([
             'name' => 'required|string|max:50|min:1|unique:films',
             'year' => 'required|string|max:4|min:4',
             'overview' => 'required|string',
             'background_cover' => 'required|image',
+            'embed_url' => 'required|string:servers,embed_url',
             'poster' => 'required|image',
             'url' => 'required|string',
             'api_url' => 'required|string',
@@ -109,6 +110,7 @@ class FilmController extends Controller
 
         $film = Film::create([
             'name' => $attributes['name'],
+            'embed_url' => $attributes['embed_url'],
             'year' => $attributes['year'],
             'overview' => $attributes['overview'],
             'background_cover' => $attributes['background_cover'],
@@ -118,6 +120,7 @@ class FilmController extends Controller
         ]);
         $film->categories()->sync($attributes['categories']);
         $film->servers()->sync($attributes['servers']);
+        $film->servers()->sync($attributes['embed_url']);
         $film->actors()->sync($attributes['actors']);
 
         session()->flash('success', 'Film Added Successfully');
