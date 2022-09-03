@@ -15,6 +15,10 @@ class FilmServer extends Model
         'embed_url'
     ];
 
+    public function film()
+    {
+        return $this->belongsToMany(Film::class);
+    }
 
 
 }

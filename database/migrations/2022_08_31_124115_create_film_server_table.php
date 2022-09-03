@@ -25,7 +25,7 @@ class CreateFilmServerTable extends Migration
             // $table->text('embed_url')->references('url')->on('films')->onDelete('cascade');
             $table->foreign('server_id')->references('id')->on('servers')->onDelete('cascade');
 
-            $table->unique(['server_id']);
+            // $table->unique(['server_id']);
         });
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
     }

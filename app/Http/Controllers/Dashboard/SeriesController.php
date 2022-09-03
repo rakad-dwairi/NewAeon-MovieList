@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Actor;
 use App\Category;
 use App\Series;
+use App\Server;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -117,7 +118,6 @@ class SeriesController extends Controller
     public function show($id)
     {
         $seasons = Series::with('seasons2')->find($id);
-        // dd($seasons); 
         return view('dashboard.seasons.index', compact('seasons'));
     }
 
@@ -131,7 +131,7 @@ class SeriesController extends Controller
     {
         $categories = Category::all();
         $actors = Actor::all();
-        return view('dashboard.films.edit', compact('serie', 'categories', 'actors'));
+        return view('dashboard.series.edit', compact('serie', 'categories', 'actors'));
     }
 
     /**
@@ -143,28 +143,30 @@ class SeriesController extends Controller
      */
     public function update(Request $request, Series $serie)
     {
+        dd($request,$serie);
         $attributes = $request->validate([
             'name' => ['required', 'string', 'max:50', 'min:1', Rule::unique('series')->ignore($serie)],
             'year' => 'required|string|max:4|min:4',
-            'seasons'=>'required|numeric',
             'overview' => 'required|string',
             'background_cover' => 'nullable|image',
             'poster' => 'nullable|image',
             'categories' => 'required|array|max:3|exists:categories,id',
+            'servers' => 'required|array|max:3|exists:servers,id',
             'actors' => 'required|array|max:10|exists:actors,id'
         ]);
 
         if ($request->background_cover) {
             Storage::delete($serie->getAttributes()['background_cover']);
-            $attributes['background_cover'] = $request->background_cover->store('series_background_covers');
+            $attributes['background_cover'] = $request->background_cover->store('serie_background_covers');
         }
         if ($request->poster) {
             Storage::delete($serie->getAttributes()['poster']);
-            $attributes['poster'] = $request->poster->store('series_posters');
+            $attributes['poster'] = $request->poster->store('serie_posters');
         }
 
         $serie->update($attributes);
         $serie->categories()->sync($attributes['categories']);
+        $serie->servers()->sync($attributes['servers']);
         $serie->actors()->sync($attributes['actors']);
 
         session()->flash('success', 'Serie Updated Successfully');

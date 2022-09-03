@@ -12,7 +12,7 @@ class Series extends Model
 
     protected $table = 'series';
 
-    protected $fillable = ['name','seasons', 'year', 'overview', 'background_cover', 'poster', 'url', 'api_url'];
+    protected $fillable = ['name','seasons', 'year', 'overview', 'background_cover', 'poster'];
 
     protected static function booted()
     {

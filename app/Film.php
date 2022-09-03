@@ -27,7 +27,7 @@ class Film extends Model
     {
         return asset('storage/' . $value);
     }
-
+ 
     public function getBackgroundCoverAttribute($value)
     {
         return asset('storage/' . $value);

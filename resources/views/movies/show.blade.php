@@ -177,6 +177,8 @@
                                                 <p>{{$film->overview}}</p>
                                                 <hr style="background-color: #405266">
                                                 <br>
+                                                @dd($servers)
+                                                {{-- {{$servers}} --}}
                                                 {!! $film->url !!}
                                             </div>
 
@@ -227,7 +229,7 @@
                                             @endforeach
                                         </div>
                                         {{$reviews->appends(request()->query())->links()}}
-
+                                        
                                         <div class="blog-detail-ct" id="write_review">
                                             <div class="comment-form" style="padding-top: 75px!important;">
                                                 <h4>Write a review</h4>

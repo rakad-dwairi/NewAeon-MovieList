@@ -147,8 +147,7 @@
                                                     style="cursor: no-drop" title="Edit">
                                                     <i class="zmdi zmdi-eye"></i>
                                                 </button>
-                                                @endif
-
+                                                @endif                                               
                                                 @if(auth()->guard('admin')->user()->hasPermission('update_series'))
                                                 <a href="{{route('dashboard.series.edit', $serie)}}">
                                                     <button class="btn btn-icon btn-neutral btn-icon-mini" title="Edit">

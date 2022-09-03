@@ -33,9 +33,8 @@
                         <div class="header">
                             <h2><strong>Edit</strong> Series</h2>
                         </div>
-
                         <div class="body">
-                            <form action="{{route('dashboard.series.update', $serie)}}" method="POST"
+                            <form action="{{route('dashboard.series.update',request()->route()->series)}}" method="POST"
                                   enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')

@@ -44,12 +44,6 @@ class FilmController extends Controller
                         ->orWhereIn('name', (array)$request->category);
                 });
             });
-            // $query->when($request->server, function ($q) use ($request) {
-            //     return $q->whereHas('servers', function ($q2) use ($request){
-            //         return $q2->whereIn('server_id', (array)$request->server)
-            //             ->orWhereIn('name', (array)$request->server);
-            //     });
-            // });
             $query->when($request->actor, function ($q) use ($request) {
                 return $q->whereHas('actors', function ($q2) use ($request){
                     return $q2->whereIn('actor_id', (array)$request->actor)
@@ -91,7 +85,6 @@ class FilmController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->server_url);
         $attributes = $request->validate([
             'name' => 'required|string|max:50|min:1|unique:films',
             'year' => 'required|string|max:4|min:4',
@@ -176,7 +169,7 @@ class FilmController extends Controller
      */
     public function update(Request $request, Film $film)
     {
-        //
+        dd($request,$film);
         $attributes = $request->validate([
             'name' => ['required', 'string', 'max:50', 'min:1', Rule::unique('films')->ignore($film)],
             'year' => 'required|string|max:4|min:4',
