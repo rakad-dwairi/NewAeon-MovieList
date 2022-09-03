@@ -9,7 +9,9 @@ class Server extends Model
 
     protected $table = 'servers';
 
-    protected $fillable = ['name'];
+    protected $fillable = [
+        'name',
+    ];
 
     public function films()
     {

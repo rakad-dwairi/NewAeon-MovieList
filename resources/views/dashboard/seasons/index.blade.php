@@ -17,7 +17,7 @@
             </div>
             <div class="col-lg-5 col-md-7 col-sm-12">
                 @if(auth()->guard('admin')->user()->hasPermission('create_seasons'))
-                <a href="{{ route('dashboard.seasons.create',['series_id' => 1]) }}">
+                <a href="{{ route('dashboard.seasons.create',['series_id' => request()->route()->series]) }}">
                     <button class="btn btn-primary btn-icon btn-round d-none d-md-inline-block float-right m-l-10"
                         type="button">
                         <i class="zmdi zmdi-plus"></i>
@@ -80,15 +80,14 @@
                                             <th>Poster</th>
                                             <th>Name</th>
                                             <th>season No</th>
-                                            <th>Overview</th>
-                                            <th>Relations</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-
+                                        
+                                        {{-- @if(sizeof($seasons[0])) --}}
                                         @forelse($seasons->seasons2 as $season)
-                                        {{-- @dd($season->name) --}}
+                                        
                                         <tr>
                                             <td>
                                                 <span class="list-icon">
@@ -98,22 +97,7 @@
                                             </td>
                                             <td><span class="list-name">{{$season->name}}</span></td>
                                             <td>{{$season->id}}</td>
-
-                                            <td>
-                                                <button title="show overview" value="{{$season->overview}}"
-                                                    class="btn btn-icon btn-neutral btn-icon-mini show_overview">
-                                                    <i class="zmdi zmdi-reader"></i>
-                                                </button>
-                                            </td>
-                                            <td>
-                                                @if(auth()->guard('admin')->user()->hasPermission('read_actors'))
-                                                <a href="{{ route('dashboard.actors.index', ['season' => $season->id]) }}"
-                                                    class="btn btn-info btn-sm">Actors</a>
-                                                @else
-                                                <button class="btn btn-info btn-sm disabled"
-                                                    style="cursor: no-drop">seasons</button>
-                                                @endif
-                                            </td>
+                                                                             
                                             <td>
                                                 @if(auth()->guard('admin')->user()->hasPermission('read_seasons'))
                                                 <a href="{{route('dashboard.seasons.show', $season->id)}}">
@@ -167,6 +151,7 @@
                                             <td colspan="5">There Is No Data...</td>
                                         </tr>
                                         @endforelse
+                                        {{-- @endif --}}
                                     </tbody>
                                 </table>
                             </div>

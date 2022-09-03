@@ -87,24 +87,25 @@
                                 </div>
                             </div> --}}
                             <br>
-                            {{-- jfnbspdbnsonbs[ibtnsa[oka[opiae[gobiae]]]] --}}
-                            <div class="input-group mb-3">
-                                @foreach ($servers as $server)
-                                <div class="input-group-prepend">
-                                        <select class="form-control z-index show-tick" name="servers[]"
-                                        data-live-search="true" multiple>
-                                        <option selected disabled>- Select Servers -</option>
-                                        
-                                        <option value="{{ $server->id }}">{{ $server->name }}</option>
-                                        
-                                    </select>
-                                </div>
-                                {{-- <input type="text" class="form-control" aria-label="Text input with dropdown button"> --}}
-                                <textarea name="embed_url" rows="4" class="form-control no-resize"
-                                            placeholder="Embed Code From JWPlayer Server">{{ old('embed_url', '') }}</textarea>
-                                        <span style="color: red; margin-left: 10px">{{ $errors->first('embed_url') }}</span>
-                                @endforeach
+                            <div class="header col-lg-12 col-md-12 col-sm-12">
+                                <h2>Main Server</h2>
                             </div>
+                            {{-- jfnbspdbnsonbs[ibtnsa[oka[opiae[gobiae]]]] --}}
+                                @foreach ($servers as $server)
+                                <div class="row clearfix">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Name"
+                                                value="{{ $server->name }}" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <input type="text" name="server_url[{{ $server->id }}]" class="form-control" placeholder="url">
+                                        </div>
+                                    </div>
+                                </div>
+                                @endforeach
                             <br>
 
                             <div class="row clearfix">

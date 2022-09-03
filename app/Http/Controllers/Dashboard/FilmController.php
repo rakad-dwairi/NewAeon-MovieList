@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Actor;
 use App\Category;
 use App\Server;
+use App\FilmServer;
 use App\Film;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -90,27 +91,26 @@ class FilmController extends Controller
      */
     public function store(Request $request)
     {
-        //  dd($request);
+        // dd($request->server_url);
         $attributes = $request->validate([
             'name' => 'required|string|max:50|min:1|unique:films',
             'year' => 'required|string|max:4|min:4',
             'overview' => 'required|string',
             'background_cover' => 'required|image',
-            'embed_url' => 'required|string:servers,embed_url',
             'poster' => 'required|image',
             'url' => 'required|string',
             'api_url' => 'required|string',
             'categories' => 'required|array|max:3|exists:categories,id',
-            'servers' => 'required|array|max:3|exists:servers,id',
             'actors' => 'required|array|max:10|exists:actors,id'
         ]);
 
-        $attributes['background_cover'] = $request->background_cover->store('film_background_covers');
-        $attributes['poster'] = $request->poster->store('film_posters');
+        $img = $request->background_cover->store('public/film_background_covers');
+        $img1 = $request->poster->store('public/film_posters');
+        $attributes['background_cover'] = str_replace('public/','',$img);
+        $attributes['poster'] = str_replace('public/','',$img1);
 
         $film = Film::create([
             'name' => $attributes['name'],
-            'embed_url' => $attributes['embed_url'],
             'year' => $attributes['year'],
             'overview' => $attributes['overview'],
             'background_cover' => $attributes['background_cover'],
@@ -118,9 +118,23 @@ class FilmController extends Controller
             'url' => $attributes['url'],
             'api_url' => $attributes['api_url'],
         ]);
+        
+        foreach($request->server_url as $server => $key) {
+            // dd($request->server_url);
+            FilmServer::updateOrCreate([
+                'film_id' => $film->id,
+                'server_id' => $server                
+            ],[
+                'film_id' => $film->id,
+                'embed_url' => $key,
+                'server_id' => $server
+            ]);
+        }
+
         $film->categories()->sync($attributes['categories']);
-        $film->servers()->sync($attributes['servers']);
-        $film->servers()->sync($attributes['embed_url']);
+
+
+        // $film->servers()->sync($attributes['embed_url']);
         $film->actors()->sync($attributes['actors']);
 
         session()->flash('success', 'Film Added Successfully');

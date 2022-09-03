@@ -32,7 +32,7 @@ class SeasonsController extends Controller
             });
         })->latest()->paginate(10);
 
-        
+        // $series_id = $request->get('series_id');
         $admins = Admin::whereRoleIs('admin')->count();
         $clients = User::count();
         $films = Film::count();
@@ -51,10 +51,11 @@ class SeasonsController extends Controller
      */
     public function create(Request $request)
     {
-        // dd($request);
+        $series_id = $request->series_id;
+        // dd($series_id);
         $categories = Category::all();
         $actors = Actor::all();
-        return view('dashboard.seasons.create', compact('categories', 'actors'));
+        return view('dashboard.seasons.create', compact('categories', 'actors','series_id'));
     }
 
     /**
@@ -65,33 +66,30 @@ class SeasonsController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        // dd($request);
         $attributes = $request->validate([
             'name' => 'required|string|max:50|min:1|unique:films',
-            'series_id' => 'required|integer',
             'no_episodes' => 'required|integer',
             'background_cover' => 'required|image',
-            'categories' => 'required|array|max:3|exists:categories,id',
-            'actors' => 'required|array|max:10|exists:actors,id'
         ]);
-        dd($attributes);
-        $test = Series::with('series')->find($request->series_id);
+        // dd($attributes);
+        // $test = Series::with('series')->find($request->series_id);
 
       
         $attributes['background_cover'] = $request->background_cover->store('series_background_covers');
         
         $season = Seasons::create([
             'name' => $attributes['name'],
-            'series_id'=>$test,
+            'series_id'=>$request->series_id,
             'no_episodes' => $attributes['no_episodes'],
             'background_cover' => $attributes['background_cover'],
         ]);
         
-        $season->categories()->sync($attributes['categories']);
-        $season->actors()->sync($attributes['actors']);
+        // $season->categories()->sync($attributes['categories']);
+        // $season->actors()->sync($attributes['actors']);
 
         session()->flash('success', 'Season Added Successfully');
-        return redirect()->route('dashboard.seasons.index');
+        return redirect()->back();
     }
 
     /**

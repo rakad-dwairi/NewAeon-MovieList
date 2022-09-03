@@ -33,7 +33,6 @@
                         <div class="header">
                             <h2><strong>Add</strong> Seasons</h2>
                         </div>
-
                         <div class="body">
                             <form action="{{route('dashboard.seasons.store')}}" method="POST"
                                   enctype="multipart/form-data">
@@ -60,7 +59,7 @@
                                     </div> 
                                 </div>
 
-                                <div class="row clearfix">
+                                {{-- <div class="row clearfix">
                                     <div class="col-sm-12">
                                         <select class="form-control z-index show-tick" name="categories[]" data-live-search="true" multiple>
                                             <option selected disabled>- Select Categories -</option>
@@ -70,9 +69,9 @@
                                         </select>
                                         <span style="color: red;margin-left: 10px">{{ $errors->first('categories') }}</span>
                                     </div>
-                                </div>
+                                </div> --}}
                                 <br>
-                                <div class="row clearfix">
+                                {{-- <div class="row clearfix">
                                     <div class="col-sm-12">
                                         <select class="form-control z-index show-tick" name="actors[]" data-live-search="true" multiple>
                                             <option selected disabled>- Select Actors -</option>
@@ -82,11 +81,11 @@
                                         </select>
                                         <span style="color: red;margin-left: 10px">{{ $errors->first('actors') }}</span>
                                     </div>
-                                </div>
+                                </div> --}}
 
                                 <br>
                                 <br>
-
+                                <input type="hidden" name="series_id" value="{{ $series_id }}">
                                 <div class="form-group last">
                                     <div class="fileinput fileinput-new" data-provides="fileinput">
                                         <div class="fileinput-new thumbnail"

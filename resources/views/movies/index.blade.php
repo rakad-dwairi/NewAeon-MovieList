@@ -32,7 +32,8 @@
                     <div class="flex-wrap-movielist">
                         @foreach($films as $film)
                             <div class="movie-item-style-2 movie-item-style-1">
-                                <img src="{{$film->poster}}" style="height: 260px" alt="">
+                                
+                                <img src="{{ asset('storage/'.$film->poster) }}" style="height: 260px" alt="">
                                 <div class="hvr-inner">
                                     <a href="{{url('movies/'.$film->id)}}"> SHOW <i class="ion-android-arrow-dropright"></i> </a>
                                 </div>
