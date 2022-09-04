@@ -16,9 +16,10 @@
                         <small class="text-muted">Welcome to episodes</small>
                     </h2>
                 </div>
+                {{-- @dd(request()->route()) --}}
                 <div class="col-lg-5 col-md-7 col-sm-12">
                     @if(auth()->guard('admin')->user()->hasPermission('create_episodes'))
-                        <a href="{{route('dashboard.episodes.create')}}">
+                        <a href="{{route('dashboard.episodes.create',['seasons_id' => request()->route()->season])}}">
                             <button class="btn btn-primary btn-icon btn-round d-none d-md-inline-block float-right m-l-10"
                                     type="button">
                                 <i class="zmdi zmdi-plus"></i>

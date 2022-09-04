@@ -19,9 +19,12 @@ Route::group(['prefix' => 'dashboard', 'namespace' => 'Dashboard'], function () 
         Route::resource('films', 'FilmController');
         Route::resource('series', 'SeriesController');
         Route::resource('seasons', 'SeasonsController' ,['parameters' => [
+            'create' => 'id',
+        ]]);
+        Route::resource('episodes', 'EpisodesController',['parameters' => [
             'create' => 'id'
         ]]);
-        Route::resource('episodes', 'EpisodesController');
+        Route::get('/seasons/{id}/edit', 'SeasonsController@edit');
 
         Route::resource('actors', 'ActorController');
         Route::resource('categories', 'CategoryController')->except(['show']);

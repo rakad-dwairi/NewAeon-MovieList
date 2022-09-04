@@ -63,6 +63,24 @@
                                 </div>
                                 <div class="row clearfix">
                                     <div class="col-sm-12">
+
+
+                                        @foreach ($servers as $server)
+                                            <div class="row clearfix">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" placeholder="Name"
+                                                            value="{{ $server->name }}" disabled>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <input type="text" name="server_url[{{ $server->id }}]" class="form-control" placeholder="url" value="{{ $server->embed_url  }}">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @endforeach
+{{-- 
                                         <select class="form-control show-tick" name="servers[]" multiple>
                                             <option selected disabled>- Servers -</option>
                                             @foreach ($servers as $server)
@@ -72,7 +90,7 @@
                                                 </option>
                                             @endforeach
                                         </select>
-                                        <span style="color: red;margin-left: 10px">{{ $errors->first('servers') }}</span>
+                                        <span style="color: red;margin-left: 10px">{{ $errors->first('servers') }}</span> --}}
                                     </div>
                                 </div>
                                 <br>

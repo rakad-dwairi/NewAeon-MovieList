@@ -149,7 +149,7 @@
                                                 </button>
                                                 @endif                                               
                                                 @if(auth()->guard('admin')->user()->hasPermission('update_series'))
-                                                <a href="{{route('dashboard.series.edit', $serie)}}">
+                                                <a href="{{route('dashboard.series.edit', $serie->id)}}">
                                                     <button class="btn btn-icon btn-neutral btn-icon-mini" title="Edit">
                                                         <i class="zmdi zmdi-edit"></i>
                                                     </button>

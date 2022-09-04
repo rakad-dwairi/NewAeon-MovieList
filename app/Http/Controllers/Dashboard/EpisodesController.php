@@ -35,26 +35,9 @@ class EpisodesController extends Controller
                 return $q->where('name', 'like', '%' . $request->search . '%')
                     ->orWhere('year', 'like', '%' . $request->search . '%');
             });
-            // $query->when($request->category, function ($q) use ($request) {
-            //     return $q->whereHas('categories', function ($q2) use ($request){
-            //         return $q2->whereIn('category_id', (array)$request->category)
-            //             ->orWhereIn('name', (array)$request->category);
-            //     });
-            // });
-            // $query->when($request->actor, function ($q) use ($request) {
-            //     return $q->whereHas('actors', function ($q2) use ($request){
-            //         return $q2->whereIn('actor_id', (array)$request->actor)
-            //             ->orWhereIn('name', (array)$request->actor);
-            //     });
-            // });
-            // $query->when($request->favorite, function ($q) use ($request) {
-            //     return $q->whereHas('favorites', function ($q2) use ($request){
-            //         return $q2->whereIn('user_id', (array)$request->favorite);
-            //     });
-            // });
         })->latest()->paginate(10);
-        //  $categories = Category::all();
-        //  $actors = Actor::all();
+         $categories = Category::all();
+         $actors = Actor::all();
 
         return view('dashboard.episodes.index', compact('episodes'));
     }
@@ -64,9 +47,14 @@ class EpisodesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $series_id = $request->series_id;
+        $seasons_id = $request->seasons_id;
+        $categories = Category::all();
+        $actors = Actor::all();
+        $episodes = Episode::all();
+        return view('dashboard.episodes.create', compact('categories', 'actors','episodes','series_id','seasons_id'));
     }
 
     /**
@@ -77,7 +65,56 @@ class EpisodesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request);
+        $attributes = $request->validate([
+            'name' => 'required|string|max:50|min:1|unique:episodes',
+            'year' => 'required|string|max:4|min:4',
+            'overview' => 'required|string',
+            'background_cover' => 'required|image',
+            'poster' => 'required|image',
+            'url' => 'required|string',
+            'api_url' => 'required|string',
+            'categories' => 'required|array|max:3|exists:categories,id',
+            'actors' => 'required|array|max:10|exists:actors,id'
+        ]);
+
+        $img = $request->background_cover->store('public/episode_background_covers');
+        $img1 = $request->poster->store('public/episode_posters');
+        $attributes['background_cover'] = str_replace('public/','',$img);
+        $attributes['poster'] = str_replace('public/','',$img1);
+
+        $episode = Episode::create([
+            'name' => $attributes['name'],
+            'year' => $attributes['year'],
+            'overview' => $attributes['overview'],
+            'series_id'=>$request->series_id,
+            'seasons_id'=>$request->seasons_id,
+            'background_cover' => $attributes['background_cover'],
+            'poster' => $attributes['poster'],
+            'url' => $attributes['url'],
+            'api_url' => $attributes['api_url'],
+        ]);
+        
+        // foreach($request->server_url as $server => $key) {
+        //     // dd($request->server_url);
+        //     FilmServer::updateOrCreate([
+        //         'film_id' => $film->id,
+        //         'server_id' => $server                
+        //     ],[
+        //         'film_id' => $film->id,
+        //         'embed_url' => $key,
+        //         'server_id' => $server
+        //     ]);
+        // }
+
+        $episode->categories()->sync($attributes['categories']);
+
+
+        // $film->servers()->sync($attributes['embed_url']);
+        $episode->actors()->sync($attributes['actors']);
+
+        session()->flash('success', 'Episode Added Successfully');
+        return redirect()->route('dashboard.episodes.index');
     }
 
     /**

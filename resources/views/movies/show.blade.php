@@ -177,13 +177,63 @@
                                                 <p>{{$film->overview}}</p>
                                                 <hr style="background-color: #405266">
                                                 <br>
-                                                @dd($servers)
-                                                {{-- {{$servers}} --}}
-                                                {!! $film->url !!}
+                                                {{-- @dd($availableServers[0]->name) --}}
+                                                {{-- @dd($servers[0]->embed_url) --}}
+                                                
+                                                @foreach($film->servers as $server)
+                                                <button type="submit" class="btn" id="embd_url_" onclick="set_url1({{ $server->id }})">{{$server->name}}</button>
+                                                @endforeach
+                                                <div id='display'>
+                                                    @foreach($servers as $s)
+                                                      @if($loop->first)
+                                                      <div id="url" style="display: block">
+                                                        {!! $s->embed_url !!}
+                                                    </div>
+                                                      @endif
+                                                    <div class="embd_url_{{ $s->server_id }}" id="url" style="display: none">
+                                                        {!! $s->embed_url !!}
+                                                    </div>
+                                                    @endforeach
+                                                </div>
+                                                
                                             </div>
 
                                         </div>
                                     </div>
+                                    {{-- <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+                                    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+                                    crossorigin="anonymous"></script>                      --}}
+                                    <script>
+                                        function set_url1(id) {
+                                            // $('#url').css('display','none');
+                                            $('*#url').each(function() {
+                                                console.log('x');
+                                                $(this).css('display','none');
+                                            });
+                                            $('.embd_url_'+id).css('display','block');           
+                                        }
+                                        // var server_id = 0;
+                                        // function set_url1(id) {
+                                        //    server_id = id 
+                                        //     $.ajax({
+                                        //         type : 'POST',
+                                        //         url  : "{{ url('/set-url') }}",
+                                        //         data: {
+                                        //             "_token": "{{ csrf_token() }}",
+                                        //             server_id: server_id,
+                                        //             film_id: {{$film->id}},
+                                        //         },                                               
+                                        //         success :  function(data){
+                                        //             // var x = JSON.stringify(data);
+                                        //             console.log(data);
+                                        //             $("#display").html(data);
+                                        //             document.getElementById('display').write(data);
+
+                                        //         }
+                                        //     });
+                                        // }
+                                       
+                                    </script>
                                     <div class="tab review" id="reviews">
                                         <div class="row">
                                             <div class="rv-hd">

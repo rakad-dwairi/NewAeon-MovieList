@@ -155,7 +155,12 @@ class FilmController extends Controller
     {
         //
         $categories = Category::all();
-        $servers = Server::all();
+        // $servers = Server::all();
+        $servers = Film::select('film_server.embed_url','servers.name','servers.id as id')
+                        ->leftJoin('film_server','film_server.film_id','films.id')
+                        ->leftJoin('servers','film_server.server_id','servers.id')
+                        ->where('film_server.film_id',$film->id)
+                        ->groupBy('film_server.server_id')->get();
         $actors = Actor::all();
         return view('dashboard.films.edit', compact('film', 'categories', 'actors','servers'));
     }
@@ -169,7 +174,7 @@ class FilmController extends Controller
      */
     public function update(Request $request, Film $film)
     {
-        dd($request,$film);
+
         $attributes = $request->validate([
             'name' => ['required', 'string', 'max:50', 'min:1', Rule::unique('films')->ignore($film)],
             'year' => 'required|string|max:4|min:4',
@@ -179,7 +184,7 @@ class FilmController extends Controller
             'url' => 'required|string',
             'api_url' => 'required|string',
             'categories' => 'required|array|max:3|exists:categories,id',
-            'servers' => 'required|array|max:3|exists:servers,id',
+            // 'servers' => 'required|array|max:3|exists:servers,id',
             'actors' => 'required|array|max:10|exists:actors,id'
         ]);
 
@@ -193,8 +198,20 @@ class FilmController extends Controller
         }
 
         $film->update($attributes);
+        foreach($request->server_url as $server => $key) {
+            // dd($film->id);
+            // dd($request->server_url);
+            FilmServer::updateOrCreate([
+                'film_id' => $film->id,
+                'server_id' => $server                
+            ],[
+                'film_id' => $film->id,
+                'embed_url' => $key,
+                'server_id' => $server
+            ]);
+        }
         $film->categories()->sync($attributes['categories']);
-        $film->servers()->sync($attributes['servers']);
+        // $film->servers()->sync($attributes['servers']);
         $film->actors()->sync($attributes['actors']);
 
         session()->flash('success', 'Film Updated Successfully');

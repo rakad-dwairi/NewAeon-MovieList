@@ -72,11 +72,9 @@ class SeasonsController extends Controller
             'no_episodes' => 'required|integer',
             'background_cover' => 'required|image',
         ]);
-        // dd($attributes);
-        // $test = Series::with('series')->find($request->series_id);
 
       
-        $attributes['background_cover'] = $request->background_cover->store('series_background_covers');
+        $attributes['background_cover'] = $request->background_cover->store('season_background_covers');
         
         $season = Seasons::create([
             'name' => $attributes['name'],
@@ -84,9 +82,6 @@ class SeasonsController extends Controller
             'no_episodes' => $attributes['no_episodes'],
             'background_cover' => $attributes['background_cover'],
         ]);
-        
-        // $season->categories()->sync($attributes['categories']);
-        // $season->actors()->sync($attributes['actors']);
 
         session()->flash('success', 'Season Added Successfully');
         return redirect()->back();
@@ -112,9 +107,10 @@ class SeasonsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Seasons $season)
     {
-        //
+        $episodes = Seasons::find($season->id);
+        return view('dashboard.series.edit', compact('season','episodes'));
     }
 
     /**
@@ -124,9 +120,22 @@ class SeasonsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Seasons $season)
     {
-        //
+        $attributes = $request->validate([
+            'name' => ['required', 'string', 'max:50', 'min:1', Rule::unique('seasons')->ignore($season)],
+            'background_cover' => 'nullable|image',
+            'no_episodes' => 'required|integer',
+        ]);
+
+        $season->update($attributes);
+        if ($request->background_cover) {
+            Storage::delete($season->getAttributes()['background_cover']);
+            $attributes['background_cover'] = $request->background_cover->store('season_background_covers');
+        }
+
+        session()->flash('success', 'Seasons Updated Successfully');
+        return redirect()->route('dashboard.seasons.index');
     }
 
     /**

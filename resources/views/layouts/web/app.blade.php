@@ -23,6 +23,7 @@
     <!-- Mobile specific meta -->
     <meta content="width=device-width, initial-scale=1" name=viewport>
     <meta content="telephone-no" name="format-detection">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <!-- CSS files -->
     <link href="{{asset('web_files/css/plugins.css')}}" rel="stylesheet">

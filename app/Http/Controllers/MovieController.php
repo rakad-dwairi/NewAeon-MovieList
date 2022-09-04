@@ -17,12 +17,27 @@ class MovieController extends Controller
                 });
             });
         })->with('servers')->latest()->paginate(10);
-        $servers = Server::all();
-        return view('movies.index', compact('films','servers'));
+        // $servers = Server::all();
+        return view('movies.index', compact('films'));
     }
 
     public function show(Film $film){
+        
+        $servers = FilmServer::where('film_id', '=',$film->id )->get();
+        $availableServers = Server::all();
+        // dd($servers[0]->id,$servers);
         $reviews = $film->reviews()->latest()->paginate(10);
-        return view('movies.show', compact('film', 'reviews'));
+        return view('movies.show', compact('film', 'reviews','servers','availableServers'));
     }
+
+    public function setEmpdUrl(Request $request) {
+        $server = FilmServer::where('film_id',$request->film_id)->where('server_id',$request->server_id)->first();
+        $url = '';
+        if(!empty($server)) {
+            $url = $server->embed_url;
+        }
+        return $url;
+    }
+
+
 }

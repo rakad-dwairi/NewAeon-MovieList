@@ -98,6 +98,7 @@ class SeriesController extends Controller
             'year' => $attributes['year'],
             'seasons'=>$attributes['seasons'],
             'overview' => $attributes['overview'],
+            'series_id'=>$request->series_id,
             'background_cover' => $attributes['background_cover'],
             'poster' => $attributes['poster'],
 
@@ -127,11 +128,12 @@ class SeriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Series $serie)
+    public function edit($id,Series $serie)
     {
+        $serie = Series::find($id);
         $categories = Category::all();
         $actors = Actor::all();
-        return view('dashboard.series.edit', compact('serie', 'categories', 'actors'));
+        return view('dashboard.series.edit', compact('categories', 'actors','serie'));
     }
 
     /**
@@ -143,7 +145,6 @@ class SeriesController extends Controller
      */
     public function update(Request $request, Series $serie)
     {
-        dd($request,$serie);
         $attributes = $request->validate([
             'name' => ['required', 'string', 'max:50', 'min:1', Rule::unique('series')->ignore($serie)],
             'year' => 'required|string|max:4|min:4',

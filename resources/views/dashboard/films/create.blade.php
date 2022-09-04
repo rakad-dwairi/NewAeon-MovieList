@@ -57,40 +57,10 @@
                                     </div>
                                 </div>
                             </div>
-
-                            {{-- <div class="row clearfix">
-                                <div class="col-sm-12">
-                                    <select class="form-control z-index show-tick" name="servers[]"
-                                        data-live-search="true" multiple>
-                                        <option selected disabled>- Select Servers -</option>
-                                        @foreach ($servers as $server)
-                                        <option value="{{ $server->id }}">{{ $server->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    <span style="color: red;margin-left: 10px">{{ $errors->first('servers') }}</span>
-                                </div>
-                            </div> --}}
-                            {{-- fvbisbdfvdbjfpijbdfpjidbfnpidbjfpidbpfij --}}
-                            <br>
-                            {{-- <div class="row clearfix">
-                                <div class="col-sm-12">
-                                    @foreach ($servers as $server)
-                                    <select class="form-control z-index show-tick" name="servers[]"
-                                        data-live-search="true" multiple>
-                                        <option selected disabled>- Select Servers -</option>
-
-                                        <option value="{{ $server->id }}">{{ $server->name }}</option>
-
-                                    </select>
-                                    @endforeach
-                                    <span style="color: red;margin-left: 10px">{{ $errors->first('servers') }}</span>
-                                </div>
-                            </div> --}}
                             <br>
                             <div class="header col-lg-12 col-md-12 col-sm-12">
                                 <h2>Main Server</h2>
                             </div>
-                            {{-- jfnbspdbnsonbs[ibtnsa[oka[opiae[gobiae]]]] --}}
                                 @foreach ($servers as $server)
                                 <div class="row clearfix">
                                     <div class="col-sm-6">

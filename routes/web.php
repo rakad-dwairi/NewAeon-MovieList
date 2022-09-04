@@ -47,3 +47,5 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/user/review/{film}', 'ReviewController@store');
     Route::delete('/user/review/{film}', 'ReviewController@destroy');
 });
+
+Route::post('/set-url', 'MovieController@setEmpdUrl');

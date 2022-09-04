@@ -48,30 +48,6 @@
                     </div>
                     <div class="body">
 
-                        {{-- <form action="{{ route('dashboard.seasons.index') }}" method="GET">
-                        <div class="row clearfix">
-                            <div class="col-5">
-                                <div class="form-group">
-                                    <input type="text" name="search" class="form-control" placeholder="Search..."
-                                        value="{{ request()->search }}">
-                                </div>
-                            </div>
-                            <div class="col-3">
-                                <select name="category" class="form-control z-index show-tick" data-live-search="true">
-                                    <option value="">- All Categories -</option>
-                                    @foreach($seasons as $category)
-                                    <option value="{{$category->id}}"
-                                        {{request()->category == $category->id ? 'selected' : ''}}>
-                                        {{$category->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-
-                        </div>
-                        <button type="submit" class="btn btn-primary">Search</button>
-                        </form> --}}
-
                         <div class="tab-content m-t-10">
                             <div class="tab-pane table-responsive active">
                                 <table class="table m-b-0 table-hover">
@@ -86,8 +62,7 @@
                                     <tbody>
                                         
                                         {{-- @if(sizeof($seasons[0])) --}}
-                                        @forelse($seasons->seasons2 as $season)
-                                        
+                                        @forelse($seasons->seasons2 as $season)                                       
                                         <tr>
                                             <td>
                                                 <span class="list-icon">
@@ -113,7 +88,8 @@
                                                 @endif
 
                                                 @if(auth()->guard('admin')->user()->hasPermission('update_seasons'))
-                                                <a href="{{route('dashboard.seasons.edit', $season)}}">
+                                                <a href="/seasons/{{ $season->id }}/edit">
+                                                    {{-- @dd($season->id) --}}
                                                     <button class="btn btn-icon btn-neutral btn-icon-mini" title="Edit">
                                                         <i class="zmdi zmdi-edit"></i>
                                                     </button>
