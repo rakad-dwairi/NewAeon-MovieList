@@ -90,8 +90,12 @@ class SeriesController extends Controller
             'actors' => 'required|array|max:10|exists:actors,id'
         ]);
 
-        $attributes['background_cover'] = $request->background_cover->store('series_background_covers');
-        $attributes['poster'] = $request->poster->store('series_posters');
+       
+
+        $img = $request->background_cover->store('public/series_background_covers');
+        $img1 = $request->poster->store('public/series_posters');
+        $attributes['background_cover'] = str_replace('public/','',$img);
+        $attributes['poster'] = str_replace('public/','',$img1);
 
         $film = Series::create([
             'name' => $attributes['name'],

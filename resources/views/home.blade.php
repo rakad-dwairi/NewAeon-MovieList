@@ -52,6 +52,31 @@
                         </div>
                     @endforeach
                 </div>
+
+                <div class="slick-multiItemSlider">
+                    @foreach($sliderSeries as $serie)
+                        <div class="movie-item">
+                            <div class="mv-img">
+                                <a href="#"><img alt="" height="437" style="height: 400px;" src="{{$serie->poster}}"
+                                                 width="285"></a>
+                            </div>
+                            <div class="hvr-inner">
+                                <a href="{{url('series/'.$serie->id)}}"> Show <i
+                                            class="ion-android-arrow-dropright"></i> </a>
+                            </div>
+                            <div class="title-in">
+                                <div class="cate">
+                                    @foreach($serie->categories as $category)
+                                        <span class="blue"><a href="#">{{$category->name}}</a></span>
+                                    @endforeach
+                                </div>
+                                <h6><a href="#">{{$serie->name}}</a></h6>
+                                <p><i class="ion-android-star"></i><span>{{$serie->ratings->avg('rating') ?? 0}}</span>
+                                    /10</p>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
             </div>
         </div>
     </div>

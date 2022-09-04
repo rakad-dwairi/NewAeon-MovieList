@@ -74,6 +74,11 @@
                         </a>
                     </li>
                     <li class="dropdown first">
+                        <a class="btn btn-default lv1" href="/series">
+                            series
+                        </a>
+                    </li>
+                    <li class="dropdown first">
                         <a class="btn btn-default lv1" href="/actors">
                             actors
                         </a>
@@ -173,8 +178,7 @@
     </div>
     <div class="ft-copyright">
         <div class="ft-left">
-            <p><a href="" target="_blank"></a>Powered by <span
-                        style="color: orangered">New Aeon</span></p>
+            
         </div>
         <div class="backtotop">
             <p><a href="#" id="back-to-top" style="color: #dd003f; font-weight: bold">Back to top <i

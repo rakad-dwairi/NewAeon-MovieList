@@ -146,6 +146,12 @@ class SeasonsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if(Seasons::destroy($id)) {
+            session()->flash('success', 'Season Deleted Successfully');
+             return redirect()->route('dashboard.seasons.index');
+          } else {
+            session()->flash('alert', 'Season Was not Successfully Delted');
+             return redirect()->route('dashboard.seasons.index');
+          }
     }
 }

@@ -1,1 +1,0 @@
-{!! $serv->embed_url !!}
