@@ -28,6 +28,7 @@
     <div class="slider movie-items">
         <div class="container">
             <div class="row">
+                <h1 style="color: white">Top Rated Movies</h1>
                 <div class="slick-multiItemSlider">
                     @foreach($sliderFilms as $film)
                         <div class="movie-item">
@@ -53,6 +54,7 @@
                     @endforeach
                 </div>
 
+                <h1 style="color: white">Top Rated Series</h1>
                 <div class="slick-multiItemSlider">
                     @foreach($sliderSeries as $serie)
                         <div class="movie-item">
