@@ -103,7 +103,7 @@
                                         <div class="slick-multiItem" style="margin-top: 10px">
                                             @foreach($category->films as $film)
                                                 <div class="slide-it">
-                                                    <div class="movie-item">
+                                                    <div class="">
                                                         <div class="mv-img">
                                                             <img alt="" src="{{$film->poster}}" style="height: 280px">
                                                         </div>
