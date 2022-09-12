@@ -9,7 +9,7 @@ class Episode extends Model
 
     protected $table = 'episodes';
 
-    protected $fillable = ['name', 'background_cover', 'poster', 'url', 'api_url'];
+    protected $fillable = ['series_id','seasons_id', 'name', 'background_cover', 'poster', 'url', 'api_url'];
 
     public function season2()
     {
@@ -30,15 +30,15 @@ class Episode extends Model
         return asset('storage/' . $value);
     }
 
-    public function categories()
-    {
-        return $this->belongsToMany(Category::class, 'film_category');
-    }
+    // public function categories()
+    // {
+    //     return $this->belongsToMany(Category::class, 'series_category');
+    // }
 
-    public function actors()
-    {
-        return $this->belongsToMany(Actor::class, 'film_actor');
-    }
+    // public function actors()
+    // {
+    //     return $this->belongsToMany(Actor::class, 'film_actor');
+    // }
 
     public function ratings()
     {

@@ -36,8 +36,8 @@ class EpisodesController extends Controller
                     ->orWhere('year', 'like', '%' . $request->search . '%');
             });
         })->latest()->paginate(10);
-         $categories = Category::all();
-         $actors = Actor::all();
+        //  $categories = Category::all();
+        //  $actors = Actor::all();
 
         return view('dashboard.episodes.index', compact('episodes'));
     }
@@ -49,12 +49,13 @@ class EpisodesController extends Controller
      */
     public function create(Request $request)
     {
+        // dd($request);
         $series_id = $request->series_id;
         $seasons_id = $request->seasons_id;
-        $categories = Category::all();
-        $actors = Actor::all();
+        // $categories = Category::all();
+        // $actors = Actor::all();
         $episodes = Episode::all();
-        return view('dashboard.episodes.create', compact('categories', 'actors','episodes','series_id','seasons_id'));
+        return view('dashboard.episodes.create', compact('episodes','series_id','seasons_id'));
     }
 
     /**
@@ -65,17 +66,18 @@ class EpisodesController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
+        // dd($request->series_id);
+        $test = $request->series_id;
         $attributes = $request->validate([
             'name' => 'required|string|max:50|min:1|unique:episodes',
             'year' => 'required|string|max:4|min:4',
             'overview' => 'required|string',
-            'background_cover' => 'required|image',
-            'poster' => 'required|image',
+            // 'background_cover' => 'required|image',
+            // 'poster' => 'required|image',
             'url' => 'required|string',
             'api_url' => 'required|string',
-            'categories' => 'required|array|max:3|exists:categories,id',
-            'actors' => 'required|array|max:10|exists:actors,id'
+            // 'categories' => 'required|array|max:3|exists:categories,id',
+            // 'actors' => 'required|array|max:10|exists:actors,id'
         ]);
 
         $img = $request->background_cover->store('public/episode_background_covers');
@@ -87,7 +89,7 @@ class EpisodesController extends Controller
             'name' => $attributes['name'],
             'year' => $attributes['year'],
             'overview' => $attributes['overview'],
-            'series_id'=>$request->series_id,
+            'series_id'=>$test,
             'seasons_id'=>$request->seasons_id,
             'background_cover' => $attributes['background_cover'],
             'poster' => $attributes['poster'],
@@ -107,14 +109,14 @@ class EpisodesController extends Controller
         //     ]);
         // }
 
-        $episode->categories()->sync($attributes['categories']);
+        // $episode->categories()->sync($attributes['categories']);
 
 
         // $film->servers()->sync($attributes['embed_url']);
-        $episode->actors()->sync($attributes['actors']);
+        // $episode->actors()->sync($attributes['actors']);
 
         session()->flash('success', 'Episode Added Successfully');
-        return redirect()->route('dashboard.episodes.index');
+        return redirect()->route('dashboard.episodes.create');
     }
 
     /**

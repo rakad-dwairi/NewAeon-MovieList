@@ -96,8 +96,8 @@ class SeasonsController extends Controller
     public function show($id)
     {
         $episodes = Seasons::with('episodes2')->find($id);
-        // dd($episodes); 
-        return view('dashboard.episodes.index', compact('episodes'));
+        $series_id = $episodes->series_id;
+        return view('dashboard.episodes.index', compact('episodes','series_id'));
     }
     
 

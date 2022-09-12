@@ -74,6 +74,7 @@
                                             <td>{{$season->id}}</td>
                                                                              
                                             <td>
+                                                {{-- @dd($season) --}}
                                                 @if(auth()->guard('admin')->user()->hasPermission('read_seasons'))
                                                 <a href="{{route('dashboard.seasons.show', $season->id)}}">
                                                     <button class="btn btn-icon btn-neutral btn-icon-mini" title="Edit">

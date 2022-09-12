@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="{{asset('web_files/css/bootstrap-fileinput.css')}}">
 <link href="{{asset('dashboard_files/assets/plugins/bootstrap-select/css/bootstrap-select.css')}}" rel="stylesheet" />
 @endpush
-{{-- @dd($seasons_id) --}}
+{{-- @dd($series_id) --}}
 <section class="content">
     <div class="block-header">
         <div class="row">
@@ -59,7 +59,7 @@
                             </div>
                             <br>
 
-                            <div class="row clearfix">
+                            {{-- <div class="row clearfix">
                                 <div class="col-sm-12">
                                     <select class="form-control z-index show-tick" name="categories[]"
                                         data-live-search="true" multiple>
@@ -70,9 +70,9 @@
                                     </select>
                                     <span style="color: red;margin-left: 10px">{{ $errors->first('categories') }}</span>
                                 </div>
-                            </div>
+                            </div> --}}
                             <br>
-                            <div class="row clearfix">
+                            {{-- <div class="row clearfix">
                                 <div class="col-sm-12">
                                     <select class="form-control z-index show-tick" name="actors[]"
                                         data-live-search="true" multiple>
@@ -83,7 +83,7 @@
                                     </select>
                                     <span style="color: red;margin-left: 10px">{{ $errors->first('actors') }}</span>
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <br>
                             <br>
@@ -118,6 +118,7 @@
                                 </div>
                             </div>
                              <input type="hidden" name="seasons_id" value="{{ $seasons_id }}">
+                             <input type="hidden" name="series_id" value="{{ $series_id }}">
                            {{-- <input type="hidden" name="season" value="{{ $season }}"> --}}
                             <div class="form-group last">
                                 <div class="fileinput fileinput-new" data-provides="fileinput">

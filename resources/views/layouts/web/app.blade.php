@@ -29,6 +29,9 @@
     <link href="{{asset('web_files/css/plugins.css')}}" rel="stylesheet">
     <link href="{{asset('web_files/css/style.css')}}" rel="stylesheet">
 
+    <!-- AD sense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2554459562280158" crossorigin="anonymous"></script>
+
 </head>
 <body>
 <!--preloading-->
