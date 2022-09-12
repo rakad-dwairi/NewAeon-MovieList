@@ -86,7 +86,7 @@
                                         <tr>
                                             <th>Poster</th>
                                             <th>Name</th>
-                                            <th>Year</th>
+                                            {{-- <th>Year</th> --}}
                                             <th>Overview</th>
                                             {{-- <th>Categories</th> --}}
                                             <th>Relations</th>
@@ -106,7 +106,7 @@
                                                     </span>
                                                 </td>
                                                 <td><span class="list-name">{{$eposide->name}}</span></td>
-                                                <td>{{$eposide->year}}</td>
+                                                {{-- <td>{{$eposide->year}}</td> --}}
                                                 {{-- <td>
                                                     <i class="zmdi zmdi-star"></i> {{$eposide->ratings->avg('rating')}}
                                                     <a href="{{route('dashboard.ratings.index', ['eposide' => $eposide->id])}}"><small style="font-size: 10px">({{$eposide->ratings->count()}} votes)</small></a>

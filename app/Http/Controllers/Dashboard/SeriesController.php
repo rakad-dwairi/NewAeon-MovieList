@@ -6,6 +6,7 @@ use App\Actor;
 use App\Category;
 use App\Series;
 use App\Server;
+use App\Episode;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -186,7 +187,7 @@ class SeriesController extends Controller
      */
     public function destroy($serie)
     {
-        if(Series::destroy($serie)) {
+        if(Series::destroy($serie) && Episode::where('series_id',$serie)->delete()) {
             session()->flash('success', 'Serie Deleted Successfully');
              return redirect()->route('dashboard.series.index');
           } else {

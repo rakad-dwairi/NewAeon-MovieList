@@ -155,7 +155,6 @@ class FilmController extends Controller
     {
         //
         $categories = Category::all();
-        // $servers = Server::all();
         $servers = Film::select('film_server.embed_url','servers.name','servers.id as id')
                         ->leftJoin('film_server','film_server.film_id','films.id')
                         ->leftJoin('servers','film_server.server_id','servers.id')

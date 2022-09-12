@@ -7,7 +7,7 @@
         <link href="{{asset('dashboard_files/assets/plugins/bootstrap-select/css/bootstrap-select.css')}}"
               rel="stylesheet"/>
     @endpush
-    @dd(request()->route()->season)
+    {{-- @dd(request()->route()->season) --}}
     <section class="content">
         <div class="block-header">
             <div class="row">
@@ -35,7 +35,7 @@
                         </div>
                         
                         <div class="body">
-                            <form action="{{route('dashboard.seasonss.update',request()->route()->seasons)}}" method="POST"
+                            <form action="{{route('dashboard.seasons.update',request()->route()->season)}}" method="POST"
                                   enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
@@ -58,12 +58,14 @@
                                 <div class="row clearfix">
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <input type="number" name="seasons" class="form-control"
+                                            <input type="number" name="no_episodes" class="form-control"
                                                    placeholder="episodes No." value="{{ $season->no_episodes }}">
-                                            <span style="color: red; margin-left: 10px">{{ $errors->first('seasons') }}</span>
+                                            <span style="color: red; margin-left: 10px">{{ $errors->first('no_episodes') }}</span>
                                         </div>
                                     </div>
                                 </div>
+
+                                <input type="hidden" name="series_id" value="{{ $series_id }}">
 
                                 <div class="form-group last">
                                     <div class="fileinput fileinput-new" data-provides="fileinput">

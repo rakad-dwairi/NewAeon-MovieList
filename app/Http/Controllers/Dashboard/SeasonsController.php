@@ -15,6 +15,8 @@ use App\Rating;
 use App\Review;
 use App\User;
 use App\Seasons;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Storage;
 
 
 class SeasonsController extends Controller
@@ -66,15 +68,14 @@ class SeasonsController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
         $attributes = $request->validate([
             'name' => 'required|string|max:50|min:1|unique:films',
             'no_episodes' => 'required|integer',
             'background_cover' => 'required|image',
         ]);
 
-      
-        $attributes['background_cover'] = $request->background_cover->store('season_background_covers');
+        $img = $request->background_cover->store('public/season_background_covers');
+        $attributes['background_cover'] = str_replace('public/','',$img);
         
         $season = Seasons::create([
             'name' => $attributes['name'],
@@ -110,7 +111,8 @@ class SeasonsController extends Controller
     public function edit(Seasons $season)
     {
         $episodes = Seasons::find($season->id);
-        return view('dashboard.series.edit', compact('season','episodes'));
+        $series_id = $episodes->series_id;
+        return view('dashboard.seasons.edit', compact('season','episodes','series_id'));
     }
 
     /**
@@ -122,20 +124,27 @@ class SeasonsController extends Controller
      */
     public function update(Request $request, Seasons $season)
     {
+        // dd($request,$season,$request->season->id);
         $attributes = $request->validate([
             'name' => ['required', 'string', 'max:50', 'min:1', Rule::unique('seasons')->ignore($season)],
-            'background_cover' => 'nullable|image',
             'no_episodes' => 'required|integer',
+            'background_cover' => 'nullable|image',         
         ]);
+        // $season->update($attributes);
 
-        $season->update($attributes);
+        Seasons::where('id',$request->season->id)->update([
+            'name' => $request->input('name'),
+            'no_episodes' => $request->input('no_episodes'),
+            'background_cover' => $request->background_cover,         
+            ]);
+
         if ($request->background_cover) {
             Storage::delete($season->getAttributes()['background_cover']);
             $attributes['background_cover'] = $request->background_cover->store('season_background_covers');
         }
 
         session()->flash('success', 'Seasons Updated Successfully');
-        return redirect()->route('dashboard.seasons.index');
+        return redirect()->route('dashboard.series.index');
     }
 
     /**
@@ -148,10 +157,10 @@ class SeasonsController extends Controller
     {
         if(Seasons::destroy($id)) {
             session()->flash('success', 'Season Deleted Successfully');
-             return redirect()->route('dashboard.seasons.index');
+            return redirect()->back();
           } else {
             session()->flash('alert', 'Season Was not Successfully Delted');
-             return redirect()->route('dashboard.seasons.index');
+            return redirect()->back();
           }
     }
 }

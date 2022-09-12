@@ -116,7 +116,7 @@ class EpisodesController extends Controller
         // $episode->actors()->sync($attributes['actors']);
 
         session()->flash('success', 'Episode Added Successfully');
-        return redirect()->route('dashboard.episodes.create');
+        return redirect()->back();
     }
 
     /**
@@ -161,6 +161,12 @@ class EpisodesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if(Episode::destroy($id)) {
+            session()->flash('success', 'Episode Deleted Successfully');
+            return redirect()->back();
+          } else {
+            session()->flash('alert', 'Episode Was not Successfully Delted');
+            return redirect()->back();
+          }
     }
 }

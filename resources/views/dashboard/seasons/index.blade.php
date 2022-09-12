@@ -89,8 +89,7 @@
                                                 @endif
 
                                                 @if(auth()->guard('admin')->user()->hasPermission('update_seasons'))
-                                                <a href="/seasons/{{ $season->id }}/edit">
-                                                    {{-- @dd($season->id) --}}
+                                                <a href="{{route('dashboard.seasons.edit', $season->id)}}">
                                                     <button class="btn btn-icon btn-neutral btn-icon-mini" title="Edit">
                                                         <i class="zmdi zmdi-edit"></i>
                                                     </button>
