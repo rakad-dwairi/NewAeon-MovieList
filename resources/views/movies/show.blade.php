@@ -183,7 +183,6 @@
                                                 @endforeach
                                                 <div id='display'>
                                                     @foreach($servers as $s)
-                                                    @dd($s)
                                                       @if($loop->first)
                                                       <div id="url" style="display: block">
                                                         {!! $s->embed_url !!}
