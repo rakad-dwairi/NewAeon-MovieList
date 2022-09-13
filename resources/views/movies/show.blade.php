@@ -179,7 +179,6 @@
                                                 <br>
                                                 
                                                 @foreach($film->servers as $server)
-                                                @dd($server);
                                                 <button type="submit" class="btn" id="embd_url_" onclick="set_url1({{ $server->id }})">{{$server->name}}</button>
                                                 @endforeach
                                                 <div id='display'>
