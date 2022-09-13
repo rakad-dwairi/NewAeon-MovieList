@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Actor;
 use App\Episode;
+use App\Server;
+use App\EpisodeServer;
 use App\Category;
 use App\Film;
 use App\Http\Controllers\Controller;
@@ -35,11 +37,11 @@ class EpisodesController extends Controller
                 return $q->where('name', 'like', '%' . $request->search . '%')
                     ->orWhere('year', 'like', '%' . $request->search . '%');
             });
-        })->latest()->paginate(10);
-        //  $categories = Category::all();
+        })->with('servers')->latest()->paginate(10);
+        $servers = Server::all();
         //  $actors = Actor::all();
 
-        return view('dashboard.episodes.index', compact('episodes'));
+        return view('dashboard.episodes.index', compact('episodes','servers'));
     }
 
     /**
@@ -52,10 +54,11 @@ class EpisodesController extends Controller
         // dd($request);
         $series_id = $request->series_id;
         $seasons_id = $request->seasons_id;
+        $servers = Server::all();
         // $categories = Category::all();
         // $actors = Actor::all();
         $episodes = Episode::all();
-        return view('dashboard.episodes.create', compact('episodes','series_id','seasons_id'));
+        return view('dashboard.episodes.create', compact('episodes','series_id','seasons_id','servers'));
     }
 
     /**
@@ -96,6 +99,18 @@ class EpisodesController extends Controller
             'url' => $attributes['url'],
             'api_url' => $attributes['api_url'],
         ]);
+
+        foreach($request->server_url as $server => $key) {
+            // dd($request->server_url);
+            FilmServer::updateOrCreate([
+                'episode_id' => $episode->id,
+                'server_id' => $server                
+            ],[
+                'episode_id' => $episode->id,
+                'embed_url' => $key,
+                'server_id' => $server
+            ]);
+        }
         
         // foreach($request->server_url as $server => $key) {
         //     // dd($request->server_url);
@@ -125,9 +140,9 @@ class EpisodesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Episode $episode)
     {
-        //
+        
     }
 
     /**
@@ -136,9 +151,15 @@ class EpisodesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Episode $episode)
     {
-        //
+        $categories = Category::all();
+        $servers = Episode::select('episode_server.embed_url','servers.name','servers.id as id')
+                        ->leftJoin('episode_server','episode_server.episode_id','episodes.id')
+                        ->leftJoin('servers','episode_server.server_id','servers.id')
+                        ->where('episode_server.episode_id',$episode->id)
+                        ->groupBy('episode_server.server_id')->get();
+        return view('dashboard.episodes.edit', compact('episode', 'categories','servers'));
     }
 
     /**
@@ -148,9 +169,47 @@ class EpisodesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Episode $episode)
     {
-        //
+        $attributes = $request->validate([
+            'name' => ['required', 'string', 'max:50', 'min:1', Rule::unique('films')->ignore($episode)],
+            'year' => 'required|string|max:4|min:4',
+            'overview' => 'required|string',
+            'background_cover' => 'nullable|image',
+            'poster' => 'nullable|image',
+            'url' => 'required|string',
+            'api_url' => 'required|string',
+            'categories' => 'required|array|max:3|exists:categories,id',
+            // 'servers' => 'required|array|max:3|exists:servers,id',
+        ]);
+
+        if ($request->background_cover) {
+            Storage::delete($episode->getAttributes()['background_cover']);
+            $attributes['background_cover'] = $request->background_cover->store('episode_background_covers');
+        }
+        if ($request->poster) {
+            Storage::delete($episode->getAttributes()['poster']);
+            $attributes['poster'] = $request->poster->store('episode_posters');
+        }
+
+        $episode->update($attributes);
+        foreach($request->server_url as $server => $key) {
+            // dd($film->id);
+            // dd($request->server_url);
+            FilmServer::updateOrCreate([
+                'episode_id' => $episode->id,
+                'server_id' => $server                
+            ],[
+                'episode_id' => $episode->id,
+                'embed_url' => $key,
+                'server_id' => $server
+            ]);
+        }
+        $episode->categories()->sync($attributes['categories']);
+        // $film->servers()->sync($attributes['servers']);
+
+        session()->flash('success', 'Episode Updated Successfully');
+        return redirect()->route('dashboard.episodes.index');
     }
 
     /**

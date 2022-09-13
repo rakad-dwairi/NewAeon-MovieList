@@ -29,8 +29,7 @@ Route::get('/movies/{film}', 'MovieController@show');
 Route::get('/series', 'SeriesController@index');
 Route::get('/series/{serie}', 'SeriesController@show');
 Route::get('/episodes/{episode}', 'SeriesController@episodeshow');
-Route::get('/actors', 'ActorController@index');
-Route::get('/actors/{actor:name}', 'ActorController@show');
+
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/user/profile', 'ClientController@profile');

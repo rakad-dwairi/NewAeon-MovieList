@@ -92,7 +92,6 @@
                                         <th>Overview</th>
                                         <th>Categories</th>
                                         <th>Servers</th>
-                                        <th>Relations</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>

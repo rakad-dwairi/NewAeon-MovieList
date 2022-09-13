@@ -59,6 +59,26 @@
                             </div>
                             <br>
 
+                            <div class="header col-lg-12 col-md-12 col-sm-12">
+                                <h2>Main Server</h2>
+                            </div>
+                                @foreach ($servers as $server)
+                                <div class="row clearfix">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Name"
+                                                value="{{ $server->name }}" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <input type="text" name="server_url[{{ $server->id }}]" class="form-control" placeholder="url">
+                                        </div>
+                                    </div>
+                                </div>
+                                @endforeach
+                            <br>
+
                             {{-- <div class="row clearfix">
                                 <div class="col-sm-12">
                                     <select class="form-control z-index show-tick" name="categories[]"

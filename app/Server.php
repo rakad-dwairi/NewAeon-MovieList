@@ -18,9 +18,9 @@ class Server extends Model
         return $this->belongsToMany(Film::class, 'film_server');
     }
 
-    public function series()
+    public function episode()
     {
-        return $this->belongsToMany(Series::class, 'series_server');
+        return $this->belongsToMany(Episode::class, 'episode_server');
     }
 
 }
