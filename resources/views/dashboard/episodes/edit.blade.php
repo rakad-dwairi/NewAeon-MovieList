@@ -80,38 +80,9 @@
                                                 </div>
                                             </div>
                                             @endforeach
-{{-- 
-                                        <select class="form-control show-tick" name="servers[]" multiple>
-                                            <option selected disabled>- Servers -</option>
-                                            @foreach ($servers as $server)
-                                                <option value="{{ $server->id }}"
-                                                {{in_array($server->id, $episode->servers->pluck('id')->toArray()) ? 'selected' : ''}}>
-                                                    {{ $server->name }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                        <span style="color: red;margin-left: 10px">{{ $errors->first('servers') }}</span> --}}
+            
                                     </div>
                                 </div>
-                                <br>
-
-                                {{-- <div class="row clearfix">
-                                    <div class="col-sm-12">
-                                        <select class="form-control show-tick" name="categories[]" multiple>
-                                            <option selected disabled>- Categories -</option>
-                                            @foreach ($categories as $category)
-                                                <option value="{{ $category->id }}"
-                                                {{in_array($category->id, $episode->categories->pluck('id')->toArray()) ? 'selected' : ''}}>
-                                                    {{ $category->name }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                        <span style="color: red;margin-left: 10px">{{ $errors->first('categories') }}</span>
-                                    </div>
-                                </div> --}}
-                                <br>
-                                
-
                                 <br>
 
                                 <div class="row clearfix">

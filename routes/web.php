@@ -51,3 +51,4 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::post('/set-url', 'MovieController@setEmpdUrl');
+Route::post('/set-serieURL', 'SeriesController@setEmpdUrl');

@@ -106,7 +106,6 @@ class FilmController extends Controller
         ]);
         
         foreach($request->server_url as $server => $key) {
-            // dd($request->server_url);
             FilmServer::updateOrCreate([
                 'film_id' => $film->id,
                 'server_id' => $server                
@@ -118,9 +117,6 @@ class FilmController extends Controller
         }
 
         $film->categories()->sync($attributes['categories']);
-
-
-        // $film->servers()->sync($attributes['embed_url']);
 
         session()->flash('success', 'Film Added Successfully');
         return redirect()->route('dashboard.films.index');
@@ -174,7 +170,6 @@ class FilmController extends Controller
             'url' => 'required|string',
             'api_url' => 'required|string',
             'categories' => 'required|array|max:3|exists:categories,id',
-            // 'servers' => 'required|array|max:3|exists:servers,id',
         ]);
 
         if ($request->background_cover) {
@@ -188,8 +183,6 @@ class FilmController extends Controller
 
         $film->update($attributes);
         foreach($request->server_url as $server => $key) {
-            // dd($film->id);
-            // dd($request->server_url);
             FilmServer::updateOrCreate([
                 'film_id' => $film->id,
                 'server_id' => $server                
@@ -200,7 +193,6 @@ class FilmController extends Controller
             ]);
         }
         $film->categories()->sync($attributes['categories']);
-        // $film->servers()->sync($attributes['servers']);
 
         session()->flash('success', 'Film Updated Successfully');
         return redirect()->route('dashboard.films.index');

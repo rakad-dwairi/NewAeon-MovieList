@@ -21,7 +21,6 @@
         </div>
     </div>
     <!-- movie single section-->
-
     <div class="page-single movie-single movie_single">
         <div class="container">
             <div class="row ipad-width2">
@@ -51,14 +50,15 @@
                                                 <p>{{$episode->overview}}</p>
                                                 <hr style="background-color: #405266">
                                                 <br>
-                                                {{-- @dd($availableServers[0]->name) --}}
-                                                {{!!$episode->url!!}}
                                                 
-                                                {{-- @foreach($episode->servers as $server)
+                                                @foreach($episode->servers as $server)
+                                                
                                                 <button type="submit" class="btn" id="embd_url_" onclick="set_url1({{ $server->id }})">{{$server->name}}</button>
                                                 @endforeach
+                                                
                                                 <div id='display'>
                                                     @foreach($servers as $s)
+                                                    {{-- @dd($s) --}}
                                                       @if($loop->first)
                                                       <div id="url" style="display: block">
                                                         {!! $s->embed_url !!}
@@ -67,7 +67,7 @@
                                                     <div class="embd_url_{{ $s->server_id }}" id="url" style="display: none">
                                                         {!! $s->embed_url !!}
                                                     </div>
-                                                    @endforeach --}}
+                                                    @endforeach
                                                 </div>
                                                 
                                             </div>
@@ -91,7 +91,7 @@
                                         //    server_id = id 
                                         //     $.ajax({
                                         //         type : 'POST',
-                                        //         url  : "{{ url('/set-url') }}",
+                                        //         url  : "{{ url('/set-serieURL') }}",
                                         //         data: {
                                         //             "_token": "{{ csrf_token() }}",
                                         //             server_id: server_id,

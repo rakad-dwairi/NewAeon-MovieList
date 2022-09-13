@@ -7,7 +7,6 @@ use App\Episode;
 use App\Server;
 use App\EpisodeServer;
 use App\Category;
-use App\Film;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -39,7 +38,7 @@ class EpisodesController extends Controller
             });
         })->with('servers')->latest()->paginate(10);
         $servers = Server::all();
-        //  $actors = Actor::all();
+
 
         return view('dashboard.episodes.index', compact('episodes','servers'));
     }
@@ -69,18 +68,13 @@ class EpisodesController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->series_id);
         $test = $request->series_id;
         $attributes = $request->validate([
             'name' => 'required|string|max:50|min:1|unique:episodes',
             'year' => 'required|string|max:4|min:4',
             'overview' => 'required|string',
-            // 'background_cover' => 'required|image',
-            // 'poster' => 'required|image',
             'url' => 'required|string',
             'api_url' => 'required|string',
-            // 'categories' => 'required|array|max:3|exists:categories,id',
-            // 'actors' => 'required|array|max:10|exists:actors,id'
         ]);
 
         $img = $request->background_cover->store('public/episode_background_covers');
@@ -101,8 +95,7 @@ class EpisodesController extends Controller
         ]);
 
         foreach($request->server_url as $server => $key) {
-            // dd($request->server_url);
-            FilmServer::updateOrCreate([
+            EpisodeServer::updateOrCreate([
                 'episode_id' => $episode->id,
                 'server_id' => $server                
             ],[
@@ -112,23 +105,6 @@ class EpisodesController extends Controller
             ]);
         }
         
-        // foreach($request->server_url as $server => $key) {
-        //     // dd($request->server_url);
-        //     FilmServer::updateOrCreate([
-        //         'film_id' => $film->id,
-        //         'server_id' => $server                
-        //     ],[
-        //         'film_id' => $film->id,
-        //         'embed_url' => $key,
-        //         'server_id' => $server
-        //     ]);
-        // }
-
-        // $episode->categories()->sync($attributes['categories']);
-
-
-        // $film->servers()->sync($attributes['embed_url']);
-        // $episode->actors()->sync($attributes['actors']);
 
         session()->flash('success', 'Episode Added Successfully');
         return redirect()->back();
@@ -172,7 +148,7 @@ class EpisodesController extends Controller
     public function update(Request $request, Episode $episode)
     {
         $attributes = $request->validate([
-            'name' => ['required', 'string', 'max:50', 'min:1', Rule::unique('films')->ignore($episode)],
+            'name' => ['required', 'string', 'max:50', 'min:1', Rule::unique('episodes')->ignore($episode)],
             'year' => 'required|string|max:4|min:4',
             'overview' => 'required|string',
             'background_cover' => 'nullable|image',
@@ -180,7 +156,6 @@ class EpisodesController extends Controller
             'url' => 'required|string',
             'api_url' => 'required|string',
             'categories' => 'required|array|max:3|exists:categories,id',
-            // 'servers' => 'required|array|max:3|exists:servers,id',
         ]);
 
         if ($request->background_cover) {
@@ -194,9 +169,7 @@ class EpisodesController extends Controller
 
         $episode->update($attributes);
         foreach($request->server_url as $server => $key) {
-            // dd($film->id);
-            // dd($request->server_url);
-            FilmServer::updateOrCreate([
+            Episodeserver::updateOrCreate([
                 'episode_id' => $episode->id,
                 'server_id' => $server                
             ],[
@@ -206,7 +179,6 @@ class EpisodesController extends Controller
             ]);
         }
         $episode->categories()->sync($attributes['categories']);
-        // $film->servers()->sync($attributes['servers']);
 
         session()->flash('success', 'Episode Updated Successfully');
         return redirect()->route('dashboard.episodes.index');

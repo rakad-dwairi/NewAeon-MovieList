@@ -21,8 +21,7 @@ class MovieController extends Controller
         return view('movies.index', compact('films'));
     }
 
-    public function show(Film $film){
-        
+    public function show(Film $film){       
         $servers = FilmServer::where('film_id', '=',$film->id )->get();
         $availableServers = Server::all();
         // dd($servers[0]->id,$servers);

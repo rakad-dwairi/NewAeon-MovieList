@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class EpisodeServer extends Model
 {
 
-    protected $table = 'film_server';
+    protected $table = 'episode_server';
 
     protected $fillable = [
         'episode_id',

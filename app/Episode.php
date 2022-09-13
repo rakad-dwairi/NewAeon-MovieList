@@ -30,6 +30,10 @@ class Episode extends Model
         return asset('storage/' . $value);
     }
 
+    public function servers()
+    {
+        return $this->belongsToMany(Server::class, 'episode_server');
+    }
     // public function categories()
     // {
     //     return $this->belongsToMany(Category::class, 'series_category');

@@ -177,14 +177,14 @@
                                                 <p>{{$film->overview}}</p>
                                                 <hr style="background-color: #405266">
                                                 <br>
-                                                {{-- @dd($availableServers[0]->name) --}}
-                                                {{-- @dd($servers[0]->embed_url) --}}
                                                 
                                                 @foreach($film->servers as $server)
+                                                @dd($server);
                                                 <button type="submit" class="btn" id="embd_url_" onclick="set_url1({{ $server->id }})">{{$server->name}}</button>
                                                 @endforeach
                                                 <div id='display'>
                                                     @foreach($servers as $s)
+                                                    @dd($s)
                                                       @if($loop->first)
                                                       <div id="url" style="display: block">
                                                         {!! $s->embed_url !!}

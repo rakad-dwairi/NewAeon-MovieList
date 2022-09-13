@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Series;
 use App\Episode;
+use App\Server;
+use App\EpisodeServer;
 use Illuminate\Http\Request;
 
 class SeriesController extends Controller
@@ -33,23 +35,28 @@ class SeriesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Series $serie){
-        // dd($serie->id);
-
-        $episodes = Episode::where('series_id','=',$serie->id)->get();
-        // dd($episodes[0]->name);
-        // $servers = FilmServer::where('film_id', '=',$film->id )->get();
-        // $availableServers = Server::all();
-        // dd($servers[0]->id,$servers);
-        // $reviews = $film->reviews()->latest()->paginate(10);
-        return view('showes.show', compact('serie','episodes'));
+        $servers = Episode::where('series_id','=',$serie->id)->get();
+        $availableServers = Server::all();
+        return view('showes.show', compact('serie','servers','availableServers'));
     }
 
     public function episodeshow(Episode $episode)
     {
         // dd($episode);
-        return view('showes.view', compact('episode'));
+        $servers = EpisodeServer::where('episode_id','=',$episode->id)->get();
+        $availableServers = Server::all();
+        return view('showes.view', compact('episode','availableServers','servers'));
     }
 
+    public function setEmpdUrl(Request $request) {
+        $server = EpisodeServer::where('episode_id',$request->episode_id)->where('server_id',$request->server_id)->first();
+        $url = '';
+        if(!empty($server)) {
+            $url = $server->embed_url;
+        }
+        return $url;
+
+    }
 
 
 
