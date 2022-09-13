@@ -79,17 +79,7 @@
                                     </div>
                                 </div>
                                 <br>
-                                <div class="row clearfix">
-                                    <div class="col-sm-12">
-                                        <select class="form-control z-index show-tick" name="actors[]" data-live-search="true" multiple>
-                                            <option selected disabled>- Select Actors -</option>
-                                            @foreach ($actors as $actor)
-                                                <option value="{{ $actor->id }}">{{ $actor->name }}</option>
-                                            @endforeach
-                                        </select>
-                                        <span style="color: red;margin-left: 10px">{{ $errors->first('actors') }}</span>
-                                    </div>
-                                </div>
+                                
 
                                 <br>
                                 <br>

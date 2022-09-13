@@ -66,16 +66,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="col-3">
-                                    <select name="actor" class="form-control z-index show-tick" data-live-search="true">
-                                        <option value="">- All Actors -</option>
-                                        @foreach($actors as $actor)
-                                        <option value="{{$actor->id}}"
-                                            {{request()->actor == $actor->id ? 'selected' : ''}}>{{$actor->name}}
-                                        </option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                                
 
                             </div>
                             <button type="submit" class="btn btn-primary">Search</button>
@@ -93,7 +84,6 @@
                                             <th>Rating</th>
                                             <th>Overview</th>
                                             <th>Categories</th>
-                                            <th>Relations</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
@@ -126,15 +116,7 @@
                                                 <span class="badge badge-info">{{$category->name}}</span>
                                                 @endforeach
                                             </td>
-                                            <td>
-                                                @if(auth()->guard('admin')->user()->hasPermission('read_actors'))
-                                                <a href="{{ route('dashboard.actors.index', ['serie' => $serie->id]) }}"
-                                                    class="btn btn-info btn-sm">Actors</a>
-                                                @else
-                                                <button class="btn btn-info btn-sm disabled"
-                                                    style="cursor: no-drop">series</button>
-                                                @endif
-                                            </td>
+                                        
                                             <td>
                                                  @if(auth()->guard('admin')->user()->hasPermission('read_series'))
                                                 <a href="{{route('dashboard.series.show', $serie->id)}}">

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Actor;
 use App\Category;
 use App\Series;
 use App\Server;
@@ -41,12 +40,6 @@ class SeriesController extends Controller
                         ->orWhereIn('name', (array)$request->category);
                 });
             });
-            $query->when($request->actor, function ($q) use ($request) {
-                return $q->whereHas('actors', function ($q2) use ($request){
-                    return $q2->whereIn('actor_id', (array)$request->actor)
-                        ->orWhereIn('name', (array)$request->actor);
-                });
-            });
             $query->when($request->favorite, function ($q) use ($request) {
                 return $q->whereHas('favorites', function ($q2) use ($request){
                     return $q2->whereIn('user_id', (array)$request->favorite);
@@ -54,9 +47,8 @@ class SeriesController extends Controller
             });
         })->with('categories')->with('ratings')->latest()->paginate(10);
         $categories = Category::all();
-        $actors = Actor::all();
 
-        return view('dashboard.series.index', compact('series', 'categories', 'actors'));
+        return view('dashboard.series.index', compact('series', 'categories'));
     }
 
     /**
@@ -67,8 +59,7 @@ class SeriesController extends Controller
     public function create()
     {
         $categories = Category::all();
-        $actors = Actor::all();
-        return view('dashboard.series.create', compact('categories', 'actors'));
+        return view('dashboard.series.create', compact('categories'));
     }
 
     /**
@@ -88,7 +79,6 @@ class SeriesController extends Controller
             'background_cover' => 'required|image',
             'poster' => 'required|image',
             'categories' => 'required|array|max:3|exists:categories,id',
-            'actors' => 'required|array|max:10|exists:actors,id'
         ]);
 
        
@@ -109,7 +99,6 @@ class SeriesController extends Controller
 
         ]);
         $film->categories()->sync($attributes['categories']);
-        $film->actors()->sync($attributes['actors']);
 
         session()->flash('success', 'Serie Added Successfully');
         return redirect()->route('dashboard.series.index');
@@ -137,8 +126,7 @@ class SeriesController extends Controller
     {
         $serie = Series::find($id);
         $categories = Category::all();
-        $actors = Actor::all();
-        return view('dashboard.series.edit', compact('categories', 'actors','serie'));
+        return view('dashboard.series.edit', compact('categories','serie'));
     }
 
     /**
@@ -158,7 +146,6 @@ class SeriesController extends Controller
             'poster' => 'nullable|image',
             'categories' => 'required|array|max:3|exists:categories,id',
             'servers' => 'required|array|max:3|exists:servers,id',
-            'actors' => 'required|array|max:10|exists:actors,id'
         ]);
 
         if ($request->background_cover) {
@@ -173,7 +160,6 @@ class SeriesController extends Controller
         $serie->update($attributes);
         $serie->categories()->sync($attributes['categories']);
         $serie->servers()->sync($attributes['servers']);
-        $serie->actors()->sync($attributes['actors']);
 
         session()->flash('success', 'Serie Updated Successfully');
         return redirect()->route('dashboard.series.index');
