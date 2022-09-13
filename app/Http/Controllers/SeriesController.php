@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Series;
+use App\Episode;
 use Illuminate\Http\Request;
 
 class SeriesController extends Controller
@@ -32,12 +33,24 @@ class SeriesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Series $serie){
-        
+        // dd($serie->id);
+
+        $episodes = Episode::where('series_id','=',$serie->id)->get();
+        // dd($episodes[0]->name);
         // $servers = FilmServer::where('film_id', '=',$film->id )->get();
         // $availableServers = Server::all();
         // dd($servers[0]->id,$servers);
         // $reviews = $film->reviews()->latest()->paginate(10);
-        return view('showes.show', compact('serie'));
+        return view('showes.show', compact('serie','episodes'));
     }
+
+    public function episodeshow(Episode $episode)
+    {
+        // dd($episode);
+        return view('showes.view', compact('episode'));
+    }
+
+
+
 
 }
