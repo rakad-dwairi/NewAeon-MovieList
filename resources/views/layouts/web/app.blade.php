@@ -82,11 +82,6 @@
                         </a>
                     </li>
                     <li class="dropdown first">
-                        <a class="btn btn-default lv1" href="/actors">
-                            actors
-                        </a>
-                    </li>
-                    <li class="dropdown first">
                         <a class="btn btn-default lv1" href="#contact_us">
                             contact us
                         </a>

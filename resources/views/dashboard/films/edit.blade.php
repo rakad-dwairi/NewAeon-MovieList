@@ -110,22 +110,8 @@
                                     </div>
                                 </div>
                                 <br>
-                                <div class="row clearfix">
-                                    <div class="col-sm-12">
-                                        <select class="form-control show-tick" name="actors[]" multiple>
-                                            <option selected disabled>- Actors -</option>
-                                            @foreach ($actors as $actor)
-                                                <option value="{{ $actor->id }}"
-                                                        {{in_array($actor->id, $film->actors->pluck('id')->toArray()) ? 'selected' : ''}}>
-                                                    {{ $actor->name }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                        <span style="color: red;margin-left: 10px">{{ $errors->first('actors') }}</span>
-                                    </div>
-                                </div>
+                                
 
-                                <br>
                                 <br>
 
                                 <div class="row clearfix">

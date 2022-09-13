@@ -322,15 +322,7 @@
                                                 {{--class="ion-ios-arrow-right"></i></a>--}}
                                             </div>
                                             <div class="mvcast-item">
-                                                @foreach($film->actors as $actor)
-                                                    <div class="cast-it">
-                                                        <div class="cast-left">
-                                                            <img alt="" src="{{$actor->avatar}}"
-                                                                 style="height: 40px; width: 40px">
-                                                            <a href="{{url('actors/' . $actor->name)}}">{{$actor->name}}</a>
-                                                        </div>
-                                                    </div>
-                                                @endforeach
+                                              
                                             </div>
                                         </div>
                                     </div>
