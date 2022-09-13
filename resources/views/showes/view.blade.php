@@ -39,15 +39,20 @@
                         <div class="movie-tabs">
                             <div class="tabs">
                                 <ul class="tab-links tabs-mv" style="margin-top: 30px">
-                                    <li class="active"><a href="#overview">Overview & Play</a></li>
+                                    <li class="active"><a href="#overview">Play</a></li>
                                     <li><a href="#reviews"> Reviews</a></li>
                                     <li><a href="#actor"> Actor </a></li>
                                 </ul>
+                                <br>
+                                <br>
+                                <br>
+                                <br>
                                 <div class="tab-content">
                                     <div class="tab active" id="overview">
                                         <div class="row">
+                                        
                                             <div class="col-md-12 col-sm-12 col-xs-12">
-                                                <p>{{$episode->overview}}</p>
+                                            
                                                 <hr style="background-color: #405266">
                                                 <br>
                                                 

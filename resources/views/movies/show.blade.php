@@ -170,6 +170,7 @@
                                     <li><a href="#reviews"> Reviews</a></li>
                                     <li><a href="#actor"> Actor </a></li>
                                 </ul>
+
                                 <div class="tab-content">
                                     <div class="tab active" id="overview">
                                         <div class="row">

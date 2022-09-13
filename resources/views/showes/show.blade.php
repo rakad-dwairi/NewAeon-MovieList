@@ -16,14 +16,20 @@
     <div class="hero common-hero">
         <div class="container">
             <div class="row">
-                {{-- should be field with the main poster image --}}
-            </div>
+                {{-- <img src="{{$servers[0]->poster}}" style="height: 260px" alt="">            --}}
+             </div>
         </div>
     </div>
 
     <div class="page-single">
         <div class="container">
             <div class="row ipad-width">
+                <div class="container">
+                    <div class="row">
+  
+                     </div>
+                    <br>
+                </div>
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="topbar-filter">
                         {{-- <p>Found <span>{{$series->count()}} showes</span> in total</p> --}}
