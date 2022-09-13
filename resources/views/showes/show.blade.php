@@ -29,7 +29,7 @@
                         {{-- <p>Found <span>{{$series->count()}} showes</span> in total</p> --}}
                     </div>
                     <div class="flex-wrap-movielist">
-                        @foreach($episodes as $episode)
+                        @foreach($servers as $episode)
                             <div class="movie-item-style-2 movie-item-style-1">
                                 
                                 <img src="{{$episode->poster}}" style="height: 260px" alt="">
