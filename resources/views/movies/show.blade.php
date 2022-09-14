@@ -215,6 +215,7 @@
                                             });
                                             $('.embd_url_'+id).css('display','block');           
                                         }
+
                                         // var server_id = 0;
                                         // function set_url1(id) {
                                         //    server_id = id 

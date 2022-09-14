@@ -29,6 +29,7 @@ Route::get('/movies/{film}', 'MovieController@show');
 Route::get('/series', 'SeriesController@index');
 Route::get('/series/{serie}', 'SeriesController@show');
 Route::get('/episodes/{episode}', 'SeriesController@episodeshow');
+Route::get('/ads', 'GoogleAdsController@index');
 
 
 Route::group(['middleware' => 'auth'], function () {

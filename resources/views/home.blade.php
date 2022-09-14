@@ -37,7 +37,7 @@
                                                  width="285"></a>
                             </div>
                             <div class="hvr-inner">
-                                <a href="{{url('movies/'.$film->id)}}"> Show <i
+                                <a class="a_movie" c-on="0"  a-href="{{url('movies/'.$film->id)}}" href="#"> Show <i
                                             class="ion-android-arrow-dropright"></i> </a>
                             </div>
                             <div class="title-in">

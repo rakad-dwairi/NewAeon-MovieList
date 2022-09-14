@@ -190,7 +190,20 @@
 <script src="{{asset('web_files/js/plugins.js')}}"></script>
 <script src="{{asset('web_files/js/plugins2.js')}}"></script>
 <script src="{{asset('web_files/js/custom.js')}}"></script>
+<script>
+    $(document).ready(function(){
+        $('.a_movie').click(function(){
+var a= $(this);
+            if(a.attr('c-on')=='0'){                
+                a.attr('c-on',"1");
+                window.open('ads', '_blank', 'location=yes,height=570,width=520,scrollbars=yes,status=yes');
+            }else{
+                window.location.href=a.attr('a-href');
+            }
 
+        });
+    });
+</script>
 <script src="{{asset('dashboard_files/assets/plugins/bootstrap-notify/bootstrap-notify.js')}}"></script>
 @if(session('success'))
     <script type="text/javascript">
