@@ -211,9 +211,9 @@
                         <div class="movie-tabs">
                             <div class="tabs">
                                 <ul class="tab-links tabs-mv" style="margin-top: 30px">
-                                    <li class="active"><a href="#overview">Overview & Play</a></li>
-                                    <li><a href="#reviews"> Reviews</a></li>
-                                    <li><a href="#actor"> Actor </a></li>
+                                    <li class="active"><a onclick="window.open('/ads')" href="#overview">Overview & Play</a></li>
+                                    <li ><a onclick="window.open('/ads')"  href="#reviews"> Reviews</a></li>
+                                    <li><a onclick="window.open('/ads')" href="#actor"> Actor </a></li>
                                 </ul>
 
                                 <div class="tab-content">
@@ -230,7 +230,7 @@
                                                 <div id='display'>
                                                     @foreach($servers as $s)
                                                       @if($loop->first)
-                                                      <div id="url" style="display: block">
+                                                      <div id="url" style="display: block" >
                                                         {!! $s->embed_url !!}
                                                     </div>
                                                       @endif
@@ -247,6 +247,7 @@
 
                                     <script>
                                         function set_url1(id) {
+                                            window.open('/ads');
                                             $('*#url').each(function() {
                                                 $(this).css('display','none');
                                             });

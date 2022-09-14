@@ -38,5 +38,9 @@ class MovieController extends Controller
         return $url;
     }
 
+    public function adv()
+    {
+        return view('movies.test');
+    }
 
 }
