@@ -9,9 +9,44 @@
             .page-item.active {
                 margin-left: 0px !important;
             }
+            .parent {
+      display: flex;
+      margin-bottom: 30px;
+      padding: 20px 0;
+    }
+    
+    .evenly {
+      justify-content: space-evenly;
+    }
+    
+    .between {
+      justify-content: center;
+    }
+    
+    .around {
+      justify-content: space-around;
+    }
         </style>
     @endpush
 
+    <div id="divpa" style="display:none; position:fixed; background-color:#dd003f; top:0; left:0; width:100%; height:100%; z-index:500; ">     
+        <div class="container" style="padding-top: 13%;">
+    
+    
+            <div class="parent evenly">
+             <img src="{{asset('/images/ads1.png')}}" alt="" style="width: 900px;">
+             </div>
+         
+         <div class="parent between text-center">
+             <div id="countdown" class="text-center"></div>
+         </div>
+         
+         <div class="parent around">
+             <img src="{{asset('/images/ads1.png')}}" alt="" style="width: 900px;">
+         </div>
+    
+    </div>
+    </div>
     <div class="hero mv-single-hero" style="background: url('{{$episode->background_cover}}');  no-repeat center center fixed; 
         -webkit-background-size: cover;
         -moz-background-size: cover;

@@ -3,7 +3,7 @@
 
 <style>
     body{
-        background-color: #dd003f;
+        background-color: white;
     }
     .parent {
   display: flex;

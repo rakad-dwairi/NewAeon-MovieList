@@ -9,8 +9,49 @@
             .page-item.active {
                 margin-left: 0px !important;
             }
+
+            .parent {
+      display: flex;
+      margin-bottom: 30px;
+      padding: 20px 0;
+    }
+    
+    .evenly {
+      justify-content: space-evenly;
+    }
+    
+    .between {
+      justify-content: center;
+    }
+    
+    .around {
+      justify-content: space-around;
+    }
         </style>
     @endpush
+
+    <style>
+
+
+    </style>
+    <div id="divpa" style=" position:fixed; background-color:rgb(241, 234, 234); top:0; left:0; width:100%; height:100%; z-index:500; ">     
+        <div class="container" style="padding-top: 13%;">
+    
+    
+            <div class="parent evenly">
+             <img src="{{asset('/images/ads1.png')}}" alt="" style="width: 900px;">
+             </div>
+         
+         <div class="parent between text-center">
+             <div id="countdown" class="text-center"></div>
+         </div>
+         
+         <div class="parent around">
+             <img src="{{asset('/images/ads1.png')}}" alt="" style="width: 900px;">
+         </div>
+    
+    </div>
+    </div>
 
     <div class="hero mv-single-hero" style="background: url('{{$film->background_cover}}'); no-repeat center center fixed; 
         -webkit-background-size: cover;
@@ -203,40 +244,15 @@
 
                                         </div>
                                     </div>
-                                    {{-- <script src="https://code.jquery.com/jquery-3.3.1.min.js"
-                                    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-                                    crossorigin="anonymous"></script>                      --}}
+
                                     <script>
                                         function set_url1(id) {
-                                            // $('#url').css('display','none');
                                             $('*#url').each(function() {
-                                                console.log('x');
                                                 $(this).css('display','none');
                                             });
                                             $('.embd_url_'+id).css('display','block');           
                                         }
 
-                                        // var server_id = 0;
-                                        // function set_url1(id) {
-                                        //    server_id = id 
-                                        //     $.ajax({
-                                        //         type : 'POST',
-                                        //         url  : "{{ url('/set-url') }}",
-                                        //         data: {
-                                        //             "_token": "{{ csrf_token() }}",
-                                        //             server_id: server_id,
-                                        //             film_id: {{$film->id}},
-                                        //         },                                               
-                                        //         success :  function(data){
-                                        //             // var x = JSON.stringify(data);
-                                        //             console.log(data);
-                                        //             $("#display").html(data);
-                                        //             document.getElementById('display').write(data);
-
-                                        //         }
-                                        //     });
-                                        // }
-                                       
                                     </script>
                                     <div class="tab review" id="reviews">
                                         <div class="row">
