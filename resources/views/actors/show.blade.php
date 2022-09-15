@@ -9,8 +9,6 @@
         </div>
     </div>
 </div>
-<!-- celebrity single section-->
-
 <div class="page-single movie-single cebleb-single">
     <div class="container">
         <div class="row ipad-width">

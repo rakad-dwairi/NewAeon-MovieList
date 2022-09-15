@@ -25,28 +25,28 @@
                             <li class="col-lg-3 col-md-3 col-6">
                                 <div class="body">
                                     <i class="zmdi zmdi-account col-green"></i>
-                                    <h4>{{$admins}}</h4>
+                                    <h4>{{ $admins }}</h4>
                                     <span>Admins</span>
                                 </div>
                             </li>
                             <li class="col-lg-3 col-md-3 col-6">
                                 <div class="body">
                                     <i class="zmdi zmdi-account-circle col-blue"></i>
-                                    <h4>{{$clients}}</h4>
+                                    <h4>{{ $clients }}</h4>
                                     <span>Clients</span>
                                 </div>
                             </li>
                             <li class="col-lg-3 col-md-3 col-6">
                                 <div class="body">
                                     <i class="zmdi zmdi-view-list col-brown"></i>
-                                    <h4>{{$categories}}</h4>
+                                    <h4>{{ $categories }}</h4>
                                     <span>Categories</span>
                                 </div>
                             </li>
                             <li class="col-lg-3 col-md-3 col-6">
                                 <div class="body">
                                     <i class="zmdi zmdi-movie col-red"></i>
-                                    <h4>{{$films}}</h4>
+                                    <h4>{{ $films }}</h4>
                                     <span>Films</span>
                                 </div>
                             </li>
@@ -62,31 +62,31 @@
                             <li class="col-lg-3 col-md-3 col-6">
                                 <div class="body">
                                     <i class="zmdi zmdi-star col-amber"></i>
-                                    <h4>{{$ratings}}</h4>
+                                    <h4>{{ $ratings }}</h4>
                                     <span>Ratings</span>
                                 </div>
                             </li>
                             <li class="col-lg-3 col-md-3 col-6">
                                 <div class="body">
                                     <i class="zmdi zmdi-comment-list col-blush"></i>
-                                    <h4>{{$reviews}}</h4>
+                                    <h4>{{ $reviews }}</h4>
                                     <span>Reviews</span>
                                 </div>
                             </li>
                             <li class="col-lg-3 col-md-3 col-6">
                                 <div class="body">
                                     <i class="zmdi zmdi-movie-alt col-grey"></i>
-                                    <h4>{{$series}}</h4>
+                                    <h4>{{ $series }}</h4>
                                     <span>Series</span>
                                 </div>
-                            </li> 
+                            </li>
                             <li class="col-lg-3 col-md-3 col-6">
                                 <div class="body">
                                     <i class="zmdi zmdi-email col-deep-purple"></i>
-                                    <h4>{{$messages}}</h4>
+                                    <h4>{{ $messages }}</h4>
                                     <span>Messages</span>
                                 </div>
-                            </li> 
+                            </li>
                         </ul>
                     </div>
                 </div>

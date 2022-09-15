@@ -1,11 +1,9 @@
 @extends('layouts.dashboard.app')
 
 @section('content')
-
     @push('styles')
-        <link rel="stylesheet" href="{{asset('web_files/css/bootstrap-fileinput.css')}}">
-        <link href="{{asset('dashboard_files/assets/plugins/bootstrap-select/css/bootstrap-select.css')}}"
-              rel="stylesheet"/>
+        <link rel="stylesheet" href="{{ asset('web_files/css/bootstrap-fileinput.css') }}">
+        <link href="{{ asset('dashboard_files/assets/plugins/bootstrap-select/css/bootstrap-select.css') }}" rel="stylesheet" />
     @endpush
 
     <section class="content">
@@ -34,8 +32,8 @@
                             <h2><strong>Edit</strong> Series</h2>
                         </div>
                         <div class="body">
-                            <form action="{{route('dashboard.series.update',request()->route()->series)}}" method="POST"
-                                  enctype="multipart/form-data">
+                            <form action="{{ route('dashboard.series.update', request()->route()->series) }}" method="POST"
+                                enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
 
@@ -46,15 +44,15 @@
                                 <div class="row clearfix">
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <input type="text" name="name" class="form-control"
-                                                   placeholder="Name" value="{{ $serie->name }}">
+                                            <input type="text" name="name" class="form-control" placeholder="Name"
+                                                value="{{ $serie->name }}">
                                             <span style="color: red; margin-left: 10px">{{ $errors->first('name') }}</span>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <input type="text" name="year" class="form-control"
-                                                   placeholder="Year" value="{{ $serie->year }}">
+                                            <input type="text" name="year" class="form-control" placeholder="Year"
+                                                value="{{ $serie->year }}">
                                             <span style="color: red;margin-left: 10px">{{ $errors->first('year') }}</span>
                                         </div>
                                     </div>
@@ -66,16 +64,17 @@
                                             <option selected disabled>- Categories -</option>
                                             @foreach ($categories as $category)
                                                 <option value="{{ $category->id }}"
-                                                {{in_array($category->id, $serie->categories->pluck('id')->toArray()) ? 'selected' : ''}}>
+                                                    {{ in_array($category->id, $serie->categories->pluck('id')->toArray()) ? 'selected' : '' }}>
                                                     {{ $category->name }}
                                                 </option>
                                             @endforeach
                                         </select>
-                                        <span style="color: red;margin-left: 10px">{{ $errors->first('categories') }}</span>
+                                        <span
+                                            style="color: red;margin-left: 10px">{{ $errors->first('categories') }}</span>
                                     </div>
                                 </div>
                                 <br>
-                            
+
 
                                 <br>
                                 <br>
@@ -83,67 +82,64 @@
                                 <div class="row clearfix">
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <textarea name="overview" rows="4" class="form-control no-resize"
-                                                      placeholder="serie Overview">{{ $serie->overview }}</textarea>
-                                            <span style="color: red; margin-left: 10px">{{ $errors->first('overview') }}</span>
+                                            <textarea name="overview" rows="4" class="form-control no-resize" placeholder="serie Overview">{{ $serie->overview }}</textarea>
+                                            <span
+                                                style="color: red; margin-left: 10px">{{ $errors->first('overview') }}</span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row clearfix">
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <input type="number" name="seasons" class="form-control"
-                                                   placeholder="seasons" value="{{ $serie->seasons }}">
-                                            <span style="color: red; margin-left: 10px">{{ $errors->first('seasons') }}</span>
+                                            <input type="number" name="seasons" class="form-control" placeholder="seasons"
+                                                value="{{ $serie->seasons }}">
+                                            <span
+                                                style="color: red; margin-left: 10px">{{ $errors->first('seasons') }}</span>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="form-group last">
                                     <div class="fileinput fileinput-new" data-provides="fileinput">
-                                        <div class="fileinput-new thumbnail"
-                                             style="width: 200px; height: 150px;">
-                                            <img src="{{$serie->background_cover}}"
-                                                 alt=""/>
+                                        <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
+                                            <img src="{{ $serie->background_cover }}" alt="" />
                                         </div>
                                         <div class="fileinput-preview fileinput-exists thumbnail"
-                                             style="max-width: 200px; max-height: 150px;">
+                                            style="max-width: 200px; max-height: 150px;">
                                         </div>
                                         <div>
-                                                <span class="btn btn-dark btn-file">
-                                                    <span class="fileinput-new"> Select serie Background_Cover </span>
-                                                    <span class="fileinput-exists"> Change </span>
-                                                    <input type="file" name="background_cover"
-                                                           value="{{$serie->background_cover}}">
-                                                </span>
+                                            <span class="btn btn-dark btn-file">
+                                                <span class="fileinput-new"> Select serie Background_Cover </span>
+                                                <span class="fileinput-exists"> Change </span>
+                                                <input type="file" name="background_cover"
+                                                    value="{{ $serie->background_cover }}">
+                                            </span>
                                             <a href="" class="btn btn-danger fileinput-exists"
-                                               data-dismiss="fileinput">
+                                                data-dismiss="fileinput">
                                                 Remove </a>
                                         </div>
-                                        <span style="color: red; margin-left: 10px">{{ $errors->first('background_cover') }}</span>
+                                        <span
+                                            style="color: red; margin-left: 10px">{{ $errors->first('background_cover') }}</span>
                                     </div>
                                 </div>
 
 
                                 <div class="form-group last">
                                     <div class="fileinput fileinput-new" data-provides="fileinput">
-                                        <div class="fileinput-new thumbnail"
-                                             style="width: 200px; height: 150px;">
-                                            <img src="{{$serie->poster}}"
-                                                 alt=""/>
+                                        <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
+                                            <img src="{{ $serie->poster }}" alt="" />
                                         </div>
                                         <div class="fileinput-preview fileinput-exists thumbnail"
-                                             style="max-width: 200px; max-height: 150px;">
+                                            style="max-width: 200px; max-height: 150px;">
                                         </div>
                                         <div>
-                                                <span class="btn btn-dark btn-file">
-                                                    <span class="fileinput-new"> Select serie Poster </span>
-                                                    <span class="fileinput-exists"> Change </span>
-                                                    <input type="file" name="poster"
-                                                           value="{{$serie->poster}}">
-                                                </span>
+                                            <span class="btn btn-dark btn-file">
+                                                <span class="fileinput-new"> Select serie Poster </span>
+                                                <span class="fileinput-exists"> Change </span>
+                                                <input type="file" name="poster" value="{{ $serie->poster }}">
+                                            </span>
                                             <a href="" class="btn btn-danger fileinput-exists"
-                                               data-dismiss="fileinput">
+                                                data-dismiss="fileinput">
                                                 Remove </a>
                                         </div>
                                         <span style="color: red; margin-left: 10px">{{ $errors->first('poster') }}</span>
@@ -166,7 +162,6 @@
     </section>
 
     @push('scripts')
-        <script src="{{asset('web_files/js/bootstrap-fileinput.js')}}"></script>
+        <script src="{{ asset('web_files/js/bootstrap-fileinput.js') }}"></script>
     @endpush
-
 @endsection

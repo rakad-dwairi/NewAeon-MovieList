@@ -18,16 +18,16 @@ class EpisodeServerController extends Controller
     {
         $episodes = Episode::where(function ($query) use ($request) {
             $query->when($request->category, function ($q) use ($request) {
-                return $q->whereHas('categories', function ($q2) use ($request){
-                    return $q2->whereIn('name', (array)$request->category);
+                return $q->whereHas('categories', function ($q2) use ($request) {
+                    return $q2->whereIn('name', (array) $request->category);
                 });
             });
         })->with('servers')->latest()->paginate(10);
         return view('showes.index', compact('episodes'));
     }
 
-    public function show(EpisodeServer $episode){
+    public function show(EpisodeServer $episode)
+    {
         return view('showes.show', compact('episode'));
     }
-   
 }

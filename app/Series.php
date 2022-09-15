@@ -43,7 +43,6 @@ class Series extends Model
         return $this->belongsToMany(Actor::class, 'series_actor');
     }
 
-
     public function ratings()
     {
         return $this->hasMany(Rating::class);

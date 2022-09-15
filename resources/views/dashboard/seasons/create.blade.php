@@ -1,11 +1,9 @@
 @extends('layouts.dashboard.app')
 
 @section('content')
-
     @push('styles')
-        <link rel="stylesheet" href="{{asset('web_files/css/bootstrap-fileinput.css')}}">
-        <link href="{{asset('dashboard_files/assets/plugins/bootstrap-select/css/bootstrap-select.css')}}"
-              rel="stylesheet"/>
+        <link rel="stylesheet" href="{{ asset('web_files/css/bootstrap-fileinput.css') }}">
+        <link href="{{ asset('dashboard_files/assets/plugins/bootstrap-select/css/bootstrap-select.css') }}" rel="stylesheet" />
     @endpush
 
     <section class="content">
@@ -34,8 +32,8 @@
                             <h2><strong>Add</strong> Seasons</h2>
                         </div>
                         <div class="body">
-                            <form action="{{route('dashboard.seasons.store')}}" method="POST"
-                                  enctype="multipart/form-data">
+                            <form action="{{ route('dashboard.seasons.store') }}" method="POST"
+                                enctype="multipart/form-data">
                                 @csrf
 
                                 <div class="header col-lg-12 col-md-12 col-sm-12">
@@ -45,18 +43,19 @@
                                 <div class="row clearfix">
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <input type="text" name="name" class="form-control"
-                                                   placeholder="Name" value="{{ old('name', '') }}">
+                                            <input type="text" name="name" class="form-control" placeholder="Name"
+                                                value="{{ old('name', '') }}">
                                             <span style="color: red; margin-left: 10px">{{ $errors->first('name') }}</span>
                                         </div>
-                                    </div>                                  
+                                    </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <input type="text" name="no_episodes" class="form-control"
-                                                   placeholder="Episodes No." value="{{ old('no_episodes', '') }}">
-                                            <span style="color: red; margin-left: 10px">{{ $errors->first('no_episodes') }}</span>
+                                                placeholder="Episodes No." value="{{ old('no_episodes', '') }}">
+                                            <span
+                                                style="color: red; margin-left: 10px">{{ $errors->first('no_episodes') }}</span>
                                         </div>
-                                    </div> 
+                                    </div>
                                 </div>
 
                                 {{-- <div class="row clearfix">
@@ -88,26 +87,26 @@
                                 <input type="hidden" name="series_id" value="{{ $series_id }}">
                                 <div class="form-group last">
                                     <div class="fileinput fileinput-new" data-provides="fileinput">
-                                        <div class="fileinput-new thumbnail"
-                                             style="width: 200px; height: 150px;">
+                                        <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
                                             <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image"
-                                                 alt=""/>
+                                                alt="" />
                                         </div>
                                         <div class="fileinput-preview fileinput-exists thumbnail"
-                                             style="max-width: 200px; max-height: 150px;">
+                                            style="max-width: 200px; max-height: 150px;">
                                         </div>
                                         <div>
-                                                <span class="btn btn-dark btn-file">
-                                                    <span class="fileinput-new"> Select Serie Background_Cover </span>
-                                                    <span class="fileinput-exists"> Change </span>
-                                                    <input type="file" name="background_cover"
-                                                           value="{{ old('background_cover', '') }}">
-                                                </span>
+                                            <span class="btn btn-dark btn-file">
+                                                <span class="fileinput-new"> Select Serie Background_Cover </span>
+                                                <span class="fileinput-exists"> Change </span>
+                                                <input type="file" name="background_cover"
+                                                    value="{{ old('background_cover', '') }}">
+                                            </span>
                                             <a href="" class="btn btn-danger fileinput-exists"
-                                               data-dismiss="fileinput">
+                                                data-dismiss="fileinput">
                                                 Remove </a>
                                         </div>
-                                        <span style="color: red; margin-left: 10px">{{ $errors->first('background_cover') }}</span>
+                                        <span
+                                            style="color: red; margin-left: 10px">{{ $errors->first('background_cover') }}</span>
                                     </div>
                                 </div>
 
@@ -127,7 +126,6 @@
     </section>
 
     @push('scripts')
-        <script src="{{asset('web_files/js/bootstrap-fileinput.js')}}"></script>
+        <script src="{{ asset('web_files/js/bootstrap-fileinput.js') }}"></script>
     @endpush
-
 @endsection

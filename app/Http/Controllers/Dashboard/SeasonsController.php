@@ -21,11 +21,6 @@ use Illuminate\Support\Facades\Storage;
 
 class SeasonsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request)
     {
         $seasons = Seasons::where(function ($query) use ($request) {
@@ -34,7 +29,6 @@ class SeasonsController extends Controller
             });
         })->latest()->paginate(10);
 
-        // $series_id = $request->get('series_id');
         $admins = Admin::whereRoleIs('admin')->count();
         $clients = User::count();
         $films = Film::count();
@@ -43,29 +37,17 @@ class SeasonsController extends Controller
         $messages = Message::count();
         $series = Series::count();
 
-        return view('dashboard.seasons.index', compact('admins', 'clients', 'films', 'ratings', 'reviews', 'messages','series','seasons'));
+        return view('dashboard.seasons.index', compact('admins', 'clients', 'films', 'ratings', 'reviews', 'messages', 'series', 'seasons'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create(Request $request)
     {
         $series_id = $request->series_id;
-        // dd($series_id);
         $categories = Category::all();
         $actors = Actor::all();
-        return view('dashboard.seasons.create', compact('categories', 'actors','series_id'));
+        return view('dashboard.seasons.create', compact('categories', 'actors', 'series_id'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $attributes = $request->validate([
@@ -75,11 +57,11 @@ class SeasonsController extends Controller
         ]);
 
         $img = $request->background_cover->store('public/season_background_covers');
-        $attributes['background_cover'] = str_replace('public/','',$img);
-        
+        $attributes['background_cover'] = str_replace('public/', '', $img);
+
         $season = Seasons::create([
             'name' => $attributes['name'],
-            'series_id'=>$request->series_id,
+            'series_id' => $request->series_id,
             'no_episodes' => $attributes['no_episodes'],
             'background_cover' => $attributes['background_cover'],
         ]);
@@ -88,55 +70,33 @@ class SeasonsController extends Controller
         return redirect()->back();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $episodes = Seasons::with('episodes2')->find($id);
         $series_id = $episodes->series_id;
-        return view('dashboard.episodes.index', compact('episodes','series_id'));
+        return view('dashboard.episodes.index', compact('episodes', 'series_id'));
     }
-    
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Seasons $season)
     {
         $episodes = Seasons::find($season->id);
         $series_id = $episodes->series_id;
-        return view('dashboard.seasons.edit', compact('season','episodes','series_id'));
+        return view('dashboard.seasons.edit', compact('season', 'episodes', 'series_id'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Seasons $season)
     {
-        // dd($request,$season,$request->season->id);
         $attributes = $request->validate([
             'name' => ['required', 'string', 'max:50', 'min:1', Rule::unique('seasons')->ignore($season)],
             'no_episodes' => 'required|integer',
-            'background_cover' => 'nullable|image',         
+            'background_cover' => 'nullable|image',
         ]);
-        // $season->update($attributes);
 
-        Seasons::where('id',$request->season->id)->update([
+        Seasons::where('id', $request->season->id)->update([
             'name' => $request->input('name'),
             'no_episodes' => $request->input('no_episodes'),
-            'background_cover' => $request->background_cover,         
-            ]);
+            'background_cover' => $request->background_cover,
+        ]);
 
         if ($request->background_cover) {
             Storage::delete($season->getAttributes()['background_cover']);
@@ -147,20 +107,15 @@ class SeasonsController extends Controller
         return redirect()->route('dashboard.series.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
-        if(Seasons::destroy($id)) {
+        if (Seasons::destroy($id)) {
             session()->flash('success', 'Season Deleted Successfully');
             return redirect()->back();
-          } else {
+        } else {
             session()->flash('alert', 'Season Was not Successfully Delted');
             return redirect()->back();
-          }
+        }
     }
 }

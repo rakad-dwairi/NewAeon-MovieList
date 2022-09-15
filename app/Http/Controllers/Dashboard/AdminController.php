@@ -19,12 +19,6 @@ class AdminController extends Controller
         $this->middleware(['permission:delete_admins,guard:admin'])->only('destroy');
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request)
     {
         //
@@ -38,26 +32,14 @@ class AdminController extends Controller
         return view('dashboard.admins.index', compact('admins'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
         return view('dashboard.admins.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
         $attributes = $request->validate([
             'name' => 'required|string|max:20|min:5',
             'email' => 'required|email|string|unique:admins',
@@ -83,23 +65,11 @@ class AdminController extends Controller
         return redirect()->route('dashboard.admins.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Admin $admin
-     * @return \Illuminate\Http\Response
-     */
     public function show(Admin $admin)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Admin $admin
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Admin $admin)
     {
         //
@@ -109,13 +79,6 @@ class AdminController extends Controller
         return view('dashboard.admins.edit', compact('admin'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \App\Admin $admin
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Admin $admin)
     {
         //
@@ -152,13 +115,6 @@ class AdminController extends Controller
         return redirect()->route('dashboard.admins.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Admin $admin
-     * @return \Illuminate\Http\Response
-     * @throws \Exception
-     */
     public function destroy(Admin $admin)
     {
         //

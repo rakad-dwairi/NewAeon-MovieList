@@ -51,7 +51,6 @@
     <div class="hero common-hero">
         <div class="container">
             <div class="row">
-                {{-- <img src="{{$servers[0]->poster}}" style="height: 260px" alt="">            --}}
              </div>
         </div>
     </div>
@@ -62,14 +61,12 @@
                 <div class="container">
                     <div class="row">
                         <div class="col">
-                        {{-- <img src="{{$servers[0]->background_cover}}" style="height: 260px" alt="">   --}}
                     </div>      
                      </div>
                     <br>
                 </div>
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="topbar-filter">
-                        {{-- <p>Found <span>{{$series->count()}} showes</span> in total</p> --}}
                     </div>
                     <div class="flex-wrap-movielist">
                         @foreach($servers as $episode)

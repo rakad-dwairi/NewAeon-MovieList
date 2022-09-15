@@ -13,7 +13,7 @@ use Illuminate\Validation\Rule;
 
 class SeriesController extends Controller
 {
-    
+
     public function __construct()
     {
         $this->middleware(['permission:create_series,guard:admin'])->only(['create', 'store']);
@@ -35,14 +35,14 @@ class SeriesController extends Controller
                     ->orWhere('year', 'like', '%' . $request->search . '%');
             });
             $query->when($request->category, function ($q) use ($request) {
-                return $q->whereHas('categories', function ($q2) use ($request){
-                    return $q2->whereIn('category_id', (array)$request->category)
-                        ->orWhereIn('name', (array)$request->category);
+                return $q->whereHas('categories', function ($q2) use ($request) {
+                    return $q2->whereIn('category_id', (array) $request->category)
+                        ->orWhereIn('name', (array) $request->category);
                 });
             });
             $query->when($request->favorite, function ($q) use ($request) {
-                return $q->whereHas('favorites', function ($q2) use ($request){
-                    return $q2->whereIn('user_id', (array)$request->favorite);
+                return $q->whereHas('favorites', function ($q2) use ($request) {
+                    return $q2->whereIn('user_id', (array) $request->favorite);
                 });
             });
         })->with('categories')->with('ratings')->latest()->paginate(10);
@@ -73,7 +73,7 @@ class SeriesController extends Controller
 
         $attributes = $request->validate([
             'name' => 'required|string|max:50|min:1|unique:series',
-            'seasons'=>'required|numeric',
+            'seasons' => 'required|numeric',
             'year' => 'required|string|max:4|min:4',
             'overview' => 'required|string',
             'background_cover' => 'required|image',
@@ -81,19 +81,17 @@ class SeriesController extends Controller
             'categories' => 'required|array|max:3|exists:categories,id',
         ]);
 
-       
-
         $img = $request->background_cover->store('public/series_background_covers');
         $img1 = $request->poster->store('public/series_posters');
-        $attributes['background_cover'] = str_replace('public/','',$img);
-        $attributes['poster'] = str_replace('public/','',$img1);
+        $attributes['background_cover'] = str_replace('public/', '', $img);
+        $attributes['poster'] = str_replace('public/', '', $img1);
 
         $film = Series::create([
             'name' => $attributes['name'],
             'year' => $attributes['year'],
-            'seasons'=>$attributes['seasons'],
+            'seasons' => $attributes['seasons'],
             'overview' => $attributes['overview'],
-            'series_id'=>$request->series_id,
+            'series_id' => $request->series_id,
             'background_cover' => $attributes['background_cover'],
             'poster' => $attributes['poster'],
 
@@ -122,11 +120,11 @@ class SeriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id,Series $serie)
+    public function edit($id, Series $serie)
     {
         $serie = Series::find($id);
         $categories = Category::all();
-        return view('dashboard.series.edit', compact('categories','serie'));
+        return view('dashboard.series.edit', compact('categories', 'serie'));
     }
 
     /**
@@ -173,12 +171,12 @@ class SeriesController extends Controller
      */
     public function destroy($serie)
     {
-        if(Series::destroy($serie) && Episode::where('series_id',$serie)->delete()) {
+        if (Series::destroy($serie) && Episode::where('series_id', $serie)->delete()) {
             session()->flash('success', 'Serie Deleted Successfully');
-             return redirect()->route('dashboard.series.index');
-          } else {
+            return redirect()->route('dashboard.series.index');
+        } else {
             session()->flash('alert', 'Serie Was not Successfully Delted');
-             return redirect()->route('dashboard.series.index');
-          }
+            return redirect()->route('dashboard.series.index');
+        }
     }
 }

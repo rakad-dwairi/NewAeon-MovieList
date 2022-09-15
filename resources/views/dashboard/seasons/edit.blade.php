@@ -1,11 +1,9 @@
 @extends('layouts.dashboard.app')
 
 @section('content')
-
     @push('styles')
-        <link rel="stylesheet" href="{{asset('web_files/css/bootstrap-fileinput.css')}}">
-        <link href="{{asset('dashboard_files/assets/plugins/bootstrap-select/css/bootstrap-select.css')}}"
-              rel="stylesheet"/>
+        <link rel="stylesheet" href="{{ asset('web_files/css/bootstrap-fileinput.css') }}">
+        <link href="{{ asset('dashboard_files/assets/plugins/bootstrap-select/css/bootstrap-select.css') }}" rel="stylesheet" />
     @endpush
     {{-- @dd(request()->route()->season) --}}
     <section class="content">
@@ -33,10 +31,10 @@
                         <div class="header">
                             <h2><strong>Edit</strong> Seasons</h2>
                         </div>
-                        
+
                         <div class="body">
-                            <form action="{{route('dashboard.seasons.update',request()->route()->season)}}" method="POST"
-                                  enctype="multipart/form-data">
+                            <form action="{{ route('dashboard.seasons.update', request()->route()->season) }}" method="POST"
+                                enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
 
@@ -47,20 +45,21 @@
                                 <div class="row clearfix">
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <input type="text" name="name" class="form-control"
-                                                   placeholder="Name" value="{{ $season->name }}">
+                                            <input type="text" name="name" class="form-control" placeholder="Name"
+                                                value="{{ $season->name }}">
                                             <span style="color: red; margin-left: 10px">{{ $errors->first('name') }}</span>
                                         </div>
                                     </div>
                                 </div>
                                 <br>
-                                
+
                                 <div class="row clearfix">
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <input type="number" name="no_episodes" class="form-control"
-                                                   placeholder="episodes No." value="{{ $season->no_episodes }}">
-                                            <span style="color: red; margin-left: 10px">{{ $errors->first('no_episodes') }}</span>
+                                                placeholder="episodes No." value="{{ $season->no_episodes }}">
+                                            <span
+                                                style="color: red; margin-left: 10px">{{ $errors->first('no_episodes') }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -69,26 +68,25 @@
 
                                 <div class="form-group last">
                                     <div class="fileinput fileinput-new" data-provides="fileinput">
-                                        <div class="fileinput-new thumbnail"
-                                             style="width: 200px; height: 150px;">
-                                            <img src="{{$season->background_cover}}"
-                                                 alt=""/>
+                                        <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
+                                            <img src="{{ $season->background_cover }}" alt="" />
                                         </div>
                                         <div class="fileinput-preview fileinput-exists thumbnail"
-                                             style="max-width: 200px; max-height: 150px;">
+                                            style="max-width: 200px; max-height: 150px;">
                                         </div>
                                         <div>
-                                                <span class="btn btn-dark btn-file">
-                                                    <span class="fileinput-new"> Select season Background_Cover </span>
-                                                    <span class="fileinput-exists"> Change </span>
-                                                    <input type="file" name="background_cover"
-                                                           value="{{$season->background_cover}}">
-                                                </span>
+                                            <span class="btn btn-dark btn-file">
+                                                <span class="fileinput-new"> Select season Background_Cover </span>
+                                                <span class="fileinput-exists"> Change </span>
+                                                <input type="file" name="background_cover"
+                                                    value="{{ $season->background_cover }}">
+                                            </span>
                                             <a href="" class="btn btn-danger fileinput-exists"
-                                               data-dismiss="fileinput">
+                                                data-dismiss="fileinput">
                                                 Remove </a>
                                         </div>
-                                        <span style="color: red; margin-left: 10px">{{ $errors->first('background_cover') }}</span>
+                                        <span
+                                            style="color: red; margin-left: 10px">{{ $errors->first('background_cover') }}</span>
                                     </div>
                                 </div>
 
@@ -108,7 +106,6 @@
     </section>
 
     @push('scripts')
-        <script src="{{asset('web_files/js/bootstrap-fileinput.js')}}"></script>
+        <script src="{{ asset('web_files/js/bootstrap-fileinput.js') }}"></script>
     @endpush
-
 @endsection

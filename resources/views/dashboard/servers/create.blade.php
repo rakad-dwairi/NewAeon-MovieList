@@ -1,9 +1,8 @@
 @extends('layouts.dashboard.app')
 
 @section('content')
-
     @push('styles')
-        <link rel="stylesheet" href="{{asset('web_files/css/bootstrap-fileinput.css')}}">
+        <link rel="stylesheet" href="{{ asset('web_files/css/bootstrap-fileinput.css') }}">
     @endpush
 
     <section class="content">
@@ -33,8 +32,8 @@
                         </div>
 
                         <div class="body">
-                            <form action="{{route('dashboard.servers.store')}}" method="POST"
-                                  enctype="multipart/form-data">
+                            <form action="{{ route('dashboard.servers.store') }}" method="POST"
+                                enctype="multipart/form-data">
                                 @csrf
 
                                 <div class="header col-lg-12 col-md-12 col-sm-12">
@@ -44,8 +43,8 @@
                                 <div class="row clearfix">
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <input type="text" name="name" class="form-control"
-                                                   placeholder="Name" value="{{ old('name', '') }}">
+                                            <input type="text" name="name" class="form-control" placeholder="Name"
+                                                value="{{ old('name', '') }}">
                                             <span style="color: red; margin-left: 10px">{{ $errors->first('name') }}</span>
                                         </div>
                                     </div>
@@ -65,5 +64,4 @@
             </div>
         </div>
     </section>
-
 @endsection

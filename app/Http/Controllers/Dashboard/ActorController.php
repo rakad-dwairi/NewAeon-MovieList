@@ -27,7 +27,6 @@ class ActorController extends Controller
      */
     public function index(Request $request)
     {
-        //
         $actors = Actor::where(function ($query) use ($request) {
             $query->when($request->search, function ($q) use ($request) {
                 return $q->where('name', 'like', '%' . $request->search . '%');
@@ -61,7 +60,6 @@ class ActorController extends Controller
      */
     public function store(Request $request)
     {
-        //
         $attributes = $request->validate([
             'name' => 'required|string|max:30|min:3|unique:actors',
             'dob' => 'required|date',
@@ -106,7 +104,6 @@ class ActorController extends Controller
      */
     public function edit(Actor $actor)
     {
-        //
         return view('dashboard.actors.edit', compact('actor'));
     }
 
@@ -152,7 +149,6 @@ class ActorController extends Controller
      */
     public function destroy(Actor $actor)
     {
-        //
         $actor->delete();
 
         session()->flash('success', 'Actor Deleted Successfully');

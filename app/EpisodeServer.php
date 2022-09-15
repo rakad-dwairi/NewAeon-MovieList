@@ -19,6 +19,4 @@ class EpisodeServer extends Model
     {
         return $this->belongsToMany(Episode::class);
     }
-
-
 }

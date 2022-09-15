@@ -1,9 +1,8 @@
 @extends('layouts.dashboard.app')
 
 @section('content')
-
     @push('styles')
-        <link rel="stylesheet" href="{{asset('web_files/css/bootstrap-fileinput.css')}}">
+        <link rel="stylesheet" href="{{ asset('web_files/css/bootstrap-fileinput.css') }}">
     @endpush
 
     <section class="content">
@@ -33,8 +32,8 @@
                         </div>
 
                         <div class="body">
-                            <form action="{{route('dashboard.clients.store')}}" method="POST"
-                                  enctype="multipart/form-data">
+                            <form action="{{ route('dashboard.clients.store') }}" method="POST"
+                                enctype="multipart/form-data">
                                 @csrf
 
                                 <div class="header col-lg-12 col-md-12 col-sm-12">
@@ -45,14 +44,15 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <input type="text" name="username" class="form-control"
-                                                   placeholder="UserName" value="{{ old('username', '') }}">
-                                            <span style="color: red; margin-left: 10px">{{ $errors->first('username') }}</span>
+                                                placeholder="UserName" value="{{ old('username', '') }}">
+                                            <span
+                                                style="color: red; margin-left: 10px">{{ $errors->first('username') }}</span>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <input type="email" name="email" class="form-control"
-                                                   placeholder="Email" value="{{ old('email', '') }}">
+                                            <input type="email" name="email" class="form-control" placeholder="Email"
+                                                value="{{ old('email', '') }}">
                                             <span style="color: red;margin-left: 10px">{{ $errors->first('email') }}</span>
                                         </div>
                                     </div>
@@ -61,37 +61,37 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <input type="text" name="first_name" class="form-control"
-                                                   placeholder="FirstName" value="{{ old('first_name', '') }}">
-                                            <span style="color: red; margin-left: 10px">{{ $errors->first('first_name') }}</span>
+                                                placeholder="FirstName" value="{{ old('first_name', '') }}">
+                                            <span
+                                                style="color: red; margin-left: 10px">{{ $errors->first('first_name') }}</span>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <input type="text" name="last_name" class="form-control"
-                                                   placeholder="LastName" value="{{ old('last_name', '') }}">
-                                            <span style="color: red;margin-left: 10px">{{ $errors->first('last_name') }}</span>
+                                                placeholder="LastName" value="{{ old('last_name', '') }}">
+                                            <span
+                                                style="color: red;margin-left: 10px">{{ $errors->first('last_name') }}</span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group last">
                                     <div class="fileinput fileinput-new" data-provides="fileinput">
-                                        <div class="fileinput-new thumbnail"
-                                             style="width: 200px; height: 150px;">
+                                        <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
                                             <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image"
-                                                 alt=""/>
+                                                alt="" />
                                         </div>
                                         <div class="fileinput-preview fileinput-exists thumbnail"
-                                             style="max-width: 200px; max-height: 150px;">
+                                            style="max-width: 200px; max-height: 150px;">
                                         </div>
                                         <div>
-                                                <span class="btn btn-dark btn-file">
-                                                    <span class="fileinput-new"> Select Client Avatar </span>
-                                                    <span class="fileinput-exists"> Change </span>
-                                                    <input type="file" name="avatar"
-                                                           value="{{ old('avatar', '') }}">
-                                                </span>
+                                            <span class="btn btn-dark btn-file">
+                                                <span class="fileinput-new"> Select Client Avatar </span>
+                                                <span class="fileinput-exists"> Change </span>
+                                                <input type="file" name="avatar" value="{{ old('avatar', '') }}">
+                                            </span>
                                             <a href="" class="btn btn-danger fileinput-exists"
-                                               data-dismiss="fileinput">
+                                                data-dismiss="fileinput">
                                                 Remove </a>
                                         </div>
                                         <span style="color: red; margin-left: 10px">{{ $errors->first('avatar') }}</span>
@@ -107,76 +107,77 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <input type="password" name="password" class="form-control"
-                                                   placeholder="Password">
-                                            <span style="color: red; margin-left: 10px">{{ $errors->first('password') }}</span>
+                                                placeholder="Password">
+                                            <span
+                                                style="color: red; margin-left: 10px">{{ $errors->first('password') }}</span>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <input type="password" name="password_confirmation" class="form-control"
-                                                   placeholder="Password Confirmation">
+                                                placeholder="Password Confirmation">
                                         </div>
                                     </div>
                                 </div>
 
-                                {{--<hr>--}}
+                                {{-- <hr> --}}
 
-                                {{--<div class="header col-lg-12 col-md-12 col-sm-12">--}}
-                                    {{--<h2>Permission Information</h2>--}}
-                                {{--</div>--}}
+                                {{-- <div class="header col-lg-12 col-md-12 col-sm-12"> --}}
+                                {{-- <h2>Permission Information</h2> --}}
+                                {{-- </div> --}}
 
-                                {{--@php--}}
-                                    {{--$models = ['admins', 'users'];--}}
-                                    {{--$cruds = ['create', 'read', 'update', 'delete'];--}}
-                                {{--@endphp--}}
+                                {{-- @php --}}
+                                {{-- $models = ['admins', 'users']; --}}
+                                {{-- $cruds = ['create', 'read', 'update', 'delete']; --}}
+                                {{-- @endphp --}}
 
-                                {{--<div class="row clearfix">--}}
-                                    {{--<ul class="nav nav-tabs" id="myTab" role="tablist">--}}
-                                        {{--@foreach($models as $index=>$model)--}}
-                                            {{--<li class="nav-item">--}}
-                                                {{--<a class="nav-link {{$index==0 ? 'active' : ''}}" data-toggle="tab" href="#{{$model}}"--}}
-                                                   {{--role="tab" aria-controls="home" aria-selected="true">{{$model}}</a>--}}
-                                            {{--</li>--}}
-                                        {{--@endforeach--}}
-                                    {{--</ul>--}}
-                                {{--</div>--}}
-                                {{--<div class="row clearfix" style="margin-left: 10px">--}}
+                                {{-- <div class="row clearfix"> --}}
+                                {{-- <ul class="nav nav-tabs" id="myTab" role="tablist"> --}}
+                                {{-- @foreach ($models as $index => $model) --}}
+                                {{-- <li class="nav-item"> --}}
+                                {{-- <a class="nav-link {{$index==0 ? 'active' : ''}}" data-toggle="tab" href="#{{$model}}" --}}
+                                {{-- role="tab" aria-controls="home" aria-selected="true">{{$model}}</a> --}}
+                                {{-- </li> --}}
+                                {{-- @endforeach --}}
+                                {{-- </ul> --}}
+                                {{-- </div> --}}
+                                {{-- <div class="row clearfix" style="margin-left: 10px"> --}}
 
-                                    {{--<div class="tab-content">--}}
-                                        {{--@foreach($models as $index=>$model)--}}
-                                            {{--<div class="tab-pane fade show {{ $index==0 ? 'active' : '' }}" id="{{ $model }}" >--}}
-                                                {{--<div class="checkbox">--}}
-                                                    {{--@foreach($cruds as $crud)--}}
-                                                        {{--<input id="{{$crud . '_' . $model }}" type="checkbox" name="permissions[]" value="{{$crud . '_' . $model }}">--}}
-                                                        {{--<label style="margin-left: 10px" for="{{$crud . '_' . $model }}">--}}
-                                                            {{--{{$crud}}--}}
-                                                        {{--</label>--}}
-                                                    {{--@endforeach--}}
-                                                {{--</div>--}}
-                                            {{--</div>--}}
-                                        {{--@endforeach--}}
-                                        {{--<div class="tab-pane fade" id="profile" role="tabpanel"--}}
-                                             {{--aria-labelledby="profile-tab">--}}
-                                            {{--<div class="checkbox">--}}
-                                                {{--<input id="checkbox1" type="checkbox">--}}
-                                                {{--<label for="checkbox1">--}}
-                                                    {{--Unchecked--}}
-                                                {{--</label>--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
-                                        {{--<div class="tab-pane fade" id="contact" role="tabpanel"--}}
-                                             {{--aria-labelledby="contact-tab">--}}
-                                            {{--<div class="checkbox">--}}
-                                                {{--<input id="checkbox1" type="checkbox">--}}
-                                                {{--<label for="checkbox1">--}}
-                                                    {{--Unchecked--}}
-                                                {{--</label>--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
+                                {{-- <div class="tab-content"> --}}
+                                {{-- @foreach ($models as $index => $model) --}}
+                                {{-- <div class="tab-pane fade show {{ $index==0 ? 'active' : '' }}" id="{{ $model }}" > --}}
+                                {{-- <div class="checkbox"> --}}
+                                {{-- @foreach ($cruds as $crud) --}}
+                                {{-- <input id="{{$crud . '_' . $model }}" type="checkbox" name="permissions[]" value="{{$crud . '_' . $model }}"> --}}
+                                {{-- <label style="margin-left: 10px" for="{{$crud . '_' . $model }}"> --}}
+                                {{-- {{$crud}} --}}
+                                {{-- </label> --}}
+                                {{-- @endforeach --}}
+                                {{-- </div> --}}
+                                {{-- </div> --}}
+                                {{-- @endforeach --}}
+                                {{-- <div class="tab-pane fade" id="profile" role="tabpanel" --}}
+                                {{-- aria-labelledby="profile-tab"> --}}
+                                {{-- <div class="checkbox"> --}}
+                                {{-- <input id="checkbox1" type="checkbox"> --}}
+                                {{-- <label for="checkbox1"> --}}
+                                {{-- Unchecked --}}
+                                {{-- </label> --}}
+                                {{-- </div> --}}
+                                {{-- </div> --}}
+                                {{-- <div class="tab-pane fade" id="contact" role="tabpanel" --}}
+                                {{-- aria-labelledby="contact-tab"> --}}
+                                {{-- <div class="checkbox"> --}}
+                                {{-- <input id="checkbox1" type="checkbox"> --}}
+                                {{-- <label for="checkbox1"> --}}
+                                {{-- Unchecked --}}
+                                {{-- </label> --}}
+                                {{-- </div> --}}
+                                {{-- </div> --}}
+                                {{-- </div> --}}
+                                {{-- </div> --}}
 
-                                {{--<br>--}}
+                                {{-- <br> --}}
                                 <br>
 
                                 <div class="row clearfix">
@@ -195,7 +196,6 @@
     </section>
 
     @push('scripts')
-        <script src="{{asset('web_files/js/bootstrap-fileinput.js')}}"></script>
+        <script src="{{ asset('web_files/js/bootstrap-fileinput.js') }}"></script>
     @endpush
-
 @endsection

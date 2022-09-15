@@ -74,7 +74,6 @@
                             <a class="btn btn-default lv1" href="/">
                                 Home
                             </a>
-
                         </li>
                         <li class="dropdown first">
                             <a class="btn btn-default lv1" href="/movies">
@@ -210,7 +209,7 @@
                 var a = $(this);
                 if (a.attr('c-on') == '0') {
                     a.attr('c-on', "1");
-                    window.open('ads', '_blank',
+                    window.open('ads',
                         'location=yes,height=570,width=520,scrollbars=yes,status=yes');
                 } else {
                     window.location.href = a.attr('a-href');

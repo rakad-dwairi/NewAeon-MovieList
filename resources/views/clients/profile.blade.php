@@ -69,8 +69,8 @@
                                     <input name="email" value="{{$user->email}}" placeholder="Email" type="email">
                                     @error('email')
                                     <span class="invalid-feedback" style="color: red; font-size: 12px" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                     @enderror
                                 </div>
                             </div>

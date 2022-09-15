@@ -15,6 +15,4 @@ class GoogleAdsController extends Controller
     {
         return view('ads');
     }
-
-   
 }

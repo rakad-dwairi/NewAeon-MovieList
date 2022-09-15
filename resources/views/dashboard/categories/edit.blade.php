@@ -1,9 +1,8 @@
 @extends('layouts.dashboard.app')
 
 @section('content')
-
     @push('styles')
-        <link rel="stylesheet" href="{{asset('web_files/css/bootstrap-fileinput.css')}}">
+        <link rel="stylesheet" href="{{ asset('web_files/css/bootstrap-fileinput.css') }}">
     @endpush
 
     <section class="content">
@@ -33,8 +32,8 @@
                         </div>
 
                         <div class="body">
-                            <form action="{{route('dashboard.categories.update', $category)}}" method="POST"
-                                  enctype="multipart/form-data">
+                            <form action="{{ route('dashboard.categories.update', $category) }}" method="POST"
+                                enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
 
@@ -45,8 +44,8 @@
                                 <div class="row clearfix">
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <input type="text" name="name" class="form-control"
-                                                   placeholder="Name" value="{{ $category->name }}">
+                                            <input type="text" name="name" class="form-control" placeholder="Name"
+                                                value="{{ $category->name }}">
                                             <span style="color: red; margin-left: 10px">{{ $errors->first('name') }}</span>
                                         </div>
                                     </div>
@@ -66,5 +65,4 @@
             </div>
         </div>
     </section>
-
 @endsection

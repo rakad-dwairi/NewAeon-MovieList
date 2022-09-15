@@ -30,8 +30,8 @@ class EpisodesController extends Controller
      */
     public function index(Request $request)
     {
-         //
-         $episodes = Episode::where(function ($query) use ($request) {
+        //
+        $episodes = Episode::where(function ($query) use ($request) {
             $query->when($request->search, function ($q) use ($request) {
                 return $q->where('name', 'like', '%' . $request->search . '%')
                     ->orWhere('year', 'like', '%' . $request->search . '%');
@@ -40,7 +40,7 @@ class EpisodesController extends Controller
         $servers = Server::all();
 
 
-        return view('dashboard.episodes.index', compact('episodes','servers'));
+        return view('dashboard.episodes.index', compact('episodes', 'servers'));
     }
 
     /**
@@ -57,7 +57,7 @@ class EpisodesController extends Controller
         // $categories = Category::all();
         // $actors = Actor::all();
         $episodes = Episode::all();
-        return view('dashboard.episodes.create', compact('episodes','series_id','seasons_id','servers'));
+        return view('dashboard.episodes.create', compact('episodes', 'series_id', 'seasons_id', 'servers'));
     }
 
     /**
@@ -79,32 +79,32 @@ class EpisodesController extends Controller
 
         $img = $request->background_cover->store('public/episode_background_covers');
         $img1 = $request->poster->store('public/episode_posters');
-        $attributes['background_cover'] = str_replace('public/','',$img);
-        $attributes['poster'] = str_replace('public/','',$img1);
+        $attributes['background_cover'] = str_replace('public/', '', $img);
+        $attributes['poster'] = str_replace('public/', '', $img1);
 
         $episode = Episode::create([
             'name' => $attributes['name'],
             'year' => $attributes['year'],
             'overview' => $attributes['overview'],
-            'series_id'=>$test,
-            'seasons_id'=>$request->seasons_id,
+            'series_id' => $test,
+            'seasons_id' => $request->seasons_id,
             'background_cover' => $attributes['background_cover'],
             'poster' => $attributes['poster'],
             'url' => $attributes['url'],
             'api_url' => $attributes['api_url'],
         ]);
 
-        foreach($request->server_url as $server => $key) {
+        foreach ($request->server_url as $server => $key) {
             EpisodeServer::updateOrCreate([
                 'episode_id' => $episode->id,
-                'server_id' => $server                
-            ],[
+                'server_id' => $server
+            ], [
                 'episode_id' => $episode->id,
                 'embed_url' => $key,
                 'server_id' => $server
             ]);
         }
-        
+
 
         session()->flash('success', 'Episode Added Successfully');
         return redirect()->back();
@@ -117,9 +117,7 @@ class EpisodesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Episode $episode)
-    {
-        
-    }
+    { }
 
     /**
      * Show the form for editing the specified resource.
@@ -130,12 +128,12 @@ class EpisodesController extends Controller
     public function edit(Episode $episode)
     {
         $categories = Category::all();
-        $servers = Episode::select('episode_server.embed_url','servers.name','servers.id as id')
-                        ->leftJoin('episode_server','episode_server.episode_id','episodes.id')
-                        ->leftJoin('servers','episode_server.server_id','servers.id')
-                        ->where('episode_server.episode_id',$episode->id)
-                        ->groupBy('episode_server.server_id')->get();
-        return view('dashboard.episodes.edit', compact('episode', 'categories','servers'));
+        $servers = Episode::select('episode_server.embed_url', 'servers.name', 'servers.id as id')
+            ->leftJoin('episode_server', 'episode_server.episode_id', 'episodes.id')
+            ->leftJoin('servers', 'episode_server.server_id', 'servers.id')
+            ->where('episode_server.episode_id', $episode->id)
+            ->groupBy('episode_server.server_id')->get();
+        return view('dashboard.episodes.edit', compact('episode', 'categories', 'servers'));
     }
 
     /**
@@ -168,11 +166,11 @@ class EpisodesController extends Controller
         }
 
         $episode->update($attributes);
-        foreach($request->server_url as $server => $key) {
+        foreach ($request->server_url as $server => $key) {
             Episodeserver::updateOrCreate([
                 'episode_id' => $episode->id,
-                'server_id' => $server                
-            ],[
+                'server_id' => $server
+            ], [
                 'episode_id' => $episode->id,
                 'embed_url' => $key,
                 'server_id' => $server
@@ -192,12 +190,12 @@ class EpisodesController extends Controller
      */
     public function destroy($id)
     {
-        if(Episode::destroy($id)) {
+        if (Episode::destroy($id)) {
             session()->flash('success', 'Episode Deleted Successfully');
             return redirect()->back();
-          } else {
+        } else {
             session()->flash('alert', 'Episode Was not Successfully Delted');
             return redirect()->back();
-          }
+        }
     }
 }

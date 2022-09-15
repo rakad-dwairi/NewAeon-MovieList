@@ -6,7 +6,6 @@ use App\Film;
 
 class FavoriteController extends Controller
 {
-    //
     public function store(Film $film)
     {
         $result = $film->addToFavorite(auth()->user());

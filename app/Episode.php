@@ -34,15 +34,6 @@ class Episode extends Model
     {
         return $this->belongsToMany(Server::class, 'episode_server');
     }
-    // public function categories()
-    // {
-    //     return $this->belongsToMany(Category::class, 'series_category');
-    // }
-
-    // public function actors()
-    // {
-    //     return $this->belongsToMany(Actor::class, 'film_actor');
-    // }
 
     public function ratings()
     {

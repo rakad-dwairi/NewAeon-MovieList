@@ -1,9 +1,8 @@
 @extends('layouts.dashboard.app')
 
 @section('content')
-
     @push('styles')
-        <link rel="stylesheet" href="{{asset('web_files/css/bootstrap-fileinput.css')}}">
+        <link rel="stylesheet" href="{{ asset('web_files/css/bootstrap-fileinput.css') }}">
     @endpush
 
     <section class="content">
@@ -33,8 +32,8 @@
                         </div>
 
                         <div class="body">
-                            <form action="{{route('dashboard.clients.update', $client)}}" method="POST"
-                                  enctype="multipart/form-data">
+                            <form action="{{ route('dashboard.clients.update', $client) }}" method="POST"
+                                enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
 
@@ -46,14 +45,15 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <input type="text" name="username" class="form-control"
-                                                   placeholder="UserName" value="{{ $client->username }}">
-                                            <span style="color: red; margin-left: 10px">{{ $errors->first('username') }}</span>
+                                                placeholder="UserName" value="{{ $client->username }}">
+                                            <span
+                                                style="color: red; margin-left: 10px">{{ $errors->first('username') }}</span>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <input type="email" name="email" class="form-control"
-                                                   placeholder="Email" value="{{ $client->email }}">
+                                            <input type="email" name="email" class="form-control" placeholder="Email"
+                                                value="{{ $client->email }}">
                                             <span style="color: red;margin-left: 10px">{{ $errors->first('email') }}</span>
                                         </div>
                                     </div>
@@ -62,37 +62,36 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <input type="text" name="first_name" class="form-control"
-                                                   placeholder="FirstName" value="{{ $client->first_name }}">
-                                            <span style="color: red; margin-left: 10px">{{ $errors->first('first_name') }}</span>
+                                                placeholder="FirstName" value="{{ $client->first_name }}">
+                                            <span
+                                                style="color: red; margin-left: 10px">{{ $errors->first('first_name') }}</span>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <input type="text" name="last_name" class="form-control"
-                                                   placeholder="LastName" value="{{ $client->last_name }}">
-                                            <span style="color: red;margin-left: 10px">{{ $errors->first('last_name') }}</span>
+                                                placeholder="LastName" value="{{ $client->last_name }}">
+                                            <span
+                                                style="color: red;margin-left: 10px">{{ $errors->first('last_name') }}</span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group last">
                                     <div class="fileinput fileinput-new" data-provides="fileinput">
-                                        <div class="fileinput-new thumbnail"
-                                             style="width: 200px; height: 150px;">
-                                            <img src="{{$client->avatar}}"
-                                                 alt=""/>
+                                        <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
+                                            <img src="{{ $client->avatar }}" alt="" />
                                         </div>
                                         <div class="fileinput-preview fileinput-exists thumbnail"
-                                             style="max-width: 200px; max-height: 150px;">
+                                            style="max-width: 200px; max-height: 150px;">
                                         </div>
                                         <div>
-                                                <span class="btn btn-dark btn-file">
-                                                    <span class="fileinput-new"> Select Client Avatar </span>
-                                                    <span class="fileinput-exists"> Change </span>
-                                                    <input type="file" name="avatar"
-                                                           value="{{ $client->avatar }}">
-                                                </span>
+                                            <span class="btn btn-dark btn-file">
+                                                <span class="fileinput-new"> Select Client Avatar </span>
+                                                <span class="fileinput-exists"> Change </span>
+                                                <input type="file" name="avatar" value="{{ $client->avatar }}">
+                                            </span>
                                             <a href="" class="btn btn-danger fileinput-exists"
-                                               data-dismiss="fileinput">
+                                                data-dismiss="fileinput">
                                                 Remove </a>
                                         </div>
                                         <span style="color: red; margin-left: 10px">{{ $errors->first('avatar') }}</span>
@@ -108,14 +107,15 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <input type="password" name="password" class="form-control"
-                                                   placeholder="Password">
-                                            <span style="color: red; margin-left: 10px">{{ $errors->first('password') }}</span>
+                                                placeholder="Password">
+                                            <span
+                                                style="color: red; margin-left: 10px">{{ $errors->first('password') }}</span>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <input type="password" name="password_confirmation" class="form-control"
-                                                   placeholder="Password Confirmation">
+                                                placeholder="Password Confirmation">
                                         </div>
                                     </div>
                                 </div>
@@ -138,7 +138,6 @@
     </section>
 
     @push('scripts')
-        <script src="{{asset('web_files/js/bootstrap-fileinput.js')}}"></script>
+        <script src="{{ asset('web_files/js/bootstrap-fileinput.js') }}"></script>
     @endpush
-
 @endsection

@@ -1,9 +1,8 @@
 @extends('layouts.dashboard.app')
 
 @section('content')
-
     @push('styles')
-        <link rel="stylesheet" href="{{asset('dashboard_files/assets/plugins/sweetalert/sweetalert.css')}}"/>
+        <link rel="stylesheet" href="{{ asset('dashboard_files/assets/plugins/sweetalert/sweetalert.css') }}" />
     @endpush
 
     <section class="content">
@@ -15,22 +14,23 @@
                     </h2>
                 </div>
                 <div class="col-lg-5 col-md-7 col-sm-12">
-                    @if(auth()->guard('admin')->user()->hasPermission('create_servers'))
-                        <a href="{{route('dashboard.servers.create')}}">
+                    @if (auth()->guard('admin')->user()->hasPermission('create_servers'))
+                        <a href="{{ route('dashboard.servers.create') }}">
                             <button class="btn btn-primary btn-icon btn-round d-none d-md-inline-block float-right m-l-10"
-                                    type="button">
+                                type="button">
                                 <i class="zmdi zmdi-plus"></i>
                             </button>
                         </a>
                     @else
-                        <button class="btn btn-primary btn-icon btn-round d-none d-md-inline-block float-right m-l-10 disabled"
-                                style="cursor: no-drop"
-                                type="button">
+                        <button
+                            class="btn btn-primary btn-icon btn-round d-none d-md-inline-block float-right m-l-10 disabled"
+                            style="cursor: no-drop" type="button">
                             <i class="zmdi zmdi-plus"></i>
                         </button>
                     @endif
                     <ul class="breadcrumb float-md-right">
-                        <li class="breadcrumb-item"><a href="{{url('dashboard')}}"><i class="zmdi zmdi-home"></i> Films</a>
+                        <li class="breadcrumb-item"><a href="{{ url('dashboard') }}"><i class="zmdi zmdi-home"></i>
+                                Films</a>
                         </li>
                         <li class="breadcrumb-item"><a href="javascript:void(0);">Servers</a></li>
                         <li class="breadcrumb-item active">All Servers</li>
@@ -43,14 +43,14 @@
                 <div class="col-md-12">
                     <div class="card patients-list">
                         <div class="header">
-                            <h2><strong>Servers </strong><span>({{$servers->total()}})</span></h2>
+                            <h2><strong>Servers </strong><span>({{ $servers->total() }})</span></h2>
                         </div>
                         <div class="body">
                             <div class="col-5" style="padding-left: 0px">
                                 <form action="{{ route('dashboard.servers.index') }}" method="GET">
                                     <div class="input-group" style="margin-bottom: 0px">
-                                        <input type="text" class="form-control" placeholder="Search..."
-                                               name="search" value="{{ request()->search }}">
+                                        <input type="text" class="form-control" placeholder="Search..." name="search"
+                                            value="{{ request()->search }}">
                                         <button class="input-group-addon" type="submit">
                                             <i class="zmdi zmdi-search"></i>
                                         </button>
@@ -62,61 +62,60 @@
                                 <div class="tab-pane table-responsive active">
                                     <table class="table m-b-0 table-hover">
                                         <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Relations</th>
-                                            <th>Actions</th>
-                                        </tr>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Relations</th>
+                                                <th>Actions</th>
+                                            </tr>
                                         </thead>
                                         <tbody>
-                                        @forelse($servers as $server)
-                                            <tr>
-                                                <td><span class="list-name">{{$server->name}}</span></td>
-                                                <td>
-                                                    <a href="{{ route('dashboard.films.index', ['server' => $server->id]) }}" class="btn btn-info btn-sm">Films</a>
-                                                </td>
-                                                <td>
-                                                    @if(auth()->guard('admin')->user()->hasPermission('update_servers'))
-                                                        <a href="{{route('dashboard.servers.edit', $server)}}">
-                                                            <button class="btn btn-icon btn-neutral btn-icon-mini"
+                                            @forelse($servers as $server)
+                                                <tr>
+                                                    <td><span class="list-name">{{ $server->name }}</span></td>
+                                                    <td>
+                                                        <a href="{{ route('dashboard.films.index', ['server' => $server->id]) }}"
+                                                            class="btn btn-info btn-sm">Films</a>
+                                                    </td>
+                                                    <td>
+                                                        @if (auth()->guard('admin')->user()->hasPermission('update_servers'))
+                                                            <a href="{{ route('dashboard.servers.edit', $server) }}">
+                                                                <button class="btn btn-icon btn-neutral btn-icon-mini"
                                                                     title="Edit">
+                                                                    <i class="zmdi zmdi-edit"></i>
+                                                                </button>
+                                                            </a>
+                                                        @else
+                                                            <button class="btn btn-icon btn-neutral btn-icon-mini disabled"
+                                                                style="cursor: no-drop" title="Edit">
                                                                 <i class="zmdi zmdi-edit"></i>
                                                             </button>
-                                                        </a>
-                                                    @else
-                                                        <button class="btn btn-icon btn-neutral btn-icon-mini disabled"
-                                                                style="cursor: no-drop"
-                                                                title="Edit">
-                                                            <i class="zmdi zmdi-edit"></i>
-                                                        </button>
-                                                    @endif
+                                                        @endif
 
-                                                    @if(auth()->guard('admin')->user()->hasPermission('delete_servers'))
-                                                        <form action="{{ route('dashboard.servers.destroy', $server) }}"
-                                                              method="POST" style="display: inline-block">
-                                                            @csrf
-                                                            @method('DELETE')
+                                                        @if (auth()->guard('admin')->user()->hasPermission('delete_servers'))
+                                                            <form action="{{ route('dashboard.servers.destroy', $server) }}"
+                                                                method="POST" style="display: inline-block">
+                                                                @csrf
+                                                                @method('DELETE')
 
-                                                            <button type="submit"
+                                                                <button type="submit"
                                                                     class="btn btn-icon btn-neutral btn-icon-mini remove_server"
-                                                                    title="Delete" value="{{$server->id}}">
+                                                                    title="Delete" value="{{ $server->id }}">
+                                                                    <i class="zmdi zmdi-delete"></i>
+                                                                </button>
+                                                            </form>
+                                                        @else
+                                                            <button class="btn btn-icon btn-neutral btn-icon-mini disabled"
+                                                                style="cursor: no-drop" title="Delete">
                                                                 <i class="zmdi zmdi-delete"></i>
                                                             </button>
-                                                        </form>
-                                                    @else
-                                                        <button class="btn btn-icon btn-neutral btn-icon-mini disabled"
-                                                                style="cursor: no-drop"
-                                                                title="Delete">
-                                                            <i class="zmdi zmdi-delete"></i>
-                                                        </button>
-                                                    @endif
-                                                </td>
-                                            </tr>
-                                        @empty
-                                            <tr class="text-center">
-                                                <td colspan="5">There Is No Data...</td>
-                                            </tr>
-                                        @endforelse
+                                                        @endif
+                                                    </td>
+                                                </tr>
+                                            @empty
+                                                <tr class="text-center">
+                                                    <td colspan="5">There Is No Data...</td>
+                                                </tr>
+                                            @endforelse
                                         </tbody>
                                     </table>
                                 </div>
@@ -124,17 +123,17 @@
                         </div>
                     </div>
                 </div>
-                {{$servers->appends(request()->query())->links()}}
+                {{ $servers->appends(request()->query())->links() }}
             </div>
         </div>
     </section>
 
     @push('scripts')
-        <script src="{{asset('dashboard_files/assets/plugins/sweetalert/sweetalert.min.js')}}"></script>
+        <script src="{{ asset('dashboard_files/assets/plugins/sweetalert/sweetalert.min.js') }}"></script>
 
         <script type="text/javascript">
-            $(document).ready(function () {
-                $(".remove_server").click(function (e) {
+            $(document).ready(function() {
+                $(".remove_server").click(function(e) {
                     var that = $(this);
                     e.preventDefault();
 
@@ -147,12 +146,11 @@
                         confirmButtonColor: "#DD6B55",
                         confirmButtonText: "Yes, delete it!",
                         closeOnConfirm: false
-                    }, function () {
+                    }, function() {
                         that.closest('form').submit();
                     });
                 });
             });
         </script>
     @endpush
-
 @endsection

@@ -118,9 +118,6 @@
 
                                         </div>
                                     </div>
-                                    {{-- <script src="https://code.jquery.com/jquery-3.3.1.min.js"
-                                    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-                                    crossorigin="anonymous"></script>                      --}}
                                     <script>
                                         function set_url1(id) {
                                             // $('#url').css('display','none');
@@ -129,28 +126,7 @@
                                                 $(this).css('display','none');
                                             });
                                             $('.embd_url_'+id).css('display','block');           
-                                        }
-                                        // var server_id = 0;
-                                        // function set_url1(id) {
-                                        //    server_id = id 
-                                        //     $.ajax({
-                                        //         type : 'POST',
-                                        //         url  : "{{ url('/set-serieURL') }}",
-                                        //         data: {
-                                        //             "_token": "{{ csrf_token() }}",
-                                        //             server_id: server_id,
-                                        //             episode_id: {{$episode->id}},
-                                        //         },                                               
-                                        //         success :  function(data){
-                                        //             // var x = JSON.stringify(data);
-                                        //             console.log(data);
-                                        //             $("#display").html(data);
-                                        //             document.getElementById('display').write(data);
-
-                                        //         }
-                                        //     });
-                                        // }
-                                       
+                                        }                                
                                     </script>
                                     <div class="tab review" id="reviews">
                                         <div class="row">
@@ -163,41 +139,7 @@
                                                    style="margin-right: 20px">Write
                                                     Review</a>
                                             </div>
-                                            {{-- <div class="topbar-filter">
-                                                <p>Found <span>{{$episode->reviews->count()}} reviews</span> in total</p>
-                                            </div> --}}
-                                            {{-- @foreach($reviews as $review)
-                                                <div class="mv-user-review-item">
-                                                    <div class="user-infor">
-                                                        <img alt="" src="{{$review->user->avatar}}">
-                                                        <div>
-                                                            <h3>{{$review->title}}</h3>
-                                                            <div class="no-star">
-                                                                @php
-                                                                    $stars = $review->user->ratings->where('episode_id', $episode->id)->first();
-                                                                    if($stars!=NULL){
-                                                                        $stars = $stars->rating;
-                                                                        for ($i=1; $i<=$stars; $i++){
-                                                                            echo '<i class="ion-android-star"></i>';
-                                                                        }
-                                                                        for ($i=1; $i<=(10-$stars); $i++){
-                                                                            echo '<i class="ion-android-star last"></i>';
-                                                                        }
-                                                                    }
-                                                                @endphp
-                                                            </div>
-                                                            <p class="time">
-                                                                {{date('d F Y',strtotime($review->created_at))}} by
-                                                                <a> {{$review->user->username}}</a>
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                    <p>{{$review->review}}</p>
-                                                </div>
-                                            @endforeach --}}
-                                        </div>
-                                        {{-- {{$reviews->appends(request()->query())->links()}} --}}
-                                        
+                                        </div>                                        
                                         <div class="blog-detail-ct" id="write_review">
                                             <div class="comment-form" style="padding-top: 75px!important;">
                                                 <h4>Write a review</h4>
@@ -236,20 +178,7 @@
                                         <div class="row">
                                             <div class="title-hd-sm">
                                                 <h4>Actor</h4>
-                                                {{--<a class="time" href="#" style="margin-right: 20px">Full Actor<i--}}
-                                                {{--class="ion-ios-arrow-right"></i></a>--}}
                                             </div>
-                                            {{-- <div class="mvcast-item">
-                                                @foreach($episode->actors as $actor)
-                                                    <div class="cast-it">
-                                                        <div class="cast-left">
-                                                            <img alt="" src="{{$actor->avatar}}"
-                                                                 style="height: 40px; width: 40px">
-                                                            <a href="{{url('actors/' . $actor->name)}}">{{$actor->name}}</a>
-                                                        </div>
-                                                    </div>
-                                                @endforeach
-                                            </div> --}}
                                         </div>
                                     </div>
                                 </div>

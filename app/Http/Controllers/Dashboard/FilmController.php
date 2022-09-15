@@ -24,30 +24,23 @@ class FilmController extends Controller
         $this->middleware(['permission:delete_films,guard:admin'])->only('destroy');
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request)
     {
-        //
         $films = Film::where(function ($query) use ($request) {
             $query->when($request->search, function ($q) use ($request) {
                 return $q->where('name', 'like', '%' . $request->search . '%')
                     ->orWhere('year', 'like', '%' . $request->search . '%');
             });
             $query->when($request->category, function ($q) use ($request) {
-                return $q->whereHas('categories', function ($q2) use ($request){
-                    return $q2->whereIn('category_id', (array)$request->category)
-                        ->orWhereIn('name', (array)$request->category);
+                return $q->whereHas('categories', function ($q2) use ($request) {
+                    return $q2->whereIn('category_id', (array) $request->category)
+                        ->orWhereIn('name', (array) $request->category);
                 });
             });
 
             $query->when($request->favorite, function ($q) use ($request) {
-                return $q->whereHas('favorites', function ($q2) use ($request){
-                    return $q2->whereIn('user_id', (array)$request->favorite);
+                return $q->whereHas('favorites', function ($q2) use ($request) {
+                    return $q2->whereIn('user_id', (array) $request->favorite);
                 });
             });
         })->with('categories')->with('ratings')->with('servers')->latest()->paginate(10);
@@ -55,28 +48,16 @@ class FilmController extends Controller
         $servers = Server::all();
 
 
-        return view('dashboard.films.index', compact('films', 'categories','servers'));
+        return view('dashboard.films.index', compact('films', 'categories', 'servers'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
         $categories = Category::all();
         $servers = Server::all();
-        return view('dashboard.films.create', compact('categories','servers'));
+        return view('dashboard.films.create', compact('categories', 'servers'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $attributes = $request->validate([
@@ -92,8 +73,8 @@ class FilmController extends Controller
 
         $img = $request->background_cover->store('public/film_background_covers');
         $img1 = $request->poster->store('public/film_posters');
-        $attributes['background_cover'] = str_replace('public/','',$img);
-        $attributes['poster'] = str_replace('public/','',$img1);
+        $attributes['background_cover'] = str_replace('public/', '', $img);
+        $attributes['poster'] = str_replace('public/', '', $img1);
 
         $film = Film::create([
             'name' => $attributes['name'],
@@ -104,12 +85,12 @@ class FilmController extends Controller
             'url' => $attributes['url'],
             'api_url' => $attributes['api_url'],
         ]);
-        
-        foreach($request->server_url as $server => $key) {
+
+        foreach ($request->server_url as $server => $key) {
             FilmServer::updateOrCreate([
                 'film_id' => $film->id,
-                'server_id' => $server                
-            ],[
+                'server_id' => $server
+            ], [
                 'film_id' => $film->id,
                 'embed_url' => $key,
                 'server_id' => $server
@@ -122,42 +103,22 @@ class FilmController extends Controller
         return redirect()->route('dashboard.films.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Film  $film
-     * @return \Illuminate\Http\Response
-     */
     public function show(Film $film)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Film  $film
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Film $film)
     {
-        //
         $categories = Category::all();
-        $servers = Film::select('film_server.embed_url','servers.name','servers.id as id')
-                        ->leftJoin('film_server','film_server.film_id','films.id')
-                        ->leftJoin('servers','film_server.server_id','servers.id')
-                        ->where('film_server.film_id',$film->id)
-                        ->groupBy('film_server.server_id')->get();
-        return view('dashboard.films.edit', compact('film', 'categories','servers'));
+        $servers = Film::select('film_server.embed_url', 'servers.name', 'servers.id as id')
+            ->leftJoin('film_server', 'film_server.film_id', 'films.id')
+            ->leftJoin('servers', 'film_server.server_id', 'servers.id')
+            ->where('film_server.film_id', $film->id)
+            ->groupBy('film_server.server_id')->get();
+        return view('dashboard.films.edit', compact('film', 'categories', 'servers'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Film  $film
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Film $film)
     {
 
@@ -182,11 +143,11 @@ class FilmController extends Controller
         }
 
         $film->update($attributes);
-        foreach($request->server_url as $server => $key) {
+        foreach ($request->server_url as $server => $key) {
             FilmServer::updateOrCreate([
                 'film_id' => $film->id,
-                'server_id' => $server                
-            ],[
+                'server_id' => $server
+            ], [
                 'film_id' => $film->id,
                 'embed_url' => $key,
                 'server_id' => $server
@@ -196,16 +157,8 @@ class FilmController extends Controller
 
         session()->flash('success', 'Film Updated Successfully');
         return redirect()->route('dashboard.films.index');
-
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Film $film
-     * @return \Illuminate\Http\Response
-     * @throws \Exception
-     */
     public function destroy(Film $film)
     {
         $film->delete();

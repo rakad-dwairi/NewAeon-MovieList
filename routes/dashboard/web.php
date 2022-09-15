@@ -25,8 +25,6 @@ Route::group(['prefix' => 'dashboard', 'namespace' => 'Dashboard'], function () 
         Route::resource('episodes', 'EpisodesController',['parameters' => [
             'create' => 'id'
         ]]);
-        // Route::get('/seasons/{id}/edit', 'SeasonsController@edit');
-
         Route::resource('actors', 'ActorController');
         Route::resource('categories', 'CategoryController')->except(['show']);
         Route::resource('servers', 'ServersController')->except(['show']);

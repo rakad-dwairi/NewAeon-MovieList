@@ -18,7 +18,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-//        $this->middleware('auth');
+        //        $this->middleware('auth');
     }
 
     /**
@@ -32,9 +32,9 @@ class HomeController extends Controller
         $sliderSeries = Series::with('categories')->limit(10)->latest()->get();
         $categoryFilms = Category::with('films')->get();
         $categorySeries = Category::with('series')->get();
-        
 
-        return view('home', compact('sliderFilms', 'categoryFilms','sliderSeries','categorySeries'));
+
+        return view('home', compact('sliderFilms', 'categoryFilms', 'sliderSeries', 'categorySeries'));
     }
 
     public function search(Request $request)
@@ -44,10 +44,10 @@ class HomeController extends Controller
                 $films = Film::where('name', 'like', '%' . $request->search . '%')->paginate(10);
                 return view('movies.index', compact('films'));
                 break;
-                case 'series':
-                    $films = Series::where('name', 'like', '%' . $request->search . '%')->paginate(10);
-                    return view('series.index', compact('series'));
-                    break;
+            case 'series':
+                $films = Series::where('name', 'like', '%' . $request->search . '%')->paginate(10);
+                return view('series.index', compact('series'));
+                break;
             case 'actors':
                 $actors = Actor::where('name', 'like', '%' . $request->search . '%')->paginate(10);
                 return view('actors.index', compact('actors'));
@@ -57,21 +57,21 @@ class HomeController extends Controller
         }
     }
 
-    public function message(Request $request){
+    public function message(Request $request)
+    {
         $attributes = $request->validate([
             'email' =>  'required|email',
-            'title'=>  'required|string',
-            'message'=>  'required|string|max:250'
+            'title' =>  'required|string',
+            'message' =>  'required|string|max:250'
         ]);
 
         Message::create([
-           'email' => $attributes['email'],
-           'title' => $attributes['title'],
-           'message' => $attributes['message'],
+            'email' => $attributes['email'],
+            'title' => $attributes['title'],
+            'message' => $attributes['message'],
         ]);
 
         session()->flash('success', 'Thank you for contact us');
         return redirect()->back();
-
     }
 }
