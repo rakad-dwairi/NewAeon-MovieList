@@ -24,19 +24,12 @@
         }
     </style>
     <div class="container" style="padding-top: 13%;">
-
-
         <div class="parent evenly">
             <img src="{{ asset('/images/ads1.png') }}" alt="" style="width: 900px;">
         </div>
 
-        {{-- <div class="parent between text-center">
-            <div id="countdown" class="text-center"></div>
-        </div> --}}
-
         <div class="parent around">
             <img src="{{ asset('/images/ads1.png') }}" alt="" style="width: 900px;">
         </div>
-
     </div>
 @endsection

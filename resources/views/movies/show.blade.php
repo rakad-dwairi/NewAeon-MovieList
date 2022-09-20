@@ -32,12 +32,10 @@
 
     <style>
 
-
     </style>
     <div id="divpa"
         style=" position:fixed; background-color:rgb(241, 234, 234); top:0; left:0; width:100%; height:100%; z-index:500; ">
         <div class="container" style="padding-top: 13%;">
-
 
             <div class="parent evenly">
                 <img src="{{ asset('/images/ads1.png') }}" alt="" style="width: 900px;">
@@ -309,7 +307,6 @@
                                             @endforeach
                                         </div>
                                         {{ $reviews->appends(request()->query())->links() }}
-
                                         <div class="blog-detail-ct" id="write_review">
                                             <div class="comment-form" style="padding-top: 75px!important;">
                                                 <h4>Write a review</h4>
@@ -347,11 +344,8 @@
                                         <div class="row">
                                             <div class="title-hd-sm">
                                                 <h4>Actor</h4>
-                                                {{-- <a class="time" href="#" style="margin-right: 20px">Full Actor<i --}}
-                                                {{-- class="ion-ios-arrow-right"></i></a> --}}
                                             </div>
                                             <div class="mvcast-item">
-
                                             </div>
                                         </div>
                                     </div>
