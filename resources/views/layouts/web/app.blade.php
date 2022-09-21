@@ -6,7 +6,7 @@
 <html class="ie ie8 no-js" lang="en-US">
 <![endif]-->
 <!--[if !(IE 7) | !(IE 8)  ]><!-->
-<html class="no-js" lang="en">
+<html class="no-js" lang="ar">
 
 <head>
     <!-- Basic need -->
@@ -33,7 +33,6 @@
     <!-- AD sense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2554459562280158"
         crossorigin="anonymous"></script>
-
 </head>
 
 <body>
