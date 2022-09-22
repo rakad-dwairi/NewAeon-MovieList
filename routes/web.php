@@ -17,6 +17,7 @@ Route::get('/episodes/{episode}', 'SeriesController@episodeshow');
 Route::get('/ads', 'GoogleAdsController@index');
 Route::get('/movies/adv', 'MovieController@ads');
 
+Route::get('lang/{lang}',[ 'as'=>'lang.switch', 'uses'=>'LanguageContoller@switchLang']);
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/user/profile', 'ClientController@profile');
@@ -36,6 +37,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/user/review/{film}', 'ReviewController@store');
     Route::delete('/user/review/{film}', 'ReviewController@destroy');
 });
-
+ 
 Route::post('/set-url', 'MovieController@setEmpdUrl');
 Route::post('/set-serieURL', 'SeriesController@setEmpdUrl');
+

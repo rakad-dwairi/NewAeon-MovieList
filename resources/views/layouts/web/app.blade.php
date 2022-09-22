@@ -89,6 +89,22 @@
                                 contact us
                             </a>
                         </li>
+
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navBarDropdownMenuLink"
+                                data-toggle="dropdown">
+                                {{ Config::get('languages')[App::getLocale()] }}
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                @foreach (Config::get('languages') as $lang => $language)
+                                    @if ($lang != App::getLocale())
+                                        <a class="dropdown-item"
+                                            href="{{ route('lang.switch',$lang) }}">{{ $language }}</a>
+                                    @endif
+                                @endforeach
+                            </div>
+                        </li>
                     </ul>
                     <ul class="nav navbar-nav flex-child-menu menu-right">
                         @auth
@@ -124,7 +140,8 @@
                         </option>
                     </select>
                     <input name="search" value="{{ request()->search }}"
-                        placeholder="Search for a movie, TV Show or celebrity that you are looking for" type="text">
+                        placeholder="Search for a movie, TV Show or celebrity that you are looking for"
+                        type="text">
                     <button type="submit"
                         style="background-color: #dd003f!important; color: white; font-weight: bold; padding: 11px 25px">Search</button>
                 </form>
@@ -216,8 +233,8 @@
 
             });
         });
-        function hil()
-        {
+
+        function hil() {
             $('#divpa').hide();
         }
         var timeleft = 10;
