@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Actor;
 use App\Category;
+use App\Type;
 use App\Server;
 use App\FilmServer;
 use App\Film;
@@ -38,24 +39,33 @@ class FilmController extends Controller
                 });
             });
 
+            $query->when($request->type, function ($q) use ($request) {
+                return $q->whereHas('type', function ($q2) use ($request) {
+                    return $q2->whereIn('type_id', (array) $request->type)
+                        ->orWhereIn('name', (array) $request->type);
+                });
+            });
+
             $query->when($request->favorite, function ($q) use ($request) {
                 return $q->whereHas('favorites', function ($q2) use ($request) {
                     return $q2->whereIn('user_id', (array) $request->favorite);
                 });
             });
-        })->with('categories')->with('ratings')->with('servers')->latest()->paginate(10);
+        })->with('categories')->with('type')->with('ratings')->with('servers')->latest()->paginate(10);
         $categories = Category::all();
+        $types = Type::all();
         $servers = Server::all();
 
 
-        return view('dashboard.films.index', compact('films', 'categories', 'servers'));
+        return view('dashboard.films.index', compact('films', 'categories','types', 'servers'));
     }
 
     public function create()
     {
         $categories = Category::all();
+        $types = Type::all();
         $servers = Server::all();
-        return view('dashboard.films.create', compact('categories', 'servers'));
+        return view('dashboard.films.create', compact('categories','types','servers'));
     }
 
     public function store(Request $request)
@@ -69,6 +79,7 @@ class FilmController extends Controller
             'url' => 'required|string',
             'api_url' => 'required|string',
             'categories' => 'required|array|max:3|exists:categories,id',
+            'type' => 'required|array|max:3|exists:type,id',
         ]);
 
         $img = $request->background_cover->store('public/film_background_covers');
@@ -98,6 +109,7 @@ class FilmController extends Controller
         }
 
         $film->categories()->sync($attributes['categories']);
+        $film->type()->sync($attributes['type']);
 
         session()->flash('success', 'Film Added Successfully');
         return redirect()->route('dashboard.films.index');
@@ -111,12 +123,13 @@ class FilmController extends Controller
     public function edit(Film $film)
     {
         $categories = Category::all();
+        $types = Type::all();
         $servers = Film::select('film_server.embed_url', 'servers.name', 'servers.id as id')
             ->leftJoin('film_server', 'film_server.film_id', 'films.id')
             ->leftJoin('servers', 'film_server.server_id', 'servers.id')
             ->where('film_server.film_id', $film->id)
             ->groupBy('film_server.server_id')->get();
-        return view('dashboard.films.edit', compact('film', 'categories', 'servers'));
+        return view('dashboard.films.edit', compact('film', 'categories','types','servers'));
     }
 
     public function update(Request $request, Film $film)
@@ -131,6 +144,7 @@ class FilmController extends Controller
             'url' => 'required|string',
             'api_url' => 'required|string',
             'categories' => 'required|array|max:3|exists:categories,id',
+            'type' => 'required|array|max:3|exists:type,id',
         ]);
 
         if ($request->background_cover) {
@@ -154,6 +168,7 @@ class FilmController extends Controller
             ]);
         }
         $film->categories()->sync($attributes['categories']);
+        $film->type()->sync($attributes['type']);
 
         session()->flash('success', 'Film Updated Successfully');
         return redirect()->route('dashboard.films.index');

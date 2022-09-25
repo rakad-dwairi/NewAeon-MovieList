@@ -15,6 +15,7 @@ class FilmSeeder extends Seeder
         $films = [
             [
                 'name' => 'film1',
+                'arname' => 'فيلم 1',
                 'year' => '2019',
                 'overview' => 'film1film1film1film1film1film1film1film1film1film1film1film1',
                 'background_cover' => 'film_background_covers/film-bg.jpg',
@@ -24,6 +25,7 @@ class FilmSeeder extends Seeder
                 ],
             [
                 'name' => 'film2',
+                'arname' => 'فيلم 2',
                 'year' => '2020',
                 'overview' => 'film2film2film2film2film2film2film2film2film2film2film2film2',
                 'background_cover' => 'film_background_covers/film-bg.jpg',

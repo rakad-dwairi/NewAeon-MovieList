@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Category;
+use App\Type;
 use App\Series;
 use App\Server;
 use App\Episode;
@@ -40,6 +41,13 @@ class SeriesController extends Controller
                         ->orWhereIn('name', (array) $request->category);
                 });
             });
+            $query->when($request->type, function ($q) use ($request) {
+                return $q->whereHas('type', function ($q2) use ($request) {
+                    return $q2->whereIn('type_id', (array) $request->type)
+                        ->orWhereIn('name', (array) $request->type);
+                });
+            });
+
             $query->when($request->favorite, function ($q) use ($request) {
                 return $q->whereHas('favorites', function ($q2) use ($request) {
                     return $q2->whereIn('user_id', (array) $request->favorite);
@@ -47,8 +55,9 @@ class SeriesController extends Controller
             });
         })->with('categories')->with('ratings')->latest()->paginate(10);
         $categories = Category::all();
+        $types = Type::all();
 
-        return view('dashboard.series.index', compact('series', 'categories'));
+        return view('dashboard.series.index', compact('series', 'types','categories'));
     }
 
     /**
@@ -59,7 +68,8 @@ class SeriesController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('dashboard.series.create', compact('categories'));
+        $types = Type::all();
+        return view('dashboard.series.create', compact('categories','types'));
     }
 
     /**
@@ -79,6 +89,7 @@ class SeriesController extends Controller
             'background_cover' => 'required|image',
             'poster' => 'required|image',
             'categories' => 'required|array|max:3|exists:categories,id',
+            'type' => 'required|array|max:3|exists:type,id',
         ]);
 
         $img = $request->background_cover->store('public/series_background_covers');
@@ -97,6 +108,7 @@ class SeriesController extends Controller
 
         ]);
         $film->categories()->sync($attributes['categories']);
+        $film->type()->sync($attributes['type']);
 
         session()->flash('success', 'Serie Added Successfully');
         return redirect()->route('dashboard.series.index');
@@ -124,7 +136,8 @@ class SeriesController extends Controller
     {
         $serie = Series::find($id);
         $categories = Category::all();
-        return view('dashboard.series.edit', compact('categories', 'serie'));
+        $types = Type::all();
+        return view('dashboard.series.edit', compact('categories', 'serie','types'));
     }
 
     /**
@@ -144,6 +157,7 @@ class SeriesController extends Controller
             'poster' => 'nullable|image',
             'categories' => 'required|array|max:3|exists:categories,id',
             'servers' => 'required|array|max:3|exists:servers,id',
+            'type' => 'required|array|max:3|exists:type,id',
         ]);
 
         if ($request->background_cover) {
@@ -158,6 +172,7 @@ class SeriesController extends Controller
         $serie->update($attributes);
         $serie->categories()->sync($attributes['categories']);
         $serie->servers()->sync($attributes['servers']);
+        $serie->type()->sync($attributes['type']);
 
         session()->flash('success', 'Serie Updated Successfully');
         return redirect()->route('dashboard.series.index');

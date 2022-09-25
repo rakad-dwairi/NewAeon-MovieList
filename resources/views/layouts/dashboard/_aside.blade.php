@@ -67,6 +67,19 @@
                             </ul>
                         </li>
                     @endif
+                    @if (auth()->guard('admin')->user()->hasPermission('read_type'))
+                        <li>
+                            <a href="javascript:void(0);" class="menu-toggle"><i
+                                    class="zmdi zmdi-view-list"></i><span>Types</span>
+                            </a>
+                            <ul class="ml-menu">
+                                <li><a href="{{ route('dashboard.types.index') }}">All Types</a></li>
+                                @if (auth()->guard('admin')->user()->hasPermission('create_type'))
+                                    <li><a href="{{ route('dashboard.types.create') }}">Add Types</a></li>
+                                @endif
+                            </ul>
+                        </li>
+                    @endif
                     @if (auth()->guard('admin')->user()->hasPermission('read_servers'))
                         <li>
                             <a href="javascript:void(0);" class="menu-toggle"><i

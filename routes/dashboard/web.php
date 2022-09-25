@@ -27,6 +27,7 @@ Route::group(['prefix' => 'dashboard', 'namespace' => 'Dashboard'], function () 
         ]]);
         Route::resource('actors', 'ActorController');
         Route::resource('categories', 'CategoryController')->except(['show']);
+        Route::resource('types', 'TypeController')->except(['show']);
         Route::resource('servers', 'ServersController')->except(['show']);
         Route::resource('ratings', 'RatingController')->only(['index', 'destroy']);
         Route::resource('reviews', 'ReviewController')->only(['index', 'destroy']);

@@ -80,6 +80,7 @@
                                     </div>
 
 
+
                                 </div>
                                 <button type="submit" class="btn btn-primary">Search</button>
                             </form>
@@ -95,6 +96,7 @@
                                                 <th>Rating</th>
                                                 <th>Overview</th>
                                                 <th>Categories</th>
+                                                <th>Film Type</th>
                                                 <th>Servers</th>
                                                 <th>Actions</th>
                                             </tr>
@@ -126,6 +128,11 @@
                                                     <td>
                                                         @foreach ($film->categories as $category)
                                                             <span class="badge badge-info">{{ $category->name }}</span>
+                                                        @endforeach
+                                                    </td>
+                                                    <td>
+                                                        @foreach ($film->type as $type)
+                                                            <span class="badge badge-info">{{ $type->name }}</span>
                                                         @endforeach
                                                     </td>
                                                     <td>

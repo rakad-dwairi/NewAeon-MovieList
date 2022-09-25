@@ -38,6 +38,11 @@ class Series extends Model
         return $this->belongsToMany(Category::class, 'series_category');
     }
 
+    public function type()
+    {
+        return $this->belongsToMany(Type::class, 'series_type');
+    }
+
     public function actors()
     {
         return $this->belongsToMany(Actor::class, 'series_actor');

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFilmsTable extends Migration
+class CreateTypeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,13 @@ class CreateFilmsTable extends Migration
      */
     public function up()
     {
-        Schema::create('films', function (Blueprint $table) {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+        Schema::create('type', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->string('arname')->unique();
-            $table->string('year');
-            $table->text('overview');
-            $table->text('background_cover');
-            $table->text('poster');
-            $table->text('url');
-            $table->text('api_url');
             $table->timestamps();
         });
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
     }
 
     /**
@@ -34,6 +29,6 @@ class CreateFilmsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('films');
+        Schema::dropIfExists('type');
     }
 }
