@@ -1,11 +1,17 @@
 <?php
 
+use App\Http\Controllers\LanguageController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+
+Route::get('/lang/{lang}', [LanguageController::class, 'lang']);
 
 Auth::routes(['reset' => FALSE]);
 Route::any('logout', 'Auth\LoginController@logout')->name('logout');
 
-Route::get('/', 'HomeController@index');
+Route::group(['middleware' => 'lang'], function () {
+    Route::get('/', 'HomeController@index');
+});
 Route::get('/search', 'HomeController@search');
 Route::post('/message', 'HomeController@message');
 
@@ -17,7 +23,7 @@ Route::get('/episodes/{episode}', 'SeriesController@episodeshow');
 Route::get('/ads', 'GoogleAdsController@index');
 Route::get('/movies/adv', 'MovieController@ads');
 
-Route::get('lang/{lang}',[ 'as'=>'lang.switch', 'uses'=>'LanguageContoller@switchLang']);
+
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/user/profile', 'ClientController@profile');

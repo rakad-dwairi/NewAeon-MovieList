@@ -72,6 +72,7 @@ class FilmController extends Controller
     {
         $attributes = $request->validate([
             'name' => 'required|string|max:50|min:1|unique:films',
+            'arname' => 'required|string|max:50|min:1|unique:films',
             'year' => 'required|string|max:4|min:4',
             'overview' => 'required|string',
             'background_cover' => 'required|image',
@@ -89,6 +90,7 @@ class FilmController extends Controller
 
         $film = Film::create([
             'name' => $attributes['name'],
+            'arname' => $attributes['arname'],
             'year' => $attributes['year'],
             'overview' => $attributes['overview'],
             'background_cover' => $attributes['background_cover'],

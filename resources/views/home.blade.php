@@ -23,7 +23,11 @@
                                         <span class="blue"><a href="#">{{ $category->name }}</a></span>
                                     @endforeach
                                 </div>
-                                <h6><a href="#">{{ $film->name }}</a></h6>
+                                @if(app()->getLocale() == 'ar')
+                                    <h6><a href="#">{{ $film->arname }}</a></h6>
+                                @else
+                                 <h6><a href="#">{{ $film->name }}</a></h6>
+                                @endif
                                 <p><i class="ion-android-star"></i><span>{{ $film->ratings->avg('rating') ?? 0 }}</span>
                                     /10</p>
                             </div>

@@ -9,11 +9,9 @@ use Illuminate\Support\Facades\Config;
 
 class LanguageController extends Controller
 {
-    public function switchLang($lang)
-    {
-        if(array_key_exists($lang, Config::get('languages'))){
-            Session::put('applocale',$lang);
-        }
-        return Redirect::back();
+    public function lang(Request $request) {
+        session()->put('lang', $request->lang);
+        return  redirect()->back();
     }
+
 }

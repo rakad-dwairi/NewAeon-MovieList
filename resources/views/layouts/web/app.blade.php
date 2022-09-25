@@ -71,12 +71,12 @@
                         </li>
                         <li class="dropdown first">
                             <a class="btn btn-default lv1" href="/">
-                                Home
+                                {{ __('default.home')}}
                             </a>
                         </li>
                         <li class="dropdown first">
                             <a class="btn btn-default lv1" href="/movies">
-                                movies
+                                {{ __('default.movies')}}
                             </a>
                         </li>
                         <li class="dropdown first">
@@ -91,19 +91,16 @@
                         </li>
 
 
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navBarDropdownMenuLink"
-                                data-toggle="dropdown">
-                                {{ Config::get('languages')[App::getLocale()] }}
+                        <li class="dropdown first">
+                            @if(app()->getLocale() == 'ar')
+                            <a class="btn btn-default lv1" href="lang/en">
+                                EN
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                @foreach (Config::get('languages') as $lang => $language)
-                                    @if ($lang != App::getLocale())
-                                        <a class="dropdown-item"
-                                            href="{{ route('lang.switch',$lang) }}">{{ $language }}</a>
-                                    @endif
-                                @endforeach
-                            </div>
+                            @else
+                            <a class="btn btn-default lv1" href="lang/ar">
+                                AR
+                            </a>
+                            @endif
                         </li>
                     </ul>
                     <ul class="nav navbar-nav flex-child-menu menu-right">
