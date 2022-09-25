@@ -45,14 +45,14 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <input type="text" name="name" class="form-control" placeholder="Name"
-                                                value="{{ old('name', '') }}">
+                                                value="{{ old('name', '') }}" required>
                                             <span style="color: red; margin-left: 10px">{{ $errors->first('name') }}</span>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <input type="text" name="year" class="form-control" placeholder="Year"
-                                                value="{{ old('year', '') }}">
+                                                value="{{ old('year', '') }}" required>
                                             <span style="color: red;margin-left: 10px">{{ $errors->first('year') }}</span>
                                         </div>
                                     </div>
@@ -66,13 +66,13 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <input type="text" class="form-control" placeholder="Name"
-                                                    value="{{ $server->name }}" disabled>
+                                                    value="{{ $server->name }}" disabled >
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <input type="text" name="server_url[{{ $server->id }}]"
-                                                    class="form-control" placeholder="url">
+                                                    class="form-control" placeholder="url" required>
                                             </div>
                                         </div>
                                     </div>
@@ -82,7 +82,7 @@
                                 <div class="row clearfix">
                                     <div class="col-sm-12">
                                         <select class="form-control z-index show-tick" name="categories[]"
-                                            data-live-search="true" multiple>
+                                            data-live-search="true" multiple required>
                                             <option selected disabled>- Select Categories -</option>
                                             @foreach ($categories as $category)
                                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -93,6 +93,20 @@
                                     </div>
                                 </div>
                                 <br>
+                                <div class="row clearfix">
+                                    <div class="col-sm-12">
+                                        <select class="form-control z-index show-tick" name="type[]"
+                                            data-live-search="true" multiple required>
+                                            <option selected disabled>- Select Type -</option>
+                                            @foreach ($types as $type)
+                                                <option value="{{ $type->id }}">{{ $type->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        <span
+                                            style="color: red;margin-left: 10px">{{ $errors->first('type') }}</span>
+                                    </div>
+                                </div>
+                                <br>
 
 
                                 <br>
@@ -101,7 +115,7 @@
                                 <div class="row clearfix">
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <textarea name="overview" rows="4" class="form-control no-resize" placeholder="Film Overview">{{ old('overview', '') }}</textarea>
+                                            <textarea name="overview" rows="4" class="form-control no-resize" placeholder="Film Overview" required>{{ old('overview', '') }}</textarea>
                                             <span
                                                 style="color: red; margin-left: 10px">{{ $errors->first('overview') }}</span>
                                         </div>
@@ -110,7 +124,7 @@
                                 <div class="row clearfix">
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <textarea name="url" rows="4" class="form-control no-resize" placeholder="Embed Code From JWPlayer Server">{{ old('url', '') }}</textarea>
+                                            <textarea name="url" rows="4" class="form-control no-resize" placeholder="Embed Code From JWPlayer Server" required>{{ old('url', '') }}</textarea>
                                             <span style="color: red; margin-left: 10px">{{ $errors->first('url') }}</span>
                                         </div>
                                     </div>
@@ -118,7 +132,7 @@
                                 <div class="row clearfix">
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <textarea name="api_url" rows="4" class="form-control no-resize" placeholder="API URL">{{ old('api_url', '') }}</textarea>
+                                            <textarea name="api_url" rows="4" class="form-control no-resize" placeholder="API URL" required>{{ old('api_url', '') }}</textarea>
                                             <span
                                                 style="color: red; margin-left: 10px">{{ $errors->first('api_url') }}</span>
                                         </div>
@@ -139,7 +153,7 @@
                                                 <span class="fileinput-new"> Select Film Background_Cover </span>
                                                 <span class="fileinput-exists"> Change </span>
                                                 <input type="file" name="background_cover"
-                                                    value="{{ old('background_cover', '') }}">
+                                                    value="{{ old('background_cover', '') }}" required>
                                             </span>
                                             <a href="" class="btn btn-danger fileinput-exists"
                                                 data-dismiss="fileinput">
@@ -164,7 +178,7 @@
                                             <span class="btn btn-dark btn-file">
                                                 <span class="fileinput-new"> Select Film Poster </span>
                                                 <span class="fileinput-exists"> Change </span>
-                                                <input type="file" name="poster" value="{{ old('poster', '') }}">
+                                                <input type="file" name="poster" value="{{ old('poster', '') }}" required>
                                             </span>
                                             <a href="" class="btn btn-danger fileinput-exists"
                                                 data-dismiss="fileinput">

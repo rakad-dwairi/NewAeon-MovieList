@@ -110,6 +110,23 @@
                                 </div>
                                 <br>
 
+                                <div class="row clearfix">
+                                    <div class="col-sm-12">
+                                        <select class="form-control show-tick" name="type[]" multiple>
+                                            <option selected disabled>- Film Type -</option>
+                                            @foreach ($types as $type)
+                                                <option value="{{ $type->id }}"
+                                                    {{ in_array($type->id, $film->type->pluck('id')->toArray()) ? 'selected' : '' }}>
+                                                    {{ $type->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        <span
+                                            style="color: red;margin-left: 10px">{{ $errors->first('type') }}</span>
+                                    </div>
+                                </div>
+                                <br>
+
 
                                 <br>
 

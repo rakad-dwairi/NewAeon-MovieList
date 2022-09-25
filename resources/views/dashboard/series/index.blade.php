@@ -86,6 +86,7 @@
                                                 <th>Rating</th>
                                                 <th>Overview</th>
                                                 <th>Categories</th>
+                                                <th>Series Type</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
@@ -117,6 +118,11 @@
                                                     <td>
                                                         @foreach ($serie->categories as $category)
                                                             <span class="badge badge-info">{{ $category->name }}</span>
+                                                        @endforeach
+                                                    </td>
+                                                    <td>
+                                                        @foreach ($serie->type as $type)
+                                                            <span class="badge badge-info">{{ $type->name }}</span>
                                                         @endforeach
                                                     </td>
 

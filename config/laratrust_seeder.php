@@ -20,6 +20,7 @@ return [
             'seasons' => 'c,r,u,d',
             'episodes' => 'c,r,u,d',
             'categories' => 'c,r,u,d',
+            'type' => 'c,r,u,d',
             'servers' => 'c,r,u,d',
             'actors' => 'c,r,u,d',
             'ratings' => 'r,d',

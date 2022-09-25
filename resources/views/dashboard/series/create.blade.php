@@ -80,6 +80,20 @@
                                     </div>
                                 </div>
                                 <br>
+                                <div class="row clearfix">
+                                    <div class="col-sm-12">
+                                        <select class="form-control z-index show-tick" name="type[]"
+                                            data-live-search="true" multiple required>
+                                            <option selected disabled>- Select Type -</option>
+                                            @foreach ($types as $type)
+                                                <option value="{{ $type->id }}">{{ $type->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        <span
+                                            style="color: red;margin-left: 10px">{{ $errors->first('type') }}</span>
+                                    </div>
+                                </div>
+                                <br>
 
 
                                 <br>
