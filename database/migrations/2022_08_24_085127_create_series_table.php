@@ -17,6 +17,7 @@ class CreateSeriesTable extends Migration
         Schema::create('series', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
+            $table->string('arname')->unique();
             $table->integer('seasons');
             $table->string('year');
             $table->text('overview');

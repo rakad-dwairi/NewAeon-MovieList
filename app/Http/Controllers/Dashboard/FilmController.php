@@ -139,6 +139,7 @@ class FilmController extends Controller
 
         $attributes = $request->validate([
             'name' => ['required', 'string', 'max:50', 'min:1', Rule::unique('films')->ignore($film)],
+            'arname' => ['required', 'string', 'max:50', 'min:1', Rule::unique('films')->ignore($film)],
             'year' => 'required|string|max:4|min:4',
             'overview' => 'required|string',
             'background_cover' => 'nullable|image',

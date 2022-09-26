@@ -12,6 +12,7 @@ Route::any('logout', 'Auth\LoginController@logout')->name('logout');
 Route::group(['middleware' => 'lang'], function () {
     Route::get('/', 'HomeController@index');
 });
+
 Route::get('/search', 'HomeController@search');
 Route::post('/message', 'HomeController@message');
 
@@ -22,6 +23,8 @@ Route::get('/series/{serie}', 'SeriesController@show');
 Route::get('/episodes/{episode}', 'SeriesController@episodeshow');
 Route::get('/ads', 'GoogleAdsController@index');
 Route::get('/movies/adv', 'MovieController@ads');
+Route::get('/actors', 'ActorController@index');
+Route::get('/actors/{actor:name}', 'ActorController@show');
 
 
 

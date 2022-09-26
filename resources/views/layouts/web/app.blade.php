@@ -81,12 +81,12 @@
                         </li>
                         <li class="dropdown first">
                             <a class="btn btn-default lv1" href="/series">
-                                series
+                                {{ __('default.series')}}
                             </a>
                         </li>
                         <li class="dropdown first">
                             <a class="btn btn-default lv1" href="#contact_us">
-                                contact us
+                                {{ __('default.contact us')}}
                             </a>
                         </li>
 
@@ -112,16 +112,16 @@
                                     {{ auth()->user()->username }} &ensp;<i aria-hidden="true" class="fa fa-angle-down"></i>
                                 </a>
                                 <ul class="dropdown-menu level1" style="background-color: #020d18;">
-                                    <li class="menu-hover"><a href="{{ url('user/profile') }}">Profile</a></li>
-                                    <li class="menu-hover"><a href="{{ url('user/favorites') }}">My Favorites List</a></li>
-                                    <li class="menu-hover"><a href="{{ url('user/ratings') }}">My Rates</a></li>
-                                    <li class="menu-hover"><a href="{{ url('user/reviews') }}">My Reviews</a></li>
+                                    <li class="menu-hover"><a href="{{ url('user/profile') }}">{{ __('default.profile')}}</a></li>
+                                    <li class="menu-hover"><a href="{{ url('user/favorites') }}">{{ __('default.my favorite list')}}</a></li></a></li>
+                                    <li class="menu-hover"><a href="{{ url('user/ratings') }}">{{ __('default.my rates')}}</a></li></a></li>
+                                    <li class="menu-hover"><a href="{{ url('user/reviews') }}">{{ __('default.my reviews')}}</a></li>
                                 </ul>
                             </li>
-                            <li class="btn signupLink"><a href="{{ route('logout') }}">Log Out</a></li>
+                            <li class="btn signupLink"><a href="{{ route('logout') }}">{{ __('default.logout')}}</a></li>
                         @else
-                            <li class="loginLink"><a href="{{ route('login') }}">LOG In</a></li>
-                            <li class="btn signupLink"><a href="{{ route('register') }}">sign up</a></li>
+                            <li class="loginLink"><a href="{{ route('login') }}">{{ __('default.login')}}</a></li>
+                            <li class="btn signupLink"><a href="{{ route('register') }}">{{ __('default.sign up')}}</a></li>
                         @endauth
                     </ul>
                 </div>
@@ -130,17 +130,17 @@
             <!-- top search form -->
             <div class="top-search">
                 <form action="/search" method="GET">
-                    <select name="search_category">
+                    {{-- <select name="search_category">
                         <option {{ request()->search_category == 'movies' ? 'selected' : '' }} value="movies">Movies
                         </option>
                         <option {{ request()->search_category == 'actors' ? 'selected' : '' }} value="actors">Actors
                         </option>
-                    </select>
+                    </select> --}}
                     <input name="search" value="{{ request()->search }}"
                         placeholder="Search for a movie, TV Show or celebrity that you are looking for"
                         type="text">
                     <button type="submit"
-                        style="background-color: #dd003f!important; color: white; font-weight: bold; padding: 11px 25px">Search</button>
+                        style="background-color: #dd003f!important; color: white; font-weight: bold; padding: 11px 25px">{{ __('default.Search')}}</button>
                 </form>
             </div>
         </div>
@@ -165,7 +165,7 @@
                     <div class="flex-child-ft item1">
                         <div class="blog-detail-ct">
                             <div class="comment-form">
-                                <h4>Contact us <i class="ion-paper-airplane"></i></h4>
+                                <h4>{{ __('default.Contact us')}} <i class="ion-paper-airplane"></i></h4>
                                 <form action="{{ url('message') }}" method="POST">
                                     @csrf
                                     @error('email')
@@ -192,7 +192,7 @@
                                     @enderror
                                     <textarea name="message" id="" placeholder="Message" style="margin: 0px 0px 30px; resize: none" required></textarea>
 
-                                    <button class="submit" type="submit"> Send</button>
+                                    <button class="submit" type="submit"> {{ __('default.Send')}}</button>
                                 </form>
                             </div>
                         </div>
@@ -234,7 +234,7 @@
         function hil() {
             $('#divpa').hide();
         }
-        var timeleft = 10;
+        var timeleft = 1;
         var downloadTimer = setInterval(function() {
             if (timeleft <= 0) {
                 clearInterval(downloadTimer);

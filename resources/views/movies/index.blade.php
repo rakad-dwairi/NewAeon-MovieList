@@ -12,11 +12,11 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="hero-ct">
-                        <h1> movies <span> {{ request()->search ? ' : " ' . request()->search . ' "' : '' }}
+                        <h1> {{ __('default.movies')}} <span> {{ request()->search ? ' : " ' . request()->search . ' "' : '' }}
                                 {{ request()->category ? ' : " ' . request()->category . ' "' : '' }}</span></h1>
                         <ul class="breadcumb">
-                            <li class="active"><a href="/">Home</a></li>
-                            <li><span class="ion-ios-arrow-right"></span> movie listing</li>
+                            <li class="active"><a href="/">{{ __('default.home')}}</a></li>
+                            <li><span class="ion-ios-arrow-right"></span>{{ __('default.movie listing')}}</li>
                         </ul>
                     </div>
                 </div>
@@ -36,7 +36,7 @@
 
                                 <img src="{{ $film->poster }}" style="height: 260px" alt="">
                                 <div class="hvr-inner">
-                                    <a href="{{ url('movies/' . $film->id) }}"> SHOW <i
+                                    <a href="{{ url('movies/' . $film->id) }}"> {{ __('default.Show')}} <i
                                             class="ion-android-arrow-dropright"></i> </a>
                                 </div>
                                 <div class="mv-item-infor">

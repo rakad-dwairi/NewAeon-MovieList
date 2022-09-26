@@ -83,6 +83,7 @@ class SeriesController extends Controller
 
         $attributes = $request->validate([
             'name' => 'required|string|max:50|min:1|unique:series',
+            'arname' => 'required|string|max:50|min:1|unique:series',
             'seasons' => 'required|numeric',
             'year' => 'required|string|max:4|min:4',
             'overview' => 'required|string',
@@ -99,6 +100,7 @@ class SeriesController extends Controller
 
         $film = Series::create([
             'name' => $attributes['name'],
+            'arname' => $attributes['arname'],
             'year' => $attributes['year'],
             'seasons' => $attributes['seasons'],
             'overview' => $attributes['overview'],
@@ -151,6 +153,7 @@ class SeriesController extends Controller
     {
         $attributes = $request->validate([
             'name' => ['required', 'string', 'max:50', 'min:1', Rule::unique('series')->ignore($serie)],
+            'arname' => ['required', 'string', 'max:50', 'min:1', Rule::unique('series')->ignore($serie)],
             'year' => 'required|string|max:4|min:4',
             'overview' => 'required|string',
             'background_cover' => 'nullable|image',

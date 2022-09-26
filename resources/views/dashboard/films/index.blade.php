@@ -92,6 +92,7 @@
                                             <tr>
                                                 <th>Poster</th>
                                                 <th>Name</th>
+                                                <th>Arabic Name</th>
                                                 <th>Year</th>
                                                 <th>Rating</th>
                                                 <th>Overview</th>
@@ -111,6 +112,7 @@
                                                         </span>
                                                     </td>
                                                     <td><span class="list-name">{{ $film->name }}</span></td>
+                                                    <td><span class="list-name">{{ $film->arname }}</span></td>
                                                     <td>{{ $film->year }}</td>
                                                     <td>
                                                         <i class="zmdi zmdi-star"></i> {{ $film->ratings->avg('rating') }}

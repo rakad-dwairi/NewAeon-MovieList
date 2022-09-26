@@ -40,11 +40,13 @@ class CategoryController extends Controller
     {
         //
         $attributes = $request->validate([
-            'name' => 'required|string|unique:categories'
+            'name' => 'required|string|unique:categories',
+            'arname' => 'required|string|unique:categories'
         ]);
 
         $category = Category::create([
             'name' => $attributes['name'],
+            'arname' => $attributes['arname'],
         ]);
 
         session()->flash('success', 'Category Added Successfully');
@@ -64,7 +66,8 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         $attributes = $request->validate([
-            'name' => ['required', 'string', Rule::unique('categories')->ignore($category)]
+            'name' => ['required', 'string', Rule::unique('categories')->ignore($category)],
+            'arname' => ['required', 'string', Rule::unique('categories')->ignore($category)]
         ]);
 
         $category->update($attributes);

@@ -52,6 +52,13 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
+                                            <input type="text" name="arname" class="form-control" placeholder="Arabic Name"
+                                                value="{{ $film->arname }}">
+                                            <span style="color: red; margin-left: 10px">{{ $errors->first('arname') }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
                                             <input type="text" name="year" class="form-control" placeholder="Year"
                                                 value="{{ $film->year }}">
                                             <span style="color: red;margin-left: 10px">{{ $errors->first('year') }}</span>

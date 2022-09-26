@@ -64,6 +64,7 @@
                                         <thead>
                                             <tr>
                                                 <th>Name</th>
+                                                <th>Arabic Name</th>
                                                 <th>Relations</th>
                                                 <th>Actions</th>
                                             </tr>
@@ -72,6 +73,7 @@
                                             @forelse($categories as $category)
                                                 <tr>
                                                     <td><span class="list-name">{{ $category->name }}</span></td>
+                                                    <td><span class="list-name">{{ $category->arname }}</span></td>
                                                     <td>
                                                         <a href="{{ route('dashboard.films.index', ['category' => $category->id]) }}"
                                                             class="btn btn-info btn-sm">Films</a>

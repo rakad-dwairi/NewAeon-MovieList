@@ -2,6 +2,19 @@
 @section('content')
     @push('style')
         <style rel="stylesheet">
+            .serverButton
+            {
+                background-color: #685e5e;
+                border: none;
+                color: white;
+                padding: 13px 60px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 10px 30px 20px 20px;
+                border-radius: 8px;
+            }
             li.active {
                 color: yellow;
             }
@@ -77,17 +90,22 @@
                 </div>
                 <div class="col-md-9 col-sm-12 col-xs-12">
                     <div class="movie-single-ct main-content">
+                        @if (app()->getLocale() == 'ar')
+                            <h1 class="bd-hd">{{ $film->arname }} <span>{{ $film->year }}</span></h1>
+                        @else
                         <h1 class="bd-hd">{{ $film->name }} <span>{{ $film->year }}</span></h1>
+                        @endif
+                        
                         <div class="social-btn favorite_div">
                             @if (!$film->isInfavorite(auth()->user()))
                                 <a class="parent-btn add_to_favorite" data-value="{{ $film->id }}"
                                     href="javascript:void(0);">
-                                    <i class="ion-ios-heart-outline"></i>Add to Favorite
+                                    <i class="ion-ios-heart-outline"></i>{{ __('default.Add to Favorite') }}
                                 </a>
                             @else
                                 <a class="parent-btn remove_from_favorite" data-value="{{ $film->id }}"
                                     href="javascript:void(0);">
-                                    <i class="ion-ios-heart"></i>Remove From Favorite
+                                    <i class="ion-ios-heart"></i>{{ __('default.Remove From Favorite') }}
                                 </a>
                             @endif
 
@@ -96,11 +114,12 @@
                             <div class="rate">
                                 <i class="ion-android-star"></i>
                                 <p><span class="movie_rating">{{ $film->ratings->avg('rating') ?? 0 }}</span> /10<br>
-                                    <span class="rv movie_reviews">{{ $film->ratings->count() }} Reviews</span>
+                                    <span class="rv movie_reviews">{{ $film->ratings->count() }}
+                                        {{ __('default.Reviews') }}</span>
                                 </p>
                             </div>
                             <div class="rate-star">
-                                <p>Rate This Movie: </p>
+                                <p>{{ __('default.Rate This Movie') }}: </p>
                                 <form class="rating">
                                     @php
                                         $userrate = 0;
@@ -216,10 +235,12 @@
                         <div class="movie-tabs">
                             <div class="tabs">
                                 <ul class="tab-links tabs-mv" style="margin-top: 30px">
-                                    <li class="active"><a onclick="window.open('/ads')" href="#overview">Overview &
-                                            Play</a></li>
-                                    <li><a onclick="window.open('/ads')" href="#reviews"> Reviews</a></li>
-                                    <li><a onclick="window.open('/ads')" href="#actor"> Actor </a></li>
+                                    <li class="active"><a onclick="window.open('/ads')"
+                                            href="#overview">{{ __('default.Overview & Play') }}</a></li>
+                                    <li><a onclick="window.open('/ads')" href="#reviews"> {{ __('default.Reviews') }}</a>
+                                    </li>
+                                    <li><a onclick="window.open('/ads')" href="#actor"> {{ __('default.Actor') }} </a>
+                                    </li>
                                 </ul>
 
                                 <div class="tab-content">
@@ -229,11 +250,12 @@
                                                 <p>{{ $film->overview }}</p>
                                                 <hr style="background-color: #405266">
                                                 <br>
-
+                                                <div class="row">
                                                 @foreach ($film->servers as $server)
-                                                    <button type="submit" class="btn" id="embd_url_"
+                                                    <button type="submit" class="btn serverButton" id="embd_url_"
                                                         onclick="set_url1({{ $server->id }})">{{ $server->name }}</button>
                                                 @endforeach
+                                            </div>
                                                 <div id='display'>
                                                     @foreach ($servers as $s)
                                                         @if ($loop->first)
@@ -266,12 +288,16 @@
                                         <div class="row">
                                             <div class="rv-hd">
                                                 <div class="div">
-                                                    <h3>Related Movies To</h3>
-                                                    <h2>{{ $film->name }}</h2>
+                                                    <h3>{{ __('default.Related Movies To') }}</h3>
+
+                                                    @if (app()->getLocale() == 'ar')
+                                                        <h2>{{ $film->arname }}</h2>
+                                                    @else
+                                                        <h2>{{ $film->name }}</h2>
+                                                    @endif
                                                 </div>
                                                 <a class="redbtn write_review" href="#write_review"
-                                                    style="margin-right: 20px">Write
-                                                    Review</a>
+                                                    style="margin-right: 20px">{{ __('default.Write Review') }}</a>
                                             </div>
                                             <div class="topbar-filter">
                                                 <p>Found <span>{{ $film->reviews->count() }} reviews</span> in total</p>
@@ -309,7 +335,7 @@
                                         {{ $reviews->appends(request()->query())->links() }}
                                         <div class="blog-detail-ct" id="write_review">
                                             <div class="comment-form" style="padding-top: 75px!important;">
-                                                <h4>Write a review</h4>
+                                                <h4>{{ __('default.Write Review') }}</h4>
                                                 <form action="{{ url('user/review/' . $film->id) }}" method="POST">
                                                     @csrf
                                                     <div class="row">
@@ -343,7 +369,7 @@
                                     <div class="tab" id="actor">
                                         <div class="row">
                                             <div class="title-hd-sm">
-                                                <h4>Actor</h4>
+                                                <h4>{{ __('default.Actor') }}</h4>
                                             </div>
                                             <div class="mvcast-item">
                                             </div>

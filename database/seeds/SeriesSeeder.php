@@ -15,6 +15,7 @@ class SeriesSeeder extends Seeder
         $series = [
             [
                 'name' => 'Lucifer',
+                'arname'=>'لوسيفر',
                 'seasons' => '3',
                 'year' => '2019',
                 'overview' => 'film1film1film1film1film1film1film1film1film1film1film1film1',
@@ -23,6 +24,7 @@ class SeriesSeeder extends Seeder
                 ],
             [
                 'name' => 'Breaking Bad',
+                'arname' => 'بريكينج باد',
                 'seasons' => '2',
                 'year' => '2020',
                 'overview' => 'film2film2film2film2film2film2film2film2film2film2film2film2',
@@ -31,6 +33,7 @@ class SeriesSeeder extends Seeder
             ],
             [
                 'name' => 'Brooklyn 99',
+                'arname'=>'بروكلين 99',
                 'seasons' => '1',
                 'year' => '2020',
                 'overview' => 'film2film2film2film2film2film2film2film2film2film2film2film2',
