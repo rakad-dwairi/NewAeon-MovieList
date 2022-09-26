@@ -14,7 +14,7 @@
         <div class="row ipad-width">
             <div class="col-md-4 col-sm-12 col-xs-12">
                 <div class="mv-ceb">
-                    <img alt="" src="{{$actor->avatar}}" style="height: 475px">
+                    {{-- <img alt="" src="{{$actor->avatar}}" style="height: 475px"> --}}
                 </div>
             </div>
             <div class="col-md-8 col-sm-12 col-xs-12">

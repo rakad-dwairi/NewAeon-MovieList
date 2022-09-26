@@ -13,9 +13,21 @@ class TypeSeeder extends Seeder
     {
         //
         $types = [
-            ['name' => 'Arabic'],
-            ['name' => 'English'],
-            ['name' => 'Turkey'],
+            [
+                'name' => 'Arabic',
+                'arname' => 'عربي'
+
+            ],
+            [
+                'name' => 'English',
+                'arname' => 'انجليزي'
+
+            ],
+            [
+                'name' => 'Turkey',
+                'arname' => 'تركي'
+
+            ],
         ];
 
         foreach ($types as $type) {

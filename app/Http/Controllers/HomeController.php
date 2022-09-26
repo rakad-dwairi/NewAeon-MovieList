@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Actor;
+use App\Type;
 use App\Category;
 use App\Film;
 use App\Series;
@@ -32,9 +33,10 @@ class HomeController extends Controller
         $sliderSeries = Series::with('categories')->limit(10)->latest()->get();
         $categoryFilms = Category::with('films')->get();
         $categorySeries = Category::with('series')->get();
+        $filmsType = Type::with('films')->get();
 
 
-        return view('home', compact('sliderFilms', 'categoryFilms', 'sliderSeries', 'categorySeries'));
+        return view('home', compact('sliderFilms', 'categoryFilms', 'sliderSeries', 'categorySeries','filmsType'));
     }
 
     public function search(Request $request)
@@ -52,6 +54,10 @@ class HomeController extends Controller
                 $actors = Actor::where('name', 'like', '%' . $request->search . '%')->paginate(10);
                 return view('actors.index', compact('actors'));
                 break;
+                case 'type':
+                    $type = Type::where('name', 'like', '%' . $request->search . '%')->paginate(10);
+                    return view('actors.index', compact('type'));
+                    break;
             default:
                 return redirect()->back();
         }

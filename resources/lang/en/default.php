@@ -41,6 +41,7 @@ return [
     'Sports' => 'Sports',
     'Thriller' => 'Thriller',
     'View all'=>'View all',
+    'Categories' => 'Categories'
 
 
 

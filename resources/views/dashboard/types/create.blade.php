@@ -43,9 +43,16 @@
                                 <div class="row clearfix">
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <input type="text" name="name" class="form-control" placeholder="Name"
+                                            <input type="text" name="name" class="form-control" placeholder="English Name Type"
                                                 value="{{ old('name', '') }}">
                                             <span style="color: red; margin-left: 10px">{{ $errors->first('name') }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <input type="text" name="arname" class="form-control" placeholder="Arabic Name Type"
+                                                value="{{ old('arname', '') }}">
+                                            <span style="color: red; margin-left: 10px">{{ $errors->first('arname') }}</span>
                                         </div>
                                     </div>
                                 </div>

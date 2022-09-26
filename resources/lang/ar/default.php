@@ -40,6 +40,7 @@ return [
     'Sports' => 'الرياضة',
     'Thriller' => 'الإثارة',
     'View all'=>'مشاهدة الكل',
+    'Categories' =>'فئات',
 
 
 

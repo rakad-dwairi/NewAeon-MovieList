@@ -17,6 +17,7 @@ class CreateTypeTable extends Migration
         Schema::create('type', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
+            $table->string('arname')->unique();
             $table->timestamps();
         });
         DB::statement('SET FOREIGN_KEY_CHECKS=1');

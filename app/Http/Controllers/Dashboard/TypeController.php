@@ -39,11 +39,13 @@ class TypeController extends Controller
     {
         //
         $attributes = $request->validate([
-            'name' => 'required|string|unique:type'
+            'name' => 'required|string|unique:type',
+            'arname' => 'required|string|unique:type'
         ]);
 
         $types = Type::create([
             'name' => $attributes['name'],
+            'arname' => $attributes['arname'],
         ]);
 
         session()->flash('success', 'Type Added Successfully');
@@ -63,7 +65,8 @@ class TypeController extends Controller
     public function update(Request $request, Type $type)
     {
         $attributes = $request->validate([
-            'name' => ['required', 'string', Rule::unique('type')->ignore($type)]
+            'name' => ['required', 'string', Rule::unique('type')->ignore($type)],
+            'arname' => ['required', 'string', Rule::unique('type')->ignore($type)]
         ]);
 
         $type->update($attributes);

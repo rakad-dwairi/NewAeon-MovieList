@@ -64,6 +64,7 @@
                                         <thead>
                                             <tr>
                                                 <th>Name</th>
+                                                <th>Arabic Name</th>
                                                 <th>Relations</th>
                                                 <th>Actions</th>
                                             </tr>
@@ -72,6 +73,7 @@
                                             @forelse($types as $type)
                                                 <tr>
                                                     <td><span class="list-name">{{ $type->name }}</span></td>
+                                                    <td><span class="list-name">{{ $type->arname }}</span></td>
                                                     <td>
                                                         <a href="{{ route('dashboard.films.index', ['type' => $type->id]) }}"
                                                             class="btn btn-info btn-sm">Films</a>

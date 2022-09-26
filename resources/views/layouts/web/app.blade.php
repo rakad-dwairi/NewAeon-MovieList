@@ -89,6 +89,20 @@
                                 {{ __('default.contact us')}}
                             </a>
                         </li>
+                        <li class="dropdown first">
+							<a class="btn btn-default dropdown-toggle lv1" href="/actors">
+                                {{ __('default.Categories') }}
+							</a>
+							{{-- <ul class="dropdown-menu level1">
+                                @foreach ($filmsType as $film)
+                                @if(app()->getLocale() == 'ar')
+                                <li><a href="{{url('actors/' . $film->name)}}">{{$film->arname}}</a></li>
+                                @else
+                                <li><a href="{{url('actors/' . $film->name)}}">{{$film->name}}</a></li>
+                                @endif
+                                @endforeach
+							</ul> --}}
+						</li>
 
 
                         <li class="dropdown first">
