@@ -49,12 +49,12 @@
         </div>
         <div class="container">
             <div class="login-content">
-                <h3>Login</h3>
+                <h3>{{ __('default.login')}}</h3>
                 <form action="{{ route('login') }}" method="POST">
                     @csrf
                     <div class="row">
                         <label for="email ">
-                            Email:
+                            {{ __('default.Email')}}:
                             <input id="email" name="email" placeholder="Email" required="required" type="email"
                                 value="{{ old('email', '') }}" />
                             @error('email')
@@ -66,7 +66,7 @@
                     </div>
                     <div class="row">
                         <label for="password">
-                            Password:
+                            {{ __('default.Password')}}:
                             <input id="password" name="password" placeholder="Password" required="required"
                                 type="password" />
                             @error('password')
@@ -80,12 +80,12 @@
                         <div class="remember">
                             <div>
                                 <input name="remember" type="checkbox" value="Remember me"
-                                    {{ old('remember') ? 'checked' : '' }}><span>Remember me</span>
+                                    {{ old('remember') ? 'checked' : '' }}><span>{{ __('default.Remember me')}}</span>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <button type="submit">Login</button>
+                        <button type="submit">{{ __('default.login')}}</button>
                     </div>
                 </form>
             </div>

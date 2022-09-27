@@ -41,7 +41,34 @@ return [
     'Sports' => 'Sports',
     'Thriller' => 'Thriller',
     'View all'=>'View all',
-    'Categories' => 'Categories'
+    'Categories' => 'Categories',
+
+    'Profile' => 'Profile',
+    'Favorite Movies' => 'Favorite Movies',
+    'Rated Movies' => 'Rated Movies',
+    'Reviewed Movies' => 'Reviewed Movies',
+    'Change Password' =>'Change Password',
+    'Username' => 'Username' ,
+    'First Name' => 'First Name',
+    'Last Name' => 'Last Name',
+    'Change Avatar' => ' Change Avatar',
+    'Save' => 'Save',
+    'Email'=>'Email',
+    'Password' => 'Password',
+    'Re-Type-Password' => 'Re-Type Passowrd',
+    'Remember me'=>'Remember me',
+    'Account Details'=>'Account Details',
+    'Profile details'=>'Profile details',
+    'Select image'=>'Select image',
+    'Select image'=>'Select image',
+    'Others'=>'Others',
+    'your rate'=>'Your Rate',
+    'Change' => 'Change',
+
+
+
+
+
 
 
 

@@ -13,10 +13,10 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="hero-ct">
-                        <h1>{{$user->first_name . ' ' . $user->last_name}}  profile</h1>
+                        <h1>{{$user->first_name . ' ' . $user->last_name}}  {{ __('default.Profile')}}</h1>
                         <ul class="breadcumb">
-                            <li class="active"><a href="#">Home</a></li>
-                            <li><span class="ion-ios-arrow-right"></span>Profile</li>
+                            <li class="active"><a href="#">{{ __('default.home')}}</a></li>
+                            <li><span class="ion-ios-arrow-right"></span>{{ __('default.Profile')}}</li>
                         </ul>
                     </div>
                 </div>
@@ -33,19 +33,19 @@
                                              style="width: 150px; height: 150px; border-radius: 50%"><br></a>
                         </div>
                         <div class="user-fav">
-                            <p>Account Details</p>
+                            <p>{{ __('default.Account Details')}}</p>
                             <ul>
-                                <li><a href="{{url('user/profile')}}">Profile</a></li>
-                                <li><a href="{{url('user/favorites')}}">Favorite movies</a></li>
-                                <li class="active"><a href="{{url('user/ratings')}}">Rated movies</a></li>
-                                <li><a href="{{url('user/reviews')}}">Reviewed movies</a></li>
+                                <li><a href="{{url('user/profile')}}">{{ __('default.Profile')}}</a></li>
+                                <li><a href="{{url('user/favorites')}}">{{ __('default.Favorit Movies')}}</a></li>
+                                <li class="active"><a href="{{url('user/ratings')}}">{{ __('default.Rated Movies')}}</a></li>
+                                <li><a href="{{url('user/reviews')}}">{{ __('default.Reviewed Movies')}}</a></li>
                             </ul>
                         </div>
                         <div class="user-fav">
-                            <p>Others</p>
+                            <p>{{ __('default.Others')}}</p>
                             <ul>
-                                <li><a href="{{url('user/change_password/')}}">Change password</a></li>
-                                <li><a href="{{route('logout')}}">Log out</a></li>
+                                <li><a href="{{url('user/change_password/')}}">{{ __('default.Change Password')}}</a></li>
+                                <li><a href="{{route('logout')}}">{{ __('default.logout')}}</a></li>
                             </ul>
                         </div>
                     </div>

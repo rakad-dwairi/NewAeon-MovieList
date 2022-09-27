@@ -42,6 +42,33 @@ return [
     'View all'=>'مشاهدة الكل',
     'Categories' =>'فئات',
 
+    'Profile' => 'الملف الشخصي',
+    'Favorite Movies' => 'أفلامي المفضلة',
+    'Rated Movies' => 'أفلامي المصنفة',
+    'Reviewed Movies' => 'افلامي التي تم تقيمها',
+    'Change Password' =>'تفير كلمه السر',
+    'Username' => 'اسم المستخدم' ,
+    'First Name' => 'الاسم الاول',
+    'Last Name' => 'الاسم الاخير',
+    'Change Avatar' => 'تغير الصوره الشخصيه',
+    'Save' => 'حفظ',
+    'Email' => 'الايميل',
+    'Password' => 'الكلمه السريه',
+    'Re-Type-Password' =>'اعد ادخال الكلمة السريه',
+    'Remember me'=>'تذكرنى',
+    'Account Details'=>'المعلومات الشخصيه',
+    'Profile details'=>'تفاصيل الملف الشخصي',
+    'Select image'=>'اختر صورة',
+    'Remove'=>'ازاله',
+    'Others' => 'اخرون',
+    'your rate'=>'تقيمك',
+    'Change'=>'تغير',
+
+    
+
+
+
+
 
 
 

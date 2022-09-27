@@ -134,12 +134,12 @@
     </div>
     <div class="container">
         <div class="login-content">
-            <h3>sign up</h3>
+            <h3>{{ __('default.sign up')}}</h3>
             <form action="{{ route('register') }}" method="POST">
                 @csrf
                 <div class="row">
                     <label for="username">
-                        Username:
+                        {{ __('default.Username')}}:
                         <input id="username" name="username"
                                placeholder="UserName"
                                required="required" type="text"/>
@@ -153,7 +153,7 @@
                 <div class="row">
                     <div class="col-md-6" style="padding-left: 0px;">
                         <label for="first_name">
-                            First_Name:
+                            {{ __('default.First Name')}}:
                             <input id="first_name" name="first_name"
                                    placeholder="FirstName"
                                    required="required" type="text"/>
@@ -166,7 +166,7 @@
                     </div>
                     <div class="col-md-6" style="padding-right: 0px;">
                         <label for="last_name">
-                            Last_Name:
+                            {{ __('default.Last name')}}:
                             <input id="last_name" name="last_name"
                                    placeholder="LastName"
                                    required="required" type="text"/>
@@ -181,7 +181,7 @@
 
                 <div class="row">
                     <label for="email">
-                        your email:
+                        {{ __('default.Email')}}:
                         <input id="email" name="email"
                                placeholder="Email"
                                required="required"
@@ -195,7 +195,7 @@
                 </div>
                 <div class="row">
                     <label for="password">
-                        Password:
+                        {{ __('default.Password')}}:
                         <input id="password" name="password"
                                placeholder="Password"
                                required="required"
@@ -209,7 +209,7 @@
                 </div>
                 <div class="row">
                     <label for="repassword">
-                        re-type Password:
+                        {{ __('default.Re-Type-Password')}}:
                         <input id="repassword" name="password_confirmation"
                                placeholder="Re-type Password"
                                required="required"
@@ -217,7 +217,7 @@
                     </label>
                 </div>
                 <div class="row">
-                    <button type="submit">sign up</button>
+                    <button type="submit">{{ __('default.sign up')}}</button>
                 </div>
             </form>
         </div>
