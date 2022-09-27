@@ -30,7 +30,7 @@ Route::group(['middleware' => 'lang'], function () {
 
 
 
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => ['auth','lang']], function () {
     Route::get('/user/profile', 'ClientController@profile');
     Route::put('/user/profile/{user}', 'ClientController@updateProfile');
     Route::get('/user/change_password', 'ClientController@changePasswordForm');

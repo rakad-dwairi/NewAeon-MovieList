@@ -107,11 +107,11 @@
 
                         <li class="dropdown first">
                             @if(app()->getLocale() == 'ar')
-                            <a class="btn btn-default lv1" href="lang/en">
+                            <a class="btn btn-default lv1" href="/lang/en">
                                 EN
                             </a>
                             @else
-                            <a class="btn btn-default lv1" href="lang/ar">
+                            <a class="btn btn-default lv1" href="/lang/ar">
                                 AR
                             </a>
                             @endif

@@ -1,113 +1,105 @@
 @extends('layouts.web.app')
 @section('content')
+    @push('style')
+        <style rel="stylesheet">
+            li.active {
+                color: yellow;
+            }
 
-<div class="hero hero3" style="background: url('{{$actor->background_cover}}') no-repeat">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
+            .page-item.active {
+                margin-left: 0px !important;
+            }
+
+            .parent {
+                display: flex;
+                margin-bottom: 30px;
+                padding: 20px 0;
+            }
+
+            .evenly {
+                justify-content: space-evenly;
+            }
+
+            .between {
+                justify-content: center;
+            }
+
+            .around {
+                justify-content: space-around;
+            }
+        </style>
+    @endpush
+
+    <div id="divpa"
+        style=" position:fixed; background-color:rgb(241, 234, 234); top:0; left:0; width:100%; height:100%; z-index:500; ">
+        <div class="container" style="padding-top: 13%;">
+
+
+            <div class="parent evenly">
+                <img src="{{ asset('/images/ads1.png') }}" alt="" style="width: 900px;">
+            </div>
+
+            <div class="parent between text-center">
+                <div id="countdown" class="text-center"></div>
+            </div>
+
+            <div class="parent around">
+                <img src="{{ asset('/images/ads1.png') }}" alt="" style="width: 900px;">
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="hero common-hero">
+        <div class="container">
+            <div class="row">
             </div>
         </div>
     </div>
-</div>
-<div class="page-single movie-single cebleb-single">
-    <div class="container">
-        <div class="row ipad-width">
-            <div class="col-md-4 col-sm-12 col-xs-12">
-                <div class="mv-ceb">
-                    {{-- <img alt="" src="{{$actor->avatar}}" style="height: 475px"> --}}
-                </div>
-            </div>
-            <div class="col-md-8 col-sm-12 col-xs-12">
-                <div class="movie-single-ct">
-                    <h1 class="bd-hd">{{$actor->name}}</h1>
-                    <p class="ceb-single">Actor</p>
-                    <div class="social-link cebsingle-socail">
-                        <a href="#"><i class="ion-social-facebook"></i></a>
-                        <a href="#"><i class="ion-social-twitter"></i></a>
-                        <a href="#"><i class="ion-social-googleplus"></i></a>
-                        <a href="#"><i class="ion-social-linkedin"></i></a>
-                    </div>
-                    <div class="movie-tabs">
-                        <div class="tabs">
-                            <ul class="tab-links tabs-mv">
-                                <li class="active"><a href="#overviewceb">Overview</a></li>
-                                <li><a href="#biography"> biography</a></li>
-                                <li><a href="#filmography">filmography</a></li>
-                            </ul>
-                            <div class="tab-content">
-                                <div class="tab active" id="overviewceb">
-                                    <div class="row">
-                                        <div class="col-md-8 col-sm-12 col-xs-12">
-                                            <div class="rv-hd">
-                                                <div>
-                                                    <h3>Overview of</h3>
-                                                    <h2>{{$actor->name}}</h2>
-                                                </div>
-                                            </div>
-                                            <p style="word-break: break-all">{{$actor->overview}}</p>
 
-                                        </div>
-                                        <div class="col-md-4 col-xs-12 col-sm-12">
-                                            <div class="sb-it">
-                                                <h6>Fullname: </h6>
-                                                <p>{{$actor->name}}</p>
-                                            </div>
-                                            <div class="sb-it">
-                                                <h6>Date of Birth: </h6>
-                                                <p>{{date('F d, Y',strtotime($actor->dob))}}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tab" id="biography">
-                                    <div class="row">
-                                        <div class="rv-hd">
-                                            <div>
-                                                <h3>Biography of</h3>
-                                                <h2>{{$actor->name}}</h2>
-                                            </div>
-                                        </div>
-                                        <p style="word-break: break-all">{{$actor->biography}}</p>
-                                    </div>
-                                </div>
-                                <div class="tab" id="filmography">
-                                    <div class="row">
-                                        <div class="rv-hd">
-                                            <div>
-                                                <h3>Filmography of</h3>
-                                                <h2>{{$actor->name}}</h2>
-                                            </div>
-
-                                        </div>
-                                        <div class="topbar-filter">
-                                            <p>Found <span>{{$actor->films->count()}} movies</span> in total</p>
-                                        </div>
-                                        <!-- movie cast -->
-                                        <div class="mvcast-item">
-                                            @foreach($actor->films as $film)
-                                                <div class="cast-it">
-                                                    <div class="cast-left cebleb-film">
-                                                        <img alt="" src="{{$film->poster}}" style="height: 75px">
-                                                        <div>
-                                                            <a href="{{url('movies/' . $film->id)}}">{{$film->name}} </a>
-                                                        </div>
-
-                                                    </div>
-                                                    <p>... {{$film->year}}</p>
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+    <div class="page-single" style="padding: 0 !important;">
+        <div class="container">
+            <div class="row ipad-width">
+                {{-- <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <h1>test</h1>
                         </div>
                     </div>
+                    <br>
+                </div> --}}
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="topbar-filter">
+
+                        @if (app()->getLocale() == 'ar')
+                            <h1 class="center">{{ $actor->arname }}</h1>
+                        @else
+                            {{-- <h1 class="bd-hd">{{ $film->name }} </h1> --}}
+                            <h1 class="center">{{ $actor->name }}</h1>
+                        @endif
+                    </div>
+                    <div class="flex-wrap-movielist">
+                        @foreach ($films as $film)
+                            <div class="movie-item-style-2 movie-item-style-1">
+                                <img src="{{ $film->poster }}" style="height: 260px" alt="">
+                                <div class="hvr-inner">
+                                    <a href="{{ url('movies/' . $film->id) }}"> SHOW <i
+                                            class="ion-android-arrow-dropright"></i> </a>
+                                </div>
+                                <div class="mv-item-infor">
+                                    @if (app()->getLocale() == 'ar')
+                                        <h6><a href="#">{{ $film->arname }} <span>{{ $film->year }}</span></a></h6>
+                                    @else
+                                        {{-- <h1 class="bd-hd">{{ $film->name }} </h1> --}}
+                                        <h6><a href="#">{{ $film->name }} <span>{{ $film->year }}</span></a></h6>
+                                    @endif
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-</div>
-<!-- celebrity single section-->
-
 @endsection
