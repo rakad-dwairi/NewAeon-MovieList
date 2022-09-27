@@ -248,7 +248,7 @@
         function hil() {
             $('#divpa').hide();
         }
-        var timeleft = 1;
+        var timeleft = 10;
         var downloadTimer = setInterval(function() {
             if (timeleft <= 0) {
                 clearInterval(downloadTimer);
