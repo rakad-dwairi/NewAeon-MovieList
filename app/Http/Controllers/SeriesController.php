@@ -24,7 +24,6 @@ class SeriesController extends Controller
                 });
             });
         })->latest()->paginate(10);
-        // $servers = Server::all();
         return view('showes.index', compact('series'));
     }
 
@@ -44,7 +43,6 @@ class SeriesController extends Controller
 
     public function episodeshow(Episode $episode)
     {
-        // dd($episode);
         $servers = EpisodeServer::where('episode_id', '=', $episode->id)->get();
         $availableServers = Server::all();
         return view('showes.view', compact('episode', 'availableServers', 'servers'));

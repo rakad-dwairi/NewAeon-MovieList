@@ -19,9 +19,7 @@ class ActorController extends Controller
     }
 
     public function show(Type $actor){
-        // dd($actor->id);
         $films = Film::with('type')->where('id','=',$actor->id)->get();
-        // $filmtype = FilmType::with('films')->find('id','=',$actor->id)->get();
         $fi = Film::select([
                 'films.*',
                 'film_type.*',
@@ -33,11 +31,7 @@ class ActorController extends Controller
             ->leftJoin('type','type.id','film_type.type_id')
             ->where('type.id',$actor->id)
             ->get();
-       
-        // $seasons = FilmType::with('films')->find($actor->id);
-        // dd($fi);
-        
-        // $films = Film::where('id');
+    
 
         return view('actors.show', compact('films','actor'));
     }

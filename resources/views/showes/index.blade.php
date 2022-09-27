@@ -15,8 +15,8 @@
                         <h1> Showes <span> {{ request()->search ? ' : " ' . request()->search . ' "' : '' }}
                                 {{ request()->category ? ' : " ' . request()->category . ' "' : '' }}</span></h1>
                         <ul class="breadcumb">
-                            <li class="active"><a href="/">Home</a></li>
-                            <li><span class="ion-ios-arrow-right"></span> show listing</li>
+                            <li class="active"><a href="/">{{ __('default.home') }} </a></li>
+                            <li><span class="ion-ios-arrow-right"></span> {{ __('default.show listing') }}</li>
                         </ul>
                     </div>
                 </div>
@@ -36,11 +36,16 @@
 
                                 <img src="{{ $serie->poster }}" style="height: 260px" alt="">
                                 <div class="hvr-inner">
-                                    <a href="{{ url('series/' . $serie->id) }}"> SHOW <i
+                                    <a href="{{ url('series/' . $serie->id) }}"> {{ __('default.Show') }}  <i
                                             class="ion-android-arrow-dropright"></i> </a>
                                 </div>
                                 <div class="mv-item-infor">
-                                    <h6><a href="#">{{ $serie->name }}</a></h6>
+                                    @if (app()->getLocale() == 'ar')
+                                    <h6><a href="#">{{ $serie->arname }}</a></h6>
+                                        @else
+                                        <h6><a href="#">{{ $serie->name }}</a></h6>
+                                        @endif
+                                    
                                     <p class="rate"><i
                                             class="ion-android-star"></i><span>{{ $serie->ratings->avg('rating') ?? 0 }}</span>
                                         /10</p>

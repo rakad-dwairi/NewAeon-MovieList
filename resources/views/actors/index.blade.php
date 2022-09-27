@@ -2,7 +2,7 @@
 @section('content')
     @push('style')
         <style rel="stylesheet">
-            li.active{
+            li.active {
                 color: yellow;
             }
         </style>
@@ -12,10 +12,10 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="hero-ct">
-                        <h1>actor <span> {{request()->search ? ' : " ' . request()->search . ' "' : ''}}</span></h1>
+                        <h1>actor <span> {{ request()->search ? ' : " ' . request()->search . ' "' : '' }}</span></h1>
                         <ul class="breadcumb">
-                            <li class="active"><a href="/">Home</a></li>
-                            <li><span class="ion-ios-arrow-right"></span> actor listing</li>
+                            <li class="active"><a href="/">{{ __('default.home') }}</a></li>
+                            <li><span class="ion-ios-arrow-right"></span> {{ __('default.Categories') }}</li>
                         </ul>
                     </div>
                 </div>
@@ -27,21 +27,24 @@
         <div class="container">
             <div class="row ipad-width2">
                 <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="topbar-filter">
+                    {{-- <div class="topbar-filter">
                         <p>Found <span>{{$actors->count()}} actors</span> in total</p>
-                    </div>
+                    </div> --}}
                     <div class="celebrity-items">
-                        @foreach($actors as $actor)
+                        @foreach ($actors as $actor)
                             <div class="ceb-item">
-                                <a href="{{url('actors/' . $actor->name)}}"></a>
+                                <a href="{{ url('actors/' . $actor->name) }}"></a>
                                 <div class="ceb-infor">
-                                    <h2><a href="{{url('actors/' . $actor->name)}}">{{$actor->name}}</a></h2>
-                                    <span>actor</span>
+                                    @if (app()->getLocale() == 'ar')
+                                        <h2 style="background-color: #dd003f!important; color: white; font-weight: bold; padding: 11px 25px"><a href="{{ url('actors/' . $actor->name) }}">{{ $actor->arname }}</a></h2>
+                                    @else
+                                        <h2 style="background-color: #dd003f!important; color: white; font-weight: bold; padding: 11px 25px"><a href="{{ url('actors/' . $actor->name) }}">{{ $actor->name }}</a></h2>
+                                    @endif
                                 </div>
                             </div>
                         @endforeach
                     </div>
-                    {{$actors->appends(request()->query())->links()}}
+                    {{ $actors->appends(request()->query())->links() }}
                 </div>
             </div>
         </div>

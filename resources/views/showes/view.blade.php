@@ -78,9 +78,9 @@
                         <div class="movie-tabs">
                             <div class="tabs">
                                 <ul class="tab-links tabs-mv" style="margin-top: 30px">
-                                    <li class="active"><a href="#overview">Play</a></li>
-                                    <li><a href="#reviews"> Reviews</a></li>
-                                    <li><a href="#actor"> Actor </a></li>
+                                    <li class="active"><a href="#overview">{{ __('default.Show') }} </a></li>
+                                    <li><a href="#reviews"></a>{{ __('default.Reviews') }}</li>
+                                    <li><a href="#actor"> {{ __('default.Actor') }} </a></li>
                                 </ul>
                                 <br>
                                 <br>

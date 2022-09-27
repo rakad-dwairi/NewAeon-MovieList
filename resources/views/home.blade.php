@@ -54,11 +54,11 @@
                             <div class="title-in">
                                 <div class="cate">
                                     @foreach ($serie->categories as $category)
-                                    @if (app()->getLocale() == 'ar')
-                                    <span class="blue"><a href="#">{{ $category->arname }}</a></span>
-                                @else
-                                    <span class="blue"><a href="#">{{ $category->name }}</a></span>
-                                @endif
+                                        @if (app()->getLocale() == 'ar')
+                                            <span class="blue"><a href="#">{{ $category->arname }}</a></span>
+                                        @else
+                                            <span class="blue"><a href="#">{{ $category->name }}</a></span>
+                                        @endif
                                     @endforeach
                                 </div>
                                 @if (app()->getLocale() == 'ar')
@@ -82,20 +82,22 @@
                     @foreach ($categoryFilms as $category)
                         <div class="title-hd">
                             @if (app()->getLocale() == 'ar')
-                            <h2>{{ $category->arname }}</h2>
-                        @else
-                        <h2>{{ $category->name }}</h2>
-                        @endif
-                            
-                            
+                                <h2>{{ $category->arname }}</h2>
+                            @else
+                                <h2>{{ $category->name }}</h2>
+                            @endif
 
-                                    @if (app()->getLocale() == 'ar')
-                                    <a class="viewall" href="{{ url('movies?category=' . $category->arname) }}">{{ __('default.View all') }} <i
+
+
+                            @if (app()->getLocale() == 'ar')
+                                <a class="viewall"
+                                    href="{{ url('movies?category=' . $category->arname) }}">{{ __('default.View all') }}
+                                    <i class="ion-ios-arrow-right"></i></a>
+                            @else
+                                <a class="viewall"
+                                    href="{{ url('movies?category=' . $category->name) }}">{{ __('default.View all') }} <i
                                         class="ion-ios-arrow-right"></i></a>
-                                @else
-                                <a class="viewall" href="{{ url('movies?category=' . $category->name) }}">{{ __('default.View all') }} <i
-                                    class="ion-ios-arrow-right"></i></a>
-                                @endif
+                            @endif
                         </div>
                         <div class="tabs">
                             <ul class="tab-links">
@@ -108,29 +110,38 @@
                                     <div class="row">
                                         <div class="slick-multiItem" style="margin-top: 10px">
                                             @foreach ($category->films as $film)
-                                                <div class="slide-it">
-                                                    <div class="">
-                                                        <div class="mv-img">
-                                                            <img alt="" src="{{ $film->poster }}"
-                                                                style="height: 280px">
+                                                <div class="movie-item">
+                                                    <div class="mv-img">
+                                                        <a href="#"><img alt="" height="300px"
+                                                                style="height: 400px;" src="{{ $film->poster }}"
+                                                                width="285"></a>
+                                                    </div>
+                                                    <div class="hvr-inner">
+                                                        <a href="{{ url('movies/' . $film->id) }}" href="#">
+                                                            {{ __('default.Show') }} <i
+                                                                class="ion-android-arrow-dropright"></i> </a>
+
+                                                    </div>
+                                                    <div class="title-in">
+                                                        <div class="cate">
+                                                            @foreach ($film->categories as $category)
+                                                                @if (app()->getLocale() == 'ar')
+                                                                    <span class="blue"><a
+                                                                            href="#">{{ $category->arname }}</a></span>
+                                                                @else
+                                                                    <span class="blue"><a
+                                                                            href="#">{{ $category->name }}</a></span>
+                                                                @endif
+                                                            @endforeach
                                                         </div>
-                                                        <div class="hvr-inner">
-                                                            <a href="{{ url('movies/' . $film->id) }}">
-                                                                {{ __('default.Show') }} <i
-                                                                    class="ion-android-arrow-dropright"></i> </a>
-                                                        </div>
-                                                        <div class="title-in">
-                                                            @if (app()->getLocale() == 'ar')
-                                                                <h6><a href="#">{{ $film->arname }}</a></h6>
-                                                            @else
-                                                                <h6><a href="#">{{ $film->name }}</a></h6>
-                                                            @endif
-                                                            <p>
-                                                                <i
-                                                                    class="ion-android-star"></i><span>{{ $film->ratings->avg('rating') ?? 0 }}</span>
-                                                                /10
-                                                            </p>
-                                                        </div>
+                                                        @if (app()->getLocale() == 'ar')
+                                                            <h6><a href="#">{{ $film->arname }}</a></h6>
+                                                        @else
+                                                            <h6><a href="#">{{ $film->name }}</a></h6>
+                                                        @endif
+                                                        <p><i
+                                                                class="ion-android-star"></i><span>{{ $film->ratings->avg('rating') ?? 0 }}</span>
+                                                            /10</p>
                                                     </div>
                                                 </div>
                                             @endforeach

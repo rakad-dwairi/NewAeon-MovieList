@@ -44,7 +44,7 @@ return [
     'Categories' => 'Categories',
 
     'Profile' => 'Profile',
-    'Favorite Movies' => 'Favorite Movies',
+    'Favorit Movies' => 'Favorite Movies',
     'Rated Movies' => 'Rated Movies',
     'Reviewed Movies' => 'Reviewed Movies',
     'Change Password' =>'Change Password',
@@ -64,6 +64,7 @@ return [
     'Others'=>'Others',
     'your rate'=>'Your Rate',
     'Change' => 'Change',
+    'show listing'=>'Show Listing',
 
 
 

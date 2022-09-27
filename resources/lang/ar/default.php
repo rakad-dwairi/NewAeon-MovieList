@@ -43,7 +43,7 @@ return [
     'Categories' =>'فئات',
 
     'Profile' => 'الملف الشخصي',
-    'Favorite Movies' => 'أفلامي المفضلة',
+    'Favorit Movies' => 'أفلامي المفضلة',
     'Rated Movies' => 'أفلامي المصنفة',
     'Reviewed Movies' => 'افلامي التي تم تقيمها',
     'Change Password' =>'تفير كلمه السر',
@@ -63,6 +63,7 @@ return [
     'Others' => 'اخرون',
     'your rate'=>'تقيمك',
     'Change'=>'تغير',
+    'show listing'=>'عرض القائمة',
 
     
 
