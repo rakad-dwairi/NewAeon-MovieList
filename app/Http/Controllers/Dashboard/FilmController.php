@@ -57,7 +57,7 @@ class FilmController extends Controller
         $servers = Server::all();
 
 
-        return view('dashboard.films.index', compact('films', 'categories','types', 'servers'));
+        return view('dashboard.films.index', compact('films', 'categories', 'types', 'servers'));
     }
 
     public function create()
@@ -65,7 +65,7 @@ class FilmController extends Controller
         $categories = Category::all();
         $types = Type::all();
         $servers = Server::all();
-        return view('dashboard.films.create', compact('categories','types','servers'));
+        return view('dashboard.films.create', compact('categories', 'types', 'servers'));
     }
 
     public function store(Request $request)
@@ -131,7 +131,7 @@ class FilmController extends Controller
             ->leftJoin('servers', 'film_server.server_id', 'servers.id')
             ->where('film_server.film_id', $film->id)
             ->groupBy('film_server.server_id')->get();
-        return view('dashboard.films.edit', compact('film', 'categories','types','servers'));
+        return view('dashboard.films.edit', compact('film', 'categories', 'types', 'servers'));
     }
 
     public function update(Request $request, Film $film)
@@ -150,13 +150,17 @@ class FilmController extends Controller
             'type' => 'required|array|max:3|exists:type,id',
         ]);
 
+
+
         if ($request->background_cover) {
             Storage::delete($film->getAttributes()['background_cover']);
-            $attributes['background_cover'] = $request->background_cover->store('film_background_covers');
+            $img = $request->background_cover->store('public/film_background_covers');
+            $img1 = $request->poster->store('public/film_posters');
         }
         if ($request->poster) {
             Storage::delete($film->getAttributes()['poster']);
-            $attributes['poster'] = $request->poster->store('film_posters');
+            $attributes['background_cover'] = str_replace('public/', '', $img);
+            $attributes['poster'] = str_replace('public/', '', $img1);
         }
 
         $film->update($attributes);

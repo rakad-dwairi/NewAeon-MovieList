@@ -57,7 +57,7 @@ class SeriesController extends Controller
         $categories = Category::all();
         $types = Type::all();
 
-        return view('dashboard.series.index', compact('series', 'types','categories'));
+        return view('dashboard.series.index', compact('series', 'types', 'categories'));
     }
 
     /**
@@ -69,7 +69,7 @@ class SeriesController extends Controller
     {
         $categories = Category::all();
         $types = Type::all();
-        return view('dashboard.series.create', compact('categories','types'));
+        return view('dashboard.series.create', compact('categories', 'types'));
     }
 
     /**
@@ -139,7 +139,7 @@ class SeriesController extends Controller
         $serie = Series::find($id);
         $categories = Category::all();
         $types = Type::all();
-        return view('dashboard.series.edit', compact('categories', 'serie','types'));
+        return view('dashboard.series.edit', compact('categories', 'serie', 'types'));
     }
 
     /**
@@ -159,22 +159,24 @@ class SeriesController extends Controller
             'background_cover' => 'nullable|image',
             'poster' => 'nullable|image',
             'categories' => 'required|array|max:3|exists:categories,id',
-            'servers' => 'required|array|max:3|exists:servers,id',
             'type' => 'required|array|max:3|exists:type,id',
         ]);
 
+
+
         if ($request->background_cover) {
             Storage::delete($serie->getAttributes()['background_cover']);
-            $attributes['background_cover'] = $request->background_cover->store('serie_background_covers');
+            $img = $request->background_cover->store('public/series_background_covers');
+            $img1 = $request->poster->store('public/series_posters');
         }
         if ($request->poster) {
             Storage::delete($serie->getAttributes()['poster']);
-            $attributes['poster'] = $request->poster->store('serie_posters');
+            $attributes['background_cover'] = str_replace('public/', '', $img);
+            $attributes['poster'] = str_replace('public/', '', $img1);
         }
 
-        $serie->update($attributes);
+        $serie->updateOrCreate($attributes);
         $serie->categories()->sync($attributes['categories']);
-        $serie->servers()->sync($attributes['servers']);
         $serie->type()->sync($attributes['type']);
 
         session()->flash('success', 'Serie Updated Successfully');
