@@ -136,6 +136,7 @@ class FilmController extends Controller
 
     public function update(Request $request, Film $film)
     {
+       
         $attributes = $request->validate([
             'name' => ['required', 'string', 'max:50', 'min:1', Rule::unique('films')->ignore($film)],
             'arname' => ['required', 'string', 'max:50', 'min:1', Rule::unique('films')->ignore($film)],

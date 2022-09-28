@@ -151,16 +151,15 @@ class SeriesController extends Controller
      */
     public function update(Request $request, Series $serie)
     {
-        // dd($request,$serie);
         $attributes = $request->validate([
             'name' => ['required', 'string', 'max:50', 'min:1', Rule::unique('series')->ignore($serie)],
             'arname' => ['required', 'string', 'max:50', 'min:1', Rule::unique('series')->ignore($serie)],
+            'seasons' => 'required|numeric',
             'year' => 'required|string|max:4|min:4',
             'overview' => 'required|string',
             'background_cover' => 'nullable|image',
             'poster' => 'nullable|image',
             'categories' => 'required|array|max:3|exists:categories,id',
-            // 'servers' => 'required|array|max:3|exists:servers,id',
             'type' => 'required|array|max:3|exists:type,id',
         ]);
 
