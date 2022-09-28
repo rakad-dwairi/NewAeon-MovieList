@@ -32,7 +32,7 @@
                             <h2><strong>Edit</strong> Series</h2>
                         </div>
                         <div class="body">
-                            <form action="{{ route('dashboard.series.update', request()->route()->series) }}" method="POST"
+                            <form action="{{ route('dashboard.series.update', $serie) }}" method="POST"
                                 enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
@@ -47,6 +47,13 @@
                                             <input type="text" name="name" class="form-control" placeholder="Name"
                                                 value="{{ $serie->name }}">
                                             <span style="color: red; margin-left: 10px">{{ $errors->first('name') }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <input type="text" name="arname" class="form-control" placeholder="Arabic Name"
+                                                value="{{ $serie->arname }}">
+                                            <span style="color: red; margin-left: 10px">{{ $errors->first('arname') }}</span>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
@@ -90,11 +97,8 @@
                                     </div>
                                 </div>
                                 <br>
-
-
                                 <br>
                                 <br>
-
                                 <div class="row clearfix">
                                     <div class="col-sm-12">
                                         <div class="form-group">

@@ -189,7 +189,6 @@
                                         </span>
                                     @enderror
                                     <input name="email" placeholder="Email" type="email" required>
-
                                     @error('title')
                                         <span class="invalid-feedback" style="color: red; font-size: 12px"
                                             role="alert">
